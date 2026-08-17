@@ -3,593 +3,717 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>ML6CMG Chord Finder</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
-margin:0;
-background:
-radial-gradient(circle at top,#26364e 0%,#101827 45%,#060a11 100%);
-color:#fff;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    background:
+        radial-gradient(
+            circle at top,
+            #26364e 0%,
+            #101827 45%,
+            #060a11 100%
+        );
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 header{
-text-align:center;
-padding:22px 12px 10px;
+    text-align:center;
+    padding:22px 12px 10px;
 }
 
 header h1{
-margin:0;
-font-size:30px;
-letter-spacing:.5px;
+    margin:0;
+    font-size:30px;
+    letter-spacing:.5px;
 }
 
 header p{
-margin:7px 0 0;
-color:#b9c4d4;
+    margin:7px 0 0;
+    color:#b9c4d4;
 }
 
 .container{
-width:min(1200px,96%);
-margin:auto;
+    width:min(1200px,96%);
+    margin:auto;
 }
 
 .panel{
-background:rgba(12,20,34,.97);
-border:1px solid #334155;
-border-radius:20px;
-padding:18px;
-margin:16px 0;
-box-shadow:0 12px 35px rgba(0,0,0,.28);
+    background:rgba(12,20,34,.97);
+    border:1px solid #334155;
+    border-radius:20px;
+    padding:18px;
+    margin:16px 0;
+    box-shadow:0 12px 35px rgba(0,0,0,.28);
 }
 
 h2{
-margin-top:0;
+    margin-top:0;
 }
+
 
 /* =====================================================
    CIRCLE OF FIFTHS
 ===================================================== */
 
 .circle-title{
-text-align:center;
-margin-bottom:15px;
+    text-align:center;
+    margin-bottom:15px;
 }
 
 .circle{
-position:relative;
-width:min(92vw,470px);
-height:min(92vw,470px);
-margin:auto;
-border-radius:50%;
-background:
-radial-gradient(circle,
-#0b1220 0 23%,
-#273850 24% 51%,
-#172236 52% 72%,
-#0b1220 73%);
-border:3px solid #64748b;
-box-shadow:
-inset 0 0 35px #000,
-0 10px 30px rgba(0,0,0,.4);
+    position:relative;
+    width:min(92vw,470px);
+    height:min(92vw,470px);
+    margin:auto;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #0b1220 0 23%,
+            #273850 24% 51%,
+            #172236 52% 72%,
+            #0b1220 73%
+        );
+
+    border:3px solid #64748b;
+
+    box-shadow:
+        inset 0 0 35px #000,
+        0 10px 30px rgba(0,0,0,.4);
 }
 
 .circle-ring{
-position:absolute;
-border:1px solid #53647d;
-border-radius:50%;
-pointer-events:none;
+    position:absolute;
+    border:1px solid #53647d;
+    border-radius:50%;
+    pointer-events:none;
 }
 
 .circle-ring.outer{
-inset:16%;
+    inset:16%;
 }
 
 .circle-ring.inner{
-inset:29%;
+    inset:29%;
 }
 
 .circle-center{
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-width:112px;
-height:112px;
-border-radius:50%;
-background:#0a111d;
-border:2px solid #d4af37;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-font-weight:bold;
-font-size:17px;
-padding:10px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+    width:112px;
+    height:112px;
+
+    border-radius:50%;
+
+    background:#0a111d;
+    border:2px solid #d4af37;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    font-weight:bold;
+    font-size:17px;
+
+    padding:10px;
 }
 
 .circle-note{
-position:absolute;
-transform:translate(-50%,-50%);
-border:2px solid #94a3b8;
-background:#1e293b;
-color:#fff;
-font-weight:bold;
-cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:.15s;
-z-index:5;
+    position:absolute;
+
+    transform:translate(-50%,-50%);
+
+    border:2px solid #94a3b8;
+    background:#1e293b;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.15s;
+
+    z-index:5;
 }
 
 .circle-note.major{
-width:55px;
-height:55px;
-border-radius:50%;
-font-size:16px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    font-size:16px;
 }
 
 .circle-note.minor{
-width:46px;
-height:46px;
-border-radius:50%;
-font-size:12px;
-background:#111827;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    font-size:12px;
+    background:#111827;
 }
 
 .circle-note:hover,
 .circle-note.active{
-background:#d4af37;
-color:#101827;
-border-color:#f8e08e;
-transform:translate(-50%,-50%) scale(1.1);
-}
+    background:#d4af37;
+    color:#101827;
+    border-color:#f8e08e;
 
-.circle-label{
-position:absolute;
-text-align:center;
-font-size:10px;
-color:#94a3b8;
-pointer-events:none;
+    transform:
+        translate(-50%,-50%)
+        scale(1.1);
 }
 
 .circle-legend{
-display:flex;
-justify-content:center;
-gap:22px;
-margin-top:14px;
-font-size:13px;
-color:#cbd5e1;
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    margin-top:14px;
+    font-size:13px;
+    color:#cbd5e1;
 }
 
 .legend-major{
-color:#f8e08e;
+    color:#f8e08e;
 }
 
 .legend-minor{
-color:#94a3b8;
+    color:#94a3b8;
 }
+
 
 /* =====================================================
    CHORD SELECTOR
 ===================================================== */
 
 .selected-chord{
-text-align:center;
-font-size:32px;
-font-weight:bold;
-color:#f8e08e;
-margin-bottom:8px;
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    color:#f8e08e;
+    margin-bottom:8px;
 }
 
 .selected-notes{
-text-align:center;
-font-size:17px;
-color:#cbd5e1;
-margin-bottom:18px;
+    text-align:center;
+    font-size:17px;
+    color:#cbd5e1;
+    margin-bottom:18px;
 }
 
 .search{
-width:100%;
-padding:13px;
-border-radius:11px;
-border:1px solid #475569;
-background:#0b1220;
-color:#fff;
-font-size:16px;
-margin-bottom:15px;
+    width:100%;
+    padding:13px;
+
+    border-radius:11px;
+
+    border:1px solid #475569;
+
+    background:#0b1220;
+
+    color:#fff;
+
+    font-size:16px;
+
+    margin-bottom:15px;
 }
 
 .category{
-margin-bottom:17px;
+    margin-bottom:17px;
 }
 
 .category h3{
-font-size:13px;
-text-transform:uppercase;
-letter-spacing:1px;
-color:#94a3b8;
-margin:0 0 8px;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#94a3b8;
+    margin:0 0 8px;
 }
 
 .chord-buttons{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
 }
 
 .chord-button{
-padding:10px 13px;
-border-radius:10px;
-border:1px solid #475569;
-background:#1e293b;
-color:#fff;
-font-size:14px;
-cursor:pointer;
+    padding:10px 13px;
+
+    border-radius:10px;
+
+    border:1px solid #475569;
+
+    background:#1e293b;
+
+    color:#fff;
+
+    font-size:14px;
+
+    cursor:pointer;
 }
 
 .chord-button:hover,
 .chord-button.active{
-background:#d4af37;
-color:#111827;
-border-color:#f8e08e;
+    background:#d4af37;
+    color:#111827;
+    border-color:#f8e08e;
 }
+
 
 /* =====================================================
    INSTRUMENT BUTTONS
 ===================================================== */
 
 .instrument-buttons{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:9px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:9px;
 }
 
 .instrument-button{
-padding:11px 16px;
-border-radius:11px;
-border:1px solid #64748b;
-background:#111827;
-color:#fff;
-font-weight:bold;
-cursor:pointer;
+    padding:11px 16px;
+
+    border-radius:11px;
+
+    border:1px solid #64748b;
+
+    background:#111827;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
 .instrument-button.active{
-background:#d4af37;
-color:#111827;
+    background:#d4af37;
+    color:#111827;
 }
 
+
 /* =====================================================
-   MUSIC STAFF
+   STAFF
 ===================================================== */
 
 .staff-panel{
-margin-top:18px;
+    margin-top:18px;
 }
 
 .staff-title{
-text-align:center;
-font-size:20px;
-font-weight:bold;
-color:#f8e08e;
-margin-bottom:3px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:#f8e08e;
+    margin-bottom:3px;
 }
 
 .staff-subtitle{
-text-align:center;
-color:#94a3b8;
-font-size:13px;
-margin-bottom:8px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:13px;
+    margin-bottom:8px;
 }
 
 .staff-container{
-width:100%;
-overflow-x:auto;
+    width:100%;
+    overflow-x:auto;
 }
 
 .staff-svg{
-display:block;
-width:100%;
-min-width:620px;
-height:240px;
+    display:block;
+    width:100%;
+    min-width:620px;
+    height:240px;
 }
 
 .staff-line{
-stroke:#d7dce3;
-stroke-width:2;
+    stroke:#d7dce3;
+    stroke-width:2;
 }
 
 .staff-note{
-fill:#f8e08e;
-stroke:#111827;
-stroke-width:1.5;
+    fill:#f8e08e;
+    stroke:#111827;
+    stroke-width:1.5;
 }
 
 .staff-note-label{
-fill:#fff;
-font-size:14px;
-font-weight:bold;
-text-anchor:middle;
+    fill:#fff;
+    font-size:14px;
+    font-weight:bold;
+    text-anchor:middle;
 }
 
 .staff-accidental{
-fill:#fff;
-font-size:20px;
-font-weight:bold;
+    fill:#fff;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .staff-clef{
-fill:#fff;
-font-family:"Times New Roman",serif;
-font-size:82px;
+    fill:#fff;
+    font-family:"Times New Roman",serif;
+    font-size:82px;
 }
 
 .staff-ledger{
-stroke:#d7dce3;
-stroke-width:2;
+    stroke:#d7dce3;
+    stroke-width:2;
 }
+
 
 /* =====================================================
    DIAGRAM GRID
 ===================================================== */
 
 .diagram-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
-gap:16px;
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(285px,1fr));
+
+    gap:16px;
 }
 
 .card{
-background:#0c1422;
-border:1px solid #334155;
-border-radius:18px;
-padding:15px;
-min-height:420px;
+    background:#0c1422;
+    border:1px solid #334155;
+    border-radius:18px;
+    padding:15px;
+    min-height:420px;
 }
 
 .card h2{
-text-align:center;
-margin:0;
-color:#f8e08e;
+    text-align:center;
+    margin:0;
+    color:#f8e08e;
 }
 
 .card-sub{
-text-align:center;
-color:#94a3b8;
-font-size:12px;
-margin:5px 0 14px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:12px;
+    margin:5px 0 14px;
 }
 
 .diagram{
-height:300px;
-display:flex;
-align-items:center;
-justify-content:center;
+    height:300px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .badge{
-display:block;
-text-align:center;
-font-size:11px;
-color:#64748b;
-margin-top:7px;
+    display:block;
+    text-align:center;
+    font-size:11px;
+    color:#64748b;
+    margin-top:7px;
 }
 
+
 /* =====================================================
-   FRETBOARD DIAGRAM
+   FRETBOARD
 ===================================================== */
 
 .fret-diagram{
-width:285px;
-height:300px;
-position:relative;
+    width:285px;
+    height:300px;
+    position:relative;
 }
 
 .fretboard{
-position:absolute;
-left:50px;
-right:16px;
-top:47px;
-height:220px;
-border-left:4px solid #eee;
-border-top:5px solid #eee;
-background:
-repeating-linear-gradient(
-to bottom,
-transparent 0,
-transparent 43px,
-#94a3b8 43px,
-#94a3b8 45px
-),
-repeating-linear-gradient(
-to right,
-transparent 0,
-transparent 53px,
-#94a3b8 53px,
-#94a3b8 55px
-);
+    position:absolute;
+
+    left:50px;
+    right:16px;
+    top:47px;
+
+    height:220px;
+
+    border-left:4px solid #eee;
+    border-top:5px solid #eee;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 43px,
+            #94a3b8 43px,
+            #94a3b8 45px
+        ),
+        repeating-linear-gradient(
+            to right,
+            transparent 0,
+            transparent 53px,
+            #94a3b8 53px,
+            #94a3b8 55px
+        );
 }
 
 .fret-string{
-position:absolute;
-top:0;
-bottom:0;
-width:2px;
-background:#d7dce3;
-z-index:3;
+    position:absolute;
+
+    top:0;
+    bottom:0;
+
+    width:2px;
+
+    background:#d7dce3;
+
+    z-index:3;
 }
 
 .string-label{
-position:absolute;
-top:18px;
-transform:translateX(-50%);
-font-size:11px;
-color:#94a3b8;
+    position:absolute;
+
+    top:18px;
+
+    transform:translateX(-50%);
+
+    font-size:11px;
+
+    color:#94a3b8;
 }
 
 .fret-number{
-position:absolute;
-left:18px;
-font-size:10px;
-color:#94a3b8;
+    position:absolute;
+
+    left:18px;
+
+    font-size:10px;
+
+    color:#94a3b8;
 }
 
 .open-mark,
 .mute-mark{
-position:absolute;
-top:5px;
-transform:translateX(-50%);
-font-size:20px;
-font-weight:bold;
-z-index:8;
+    position:absolute;
+
+    top:5px;
+
+    transform:translateX(-50%);
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    z-index:8;
 }
 
 .open-mark{
-color:#86efac;
+    color:#86efac;
 }
 
 .mute-mark{
-color:#f87171;
+    color:#f87171;
 }
 
 .finger-dot{
-position:absolute;
-width:31px;
-height:31px;
-border-radius:50%;
-background:#d4af37;
-color:#111827;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-z-index:8;
-transform:translate(-50%,-50%);
+    position:absolute;
+
+    width:31px;
+    height:31px;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    color:#111827;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+    z-index:8;
+
+    transform:translate(-50%,-50%);
+
+    border:2px solid #f8e08e;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.4);
 }
 
-.fret-barre{
-position:absolute;
-height:29px;
-background:#d4af37;
-border-radius:15px;
-z-index:6;
+.finger-key{
+    pointer-events:none;
 }
+
 
 /* =====================================================
    PIANO
 ===================================================== */
 
 .piano{
-position:relative;
-width:280px;
-height:190px;
+    position:relative;
+
+    width:280px;
+    height:190px;
 }
 
 .white-key{
-position:absolute;
-top:0;
-height:175px;
-width:40px;
-background:#fff;
-border:1px solid #111827;
-z-index:1;
+    position:absolute;
+
+    top:0;
+
+    height:175px;
+    width:40px;
+
+    background:#fff;
+
+    border:1px solid #111827;
+
+    z-index:1;
 }
 
 .white-key.active{
-background:#d4af37;
+    background:#d4af37;
 }
 
 .black-key{
-position:absolute;
-top:0;
-width:25px;
-height:108px;
-background:#050505;
-border-radius:0 0 5px 5px;
-z-index:3;
+    position:absolute;
+
+    top:0;
+
+    width:25px;
+    height:108px;
+
+    background:#050505;
+
+    border-radius:
+        0 0 5px 5px;
+
+    z-index:3;
 }
 
 .black-key.active{
-background:#d4af37;
+    background:#d4af37;
 }
 
 .key-name{
-position:absolute;
-bottom:8px;
-width:100%;
-text-align:center;
-color:#111827;
-font-size:10px;
-font-weight:bold;
+    position:absolute;
+
+    bottom:8px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:#111827;
+
+    font-size:10px;
+
+    font-weight:bold;
 }
 
 .piano-notes{
-text-align:center;
-font-size:12px;
-color:#cbd5e1;
-margin-top:10px;
+    text-align:center;
+
+    font-size:12px;
+
+    color:#cbd5e1;
+
+    margin-top:10px;
 }
+
 
 /* =====================================================
    FOOTER
 ===================================================== */
 
 footer{
-text-align:center;
-padding:25px;
-color:#64748b;
-font-size:12px;
+    text-align:center;
+
+    padding:25px;
+
+    color:#64748b;
+
+    font-size:12px;
 }
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:600px){
 
-header h1{
-font-size:25px;
+    header h1{
+        font-size:25px;
+    }
+
+    .circle{
+        width:90vw;
+        height:90vw;
+    }
+
+    .circle-note.major{
+        width:48px;
+        height:48px;
+        font-size:14px;
+    }
+
+    .circle-note.minor{
+        width:39px;
+        height:39px;
+        font-size:11px;
+    }
+
+    .selected-chord{
+        font-size:27px;
+    }
+
+    .diagram-grid{
+        grid-template-columns:1fr;
+    }
+
 }
 
-.circle{
-width:90vw;
-height:90vw;
-}
-
-.circle-note.major{
-width:48px;
-height:48px;
-font-size:14px;
-}
-
-.circle-note.minor{
-width:39px;
-height:39px;
-font-size:11px;
-}
-
-.selected-chord{
-font-size:27px;
-}
-
-.diagram-grid{
-grid-template-columns:1fr;
-}
-
-}
 </style>
 </head>
 
+
 <body>
 
+
 <header>
+
 <h1>🎵 ML6CMG Chord Finder</h1>
-<p>Circle of Fifths • Chords • Fingerings • Music Staff</p>
+
+<p>
+Circle of Fifths • Chords • Fingerings • Music Staff
+</p>
+
 </header>
 
+
 <div class="container">
+
 
 <!-- =====================================================
      CIRCLE OF FIFTHS
@@ -597,22 +721,34 @@ grid-template-columns:1fr;
 
 <section class="panel">
 
-<h2 class="circle-title">Circle of Fifths</h2>
+<h2 class="circle-title">
+Circle of Fifths
+</h2>
 
 <div class="circle" id="circle">
 
 <div class="circle-ring outer"></div>
+
 <div class="circle-ring inner"></div>
 
-<div class="circle-center" id="circleCenter">
-C Major
+<div
+    class="circle-center"
+    id="circleCenter">
+    C Major
 </div>
 
 </div>
 
 <div class="circle-legend">
-<span class="legend-major">● Major keys</span>
-<span class="legend-minor">● Relative minor keys</span>
+
+<span class="legend-major">
+● Major keys
+</span>
+
+<span class="legend-minor">
+● Relative minor keys
+</span>
+
 </div>
 
 </section>
@@ -624,19 +760,24 @@ C Major
 
 <section class="panel">
 
-<div class="selected-chord" id="selectedChord">
-C Major
+<div
+    class="selected-chord"
+    id="selectedChord">
+    C Major
 </div>
 
-<div class="selected-notes" id="selectedNotes">
-Notes: C • E • G
+<div
+    class="selected-notes"
+    id="selectedNotes">
+    Notes: C • E • G
 </div>
 
 <input
-class="search"
-id="search"
-placeholder="Search chord type — e.g. 7, maj9, sus4..."
+    class="search"
+    id="search"
+    placeholder="Search chord type — e.g. 7, maj9, sus4..."
 >
+
 
 <div id="chordLibrary"></div>
 
@@ -656,27 +797,27 @@ Show instruments
 <div class="instrument-buttons">
 
 <button
-class="instrument-button active"
-data-instrument="guitar">
-🎸 Guitar
+    class="instrument-button active"
+    data-instrument="guitar">
+    🎸 Guitar
 </button>
 
 <button
-class="instrument-button active"
-data-instrument="ukulele">
-🪕 Ukulele
+    class="instrument-button active"
+    data-instrument="ukulele">
+    🪕 Ukulele
 </button>
 
 <button
-class="instrument-button active"
-data-instrument="mandolin">
-🎻 Mandolin
+    class="instrument-button active"
+    data-instrument="mandolin">
+    🎻 Mandolin
 </button>
 
 <button
-class="instrument-button active"
-data-instrument="piano">
-🎹 Piano
+    class="instrument-button active"
+    data-instrument="piano">
+    🎹 Piano
 </button>
 
 </div>
@@ -685,7 +826,7 @@ data-instrument="piano">
 
 
 <!-- =====================================================
-     TREBLE CLEF
+     TREBLE CLEF STAFF
 ===================================================== -->
 
 <section class="panel staff-panel">
@@ -699,12 +840,14 @@ Notes contained in the selected chord
 </div>
 
 <div class="staff-container">
+
 <svg
-id="staffSvg"
-class="staff-svg"
-viewBox="0 0 900 240"
-preserveAspectRatio="xMidYMid meet">
+    id="staffSvg"
+    class="staff-svg"
+    viewBox="0 0 900 240"
+    preserveAspectRatio="xMidYMid meet">
 </svg>
+
 </div>
 
 </section>
@@ -715,11 +858,13 @@ preserveAspectRatio="xMidYMid meet">
 ===================================================== -->
 
 <section
-class="diagram-grid"
-id="diagramGrid">
+    class="diagram-grid"
+    id="diagramGrid">
 </section>
 
+
 </div>
+
 
 <footer>
 ML6 Community Music Group • ML6CMG Chord Finder
@@ -728,45 +873,76 @@ ML6 Community Music Group • ML6CMG Chord Finder
 
 <script>
 
+
 /* =====================================================
    NOTE DATA
 ===================================================== */
 
-const NOTES=[
-"C","C#","D","D#","E","F",
-"F#","G","G#","A","A#","B"
+const NOTES = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B"
 ];
 
-const DISPLAY_FLATS={
-"C#":"Db",
-"D#":"Eb",
-"F#":"Gb",
-"G#":"Ab",
-"A#":"Bb"
+
+/*
+   Prefer correct flat names for displayed notes.
+*/
+
+const FLAT_NAMES = {
+
+    "C#":"Db",
+    "D#":"Eb",
+    "F#":"Gb",
+    "G#":"Ab",
+    "A#":"Bb"
+
 };
 
-const NOTE_INDEX={
-"C":0,
-"B#":0,
-"C#":1,
-"Db":1,
-"D":2,
-"D#":3,
-"Eb":3,
-"E":4,
-"Fb":4,
-"E#":5,
-"F":5,
-"F#":6,
-"Gb":6,
-"G":7,
-"G#":8,
-"Ab":8,
-"A":9,
-"A#":10,
-"Bb":10,
-"B":11,
-"Cb":11
+
+const NOTE_INDEX = {
+
+    "C":0,
+    "B#":0,
+
+    "C#":1,
+    "Db":1,
+
+    "D":2,
+
+    "D#":3,
+    "Eb":3,
+
+    "E":4,
+    "Fb":4,
+
+    "E#":5,
+    "F":5,
+
+    "F#":6,
+    "Gb":6,
+
+    "G":7,
+
+    "G#":8,
+    "Ab":8,
+
+    "A":9,
+
+    "A#":10,
+    "Bb":10,
+
+    "B":11,
+    "Cb":11
 };
 
 
@@ -774,93 +950,126 @@ const NOTE_INDEX={
    CIRCLE OF FIFTHS
 ===================================================== */
 
-const MAJOR_CIRCLE=[
-"C","G","D","A","E","B",
-"F#","Db","Ab","Eb","Bb","F"
+const MAJOR_CIRCLE = [
+
+    "C",
+    "G",
+    "D",
+    "A",
+    "E",
+    "B",
+    "F#",
+    "Db",
+    "Ab",
+    "Eb",
+    "Bb",
+    "F"
+
 ];
 
-const MINOR_CIRCLE=[
-"Am","Em","Bm","F#m","C#m","G#m",
-"D#m","Bbm","Fm","Cm","Gm","Dm"
+
+const MINOR_CIRCLE = [
+
+    "Am",
+    "Em",
+    "Bm",
+    "F#m",
+    "C#m",
+    "G#m",
+    "D#m",
+    "Bbm",
+    "Fm",
+    "Cm",
+    "Gm",
+    "Dm"
+
 ];
 
 
 /* =====================================================
-   CHORD TYPES
+   CHORD GROUPS
 ===================================================== */
 
-const CHORD_GROUPS=[
+const CHORD_GROUPS = [
 
-{
-name:"Basic",
-items:[
-["Major",""],
-["Minor","m"]
-]
-},
+    {
+        name:"Basic",
 
-{
-name:"Suspended",
-items:[
-["Sus2","sus2"],
-["Sus4","sus4"]
-]
-},
+        items:[
+            ["Major",""],
+            ["Minor","m"]
+        ]
+    },
 
-{
-name:"Sixths",
-items:[
-["6","6"],
-["Minor 6","m6"]
-]
-},
+    {
+        name:"Suspended",
 
-{
-name:"Sevenths",
-items:[
-["7","7"],
-["Major 7","maj7"],
-["Minor 7","m7"],
-["Minor 7 flat 5","m7b5"],
-["Diminished 7","dim7"]
-]
-},
+        items:[
+            ["Sus2","sus2"],
+            ["Sus4","sus4"]
+        ]
+    },
 
-{
-name:"Ninths",
-items:[
-["Add 9","add9"],
-["9","9"],
-["Major 9","maj9"],
-["Minor 9","m9"]
-]
-},
+    {
+        name:"Sixths",
 
-{
-name:"Elevenths",
-items:[
-["11","11"],
-["Major 11","maj11"],
-["Minor 11","m11"]
-]
-},
+        items:[
+            ["6","6"],
+            ["Minor 6","m6"]
+        ]
+    },
 
-{
-name:"Thirteenths",
-items:[
-["13","13"],
-["Major 13","maj13"],
-["Minor 13","m13"]
-]
-},
+    {
+        name:"Sevenths",
 
-{
-name:"Altered",
-items:[
-["Diminished","dim"],
-["Augmented","aug"]
-]
-}
+        items:[
+            ["7","7"],
+            ["Major 7","maj7"],
+            ["Minor 7","m7"],
+            ["Minor 7 flat 5","m7b5"],
+            ["Diminished 7","dim7"]
+        ]
+    },
+
+    {
+        name:"Ninths",
+
+        items:[
+            ["Add 9","add9"],
+            ["9","9"],
+            ["Major 9","maj9"],
+            ["Minor 9","m9"]
+        ]
+    },
+
+    {
+        name:"Elevenths",
+
+        items:[
+            ["11","11"],
+            ["Major 11","maj11"],
+            ["Minor 11","m11"]
+        ]
+    },
+
+    {
+        name:"Thirteenths",
+
+        items:[
+            ["13","13"],
+            ["Major 13","maj13"],
+            ["Minor 13","m13"]
+        ]
+    },
+
+    {
+        name:"Altered",
+
+        items:[
+            ["Diminished","dim"],
+            ["Augmented","aug"]
+        ]
+    }
 
 ];
 
@@ -869,77 +1078,109 @@ items:[
    CHORD FORMULAS
 ===================================================== */
 
-const FORMULAS={
+const FORMULAS = {
 
-"":     [0,4,7],
-"m":    [0,3,7],
+    "":[0,4,7],
 
-"sus2": [0,2,7],
-"sus4": [0,5,7],
+    "m":[0,3,7],
 
-"6":    [0,4,7,9],
-"m6":   [0,3,7,9],
+    "sus2":[0,2,7],
 
-"7":    [0,4,7,10],
-"maj7": [0,4,7,11],
-"m7":   [0,3,7,10],
-"m7b5": [0,3,6,10],
+    "sus4":[0,5,7],
 
-"dim":  [0,3,6],
-"dim7": [0,3,6,9],
-"aug":  [0,4,8],
+    "6":[0,4,7,9],
 
-"add9": [0,4,7,2],
-"9":    [0,4,7,10,2],
-"maj9": [0,4,7,11,2],
-"m9":   [0,3,7,10,2],
+    "m6":[0,3,7,9],
 
-"11":   [0,4,7,10,2,5],
-"maj11":[0,4,7,11,2,5],
-"m11":  [0,3,7,10,2,5],
+    "7":[0,4,7,10],
 
-"13":   [0,4,7,10,2,5,9],
-"maj13":[0,4,7,11,2,5,9],
-"m13":  [0,3,7,10,2,5,9]
+    "maj7":[0,4,7,11],
+
+    "m7":[0,3,7,10],
+
+    "m7b5":[0,3,6,10],
+
+    "dim":[0,3,6],
+
+    "dim7":[0,3,6,9],
+
+    "aug":[0,4,8],
+
+    "add9":[0,4,7,2],
+
+    "9":[0,4,7,10,2],
+
+    "maj9":[0,4,7,11,2],
+
+    "m9":[0,3,7,10,2],
+
+    "11":[0,4,7,10,2,5],
+
+    "maj11":[0,4,7,11,2,5],
+
+    "m11":[0,3,7,10,2,5],
+
+    "13":[0,4,7,10,2,5,9],
+
+    "maj13":[0,4,7,11,2,5,9],
+
+    "m13":[0,3,7,10,2,5,9]
+
 };
 
 
 /* =====================================================
-   CHORD NAMES
+   CHORD DISPLAY NAMES
 ===================================================== */
 
-const TYPE_NAMES={
+const TYPE_NAMES = {
 
-"": "Major",
-"m":"Minor",
+    "":"Major",
 
-"sus2":"Sus2",
-"sus4":"Sus4",
+    "m":"Minor",
 
-"6":"6",
-"m6":"Minor 6",
+    "sus2":"Sus2",
 
-"7":"7",
-"maj7":"Major 7",
-"m7":"Minor 7",
-"m7b5":"Minor 7♭5",
-"dim7":"Diminished 7",
+    "sus4":"Sus4",
 
-"dim":"Diminished",
-"aug":"Augmented",
+    "6":"6",
 
-"add9":"Add9",
-"9":"9",
-"maj9":"Major 9",
-"m9":"Minor 9",
+    "m6":"Minor 6",
 
-"11":"11",
-"maj11":"Major 11",
-"m11":"Minor 11",
+    "7":"7",
 
-"13":"13",
-"maj13":"Major 13",
-"m13":"Minor 13"
+    "maj7":"Major 7",
+
+    "m7":"Minor 7",
+
+    "m7b5":"Minor 7♭5",
+
+    "dim7":"Diminished 7",
+
+    "dim":"Diminished",
+
+    "aug":"Augmented",
+
+    "add9":"Add9",
+
+    "9":"9",
+
+    "maj9":"Major 9",
+
+    "m9":"Minor 9",
+
+    "11":"11",
+
+    "maj11":"Major 11",
+
+    "m11":"Minor 11",
+
+    "13":"13",
+
+    "maj13":"Major 13",
+
+    "m13":"Minor 13"
+
 };
 
 
@@ -947,14 +1188,20 @@ const TYPE_NAMES={
    STATE
 ===================================================== */
 
-let selectedRoot="C";
-let selectedType="";
+let selectedRoot = "C";
 
-let activeInstruments={
-guitar:true,
-ukulele:true,
-mandolin:true,
-piano:true
+let selectedType = "";
+
+let activeInstruments = {
+
+    guitar:true,
+
+    ukulele:true,
+
+    mandolin:true,
+
+    piano:true
+
 };
 
 
@@ -963,151 +1210,197 @@ piano:true
 ===================================================== */
 
 function pitch(note){
-return NOTE_INDEX[note];
-}
 
-function normalizePitch(n){
-return ((n%12)+12)%12;
-}
-
-function chordNotes(root,type){
-
-const rootPitch=pitch(root);
-
-return FORMULAS[type].map(interval=>{
-return NOTES[
-normalizePitch(rootPitch+interval)
-];
-});
-}
-
-function chordName(){
-
-return selectedRoot+
-(
-selectedType===""
-?" Major"
-:
-" "+TYPE_NAMES[selectedType]
-);
+    return NOTE_INDEX[note];
 
 }
+
+
+function normalizePitch(number){
+
+    return ((number % 12) + 12) % 12;
+
+}
+
 
 function prettyNote(note){
 
-return DISPLAY_FLATS[note] || note;
+    return FLAT_NAMES[note] || note;
 
 }
 
+
+function chordNotes(root,type){
+
+    const rootPitch =
+        pitch(root);
+
+    return FORMULAS[type].map(
+        interval =>
+            NOTES[
+                normalizePitch(
+                    rootPitch + interval
+                )
+            ]
+    );
+
+}
+
+
+function chordName(){
+
+    return selectedRoot +
+        (
+            selectedType === ""
+            ? " Major"
+            : " " +
+              TYPE_NAMES[selectedType]
+        );
+
+}
+
+
 function displayNotes(){
 
-return chordNotes(
-selectedRoot,
-selectedType
-).map(prettyNote);
+    return chordNotes(
+        selectedRoot,
+        selectedType
+    ).map(prettyNote);
 
 }
 
 
 /* =====================================================
-   BUILD CIRCLE
+   CIRCLE
 ===================================================== */
 
 function buildCircle(){
 
-const circle=
-document.getElementById("circle");
+    const circle =
+        document.getElementById("circle");
 
-const old=
-circle.querySelectorAll(".circle-note");
-
-old.forEach(x=>x.remove());
-
-
-/* Major */
-
-MAJOR_CIRCLE.forEach((note,index)=>{
-
-const angle=
-(index*30-90)*Math.PI/180;
-
-const radius=40;
-
-const x=
-50+radius*Math.cos(angle);
-
-const y=
-50+radius*Math.sin(angle);
-
-const button=
-document.createElement("button");
-
-button.className="circle-note major";
-
-button.style.left=x+"%";
-button.style.top=y+"%";
-
-button.textContent=note;
-
-button.title=note+" Major";
-
-button.onclick=()=>{
-
-selectedRoot=note;
-selectedType="";
-
-update();
-
-};
-
-circle.appendChild(button);
-
-});
+    circle
+        .querySelectorAll(".circle-note")
+        .forEach(x=>x.remove());
 
 
-/* Relative minor */
+    MAJOR_CIRCLE.forEach(
+        (note,index)=>{
 
-MINOR_CIRCLE.forEach((minor,index)=>{
+            const angle =
+                (index*30-90)
+                * Math.PI/180;
 
-const root=
-minor.replace("m","");
+            const radius = 40;
 
-const angle=
-(index*30-90)*Math.PI/180;
+            const x =
+                50 +
+                radius *
+                Math.cos(angle);
 
-const radius=27;
+            const y =
+                50 +
+                radius *
+                Math.sin(angle);
 
-const x=
-50+radius*Math.cos(angle);
 
-const y=
-50+radius*Math.sin(angle);
+            const button =
+                document.createElement("button");
 
-const button=
-document.createElement("button");
+            button.className =
+                "circle-note major";
 
-button.className="circle-note minor";
+            button.style.left =
+                x+"%";
 
-button.style.left=x+"%";
-button.style.top=y+"%";
+            button.style.top =
+                y+"%";
 
-button.textContent=minor;
+            button.textContent =
+                note;
 
-button.title=
-minor+" Relative Minor";
+            button.title =
+                note+" Major";
 
-button.onclick=()=>{
 
-selectedRoot=root;
-selectedType="m";
+            button.onclick = ()=>{
 
-update();
+                selectedRoot =
+                    note;
 
-};
+                selectedType =
+                    "";
 
-circle.appendChild(button);
+                update();
 
-});
+            };
+
+
+            circle.appendChild(button);
+
+        }
+    );
+
+
+    MINOR_CIRCLE.forEach(
+        (minor,index)=>{
+
+            const root =
+                minor.replace("m","");
+
+            const angle =
+                (index*30-90)
+                * Math.PI/180;
+
+            const radius = 27;
+
+            const x =
+                50 +
+                radius *
+                Math.cos(angle);
+
+            const y =
+                50 +
+                radius *
+                Math.sin(angle);
+
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "circle-note minor";
+
+            button.style.left =
+                x+"%";
+
+            button.style.top =
+                y+"%";
+
+            button.textContent =
+                minor;
+
+            button.title =
+                minor+" Relative Minor";
+
+
+            button.onclick = ()=>{
+
+                selectedRoot =
+                    root;
+
+                selectedType =
+                    "m";
+
+                update();
+
+            };
+
+
+            circle.appendChild(button);
+
+        }
+    );
 
 }
 
@@ -1118,969 +1411,1514 @@ circle.appendChild(button);
 
 function highlightCircle(){
 
-document
-.querySelectorAll(".circle-note")
-.forEach(button=>{
+    document
+        .querySelectorAll(".circle-note")
+        .forEach(button=>{
 
-button.classList.remove("active");
+            button.classList.remove(
+                "active"
+            );
 
-if(
-selectedType==="m"
-&&
-button.textContent===selectedRoot+"m"
-){
 
-button.classList.add("active");
+            if(
+                selectedType === "m" &&
+                button.textContent ===
+                    selectedRoot+"m"
+            ){
 
-}
+                button.classList.add(
+                    "active"
+                );
 
-else if(
-selectedType!=="m"
-&&
-button.textContent===selectedRoot
-){
+            }
 
-button.classList.add("active");
 
-}
+            else if(
+                selectedType !== "m" &&
+                button.textContent ===
+                    selectedRoot
+            ){
 
-});
+                button.classList.add(
+                    "active"
+                );
 
-document
-.getElementById("circleCenter")
-.textContent=
-chordName();
+            }
+
+        });
+
+
+    document
+        .getElementById("circleCenter")
+        .textContent =
+            chordName();
 
 }
 
 
 /* =====================================================
-   BUILD CHORD LIBRARY
+   CHORD LIBRARY
 ===================================================== */
 
 function buildChordLibrary(){
 
-const library=
-document.getElementById("chordLibrary");
+    const library =
+        document.getElementById(
+            "chordLibrary"
+        );
 
-const search=
-document
-.getElementById("search")
-.value
-.toLowerCase()
-.trim();
+    const search =
+        document
+            .getElementById("search")
+            .value
+            .toLowerCase()
+            .trim();
 
-library.innerHTML="";
 
-CHORD_GROUPS.forEach(group=>{
+    library.innerHTML = "";
 
-const category=
-document.createElement("div");
 
-category.className="category";
+    CHORD_GROUPS.forEach(group=>{
 
-const heading=
-document.createElement("h3");
+        const category =
+            document.createElement("div");
 
-heading.textContent=
-group.name;
+        category.className =
+            "category";
 
-category.appendChild(heading);
 
-const buttons=
-document.createElement("div");
+        const heading =
+            document.createElement("h3");
 
-buttons.className="chord-buttons";
+        heading.textContent =
+            group.name;
 
-group.items.forEach(item=>{
 
-const label=item[0];
-const type=item[1];
+        category.appendChild(
+            heading
+        );
 
-const fullName=
-selectedRoot+type;
 
-if(
-search &&
-!label.toLowerCase().includes(search) &&
-!fullName.toLowerCase().includes(search)
-){
+        const buttons =
+            document.createElement("div");
 
-return;
+        buttons.className =
+            "chord-buttons";
+
+
+        group.items.forEach(item=>{
+
+            const label =
+                item[0];
+
+            const type =
+                item[1];
+
+
+            const fullName =
+                selectedRoot+type;
+
+
+            if(
+                search &&
+                !label
+                    .toLowerCase()
+                    .includes(search) &&
+                !fullName
+                    .toLowerCase()
+                    .includes(search)
+            ){
+
+                return;
+
+            }
+
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "chord-button";
+
+
+            if(type === selectedType){
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            button.textContent =
+                selectedRoot +
+                (
+                    type === ""
+                    ? ""
+                    : type
+                );
+
+
+            button.title =
+                label;
+
+
+            button.onclick = ()=>{
+
+                selectedType =
+                    type;
+
+                update();
+
+            };
+
+
+            buttons.appendChild(
+                button
+            );
+
+        });
+
+
+        if(buttons.children.length){
+
+            category.appendChild(
+                buttons
+            );
+
+            library.appendChild(
+                category
+            );
+
+        }
+
+    });
 
 }
 
-const button=
-document.createElement("button");
 
-button.className="chord-button";
+/* =====================================================
+   TREBLE STAFF
+===================================================== */
 
-if(type===selectedType){
-button.classList.add("active");
-}
+const STAFF_BASE = {
 
-button.textContent=
-selectedRoot+
-(
-type===""
-?""
-:type
-);
-
-button.title=label;
-
-button.onclick=()=>{
-
-selectedType=type;
-
-update();
+    "C":5,
+    "D":6,
+    "E":0,
+    "F":1,
+    "G":2,
+    "A":3,
+    "B":4
 
 };
 
-buttons.appendChild(button);
-
-});
-
-if(buttons.children.length){
-
-category.appendChild(buttons);
-library.appendChild(category);
-
-}
-
-});
-
-}
-
-
-/* =====================================================
-   STAFF NOTE SPELLING
-===================================================== */
-
-/*
-Musical staff positions use letter names rather
-than raw chromatic positions.
-
-Treble clef:
-bottom line = E
-then F G A B C D E F...
-*/
-
-const STAFF_LETTERS=[
-"C","D","E","F","G","A","B"
-];
-
-function letterIndex(letter){
-
-return STAFF_LETTERS.indexOf(letter);
-
-}
-
-function noteLetter(note){
-
-return note.replace("#","");
-
-}
-
-function noteStep(note){
-
-const letter=noteLetter(note);
-
-return letterIndex(letter);
-
-}
-
-
-/* =====================================================
-   CREATE MUSICAL STAFF
-===================================================== */
 
 function renderStaff(){
 
-const svg=
-document.getElementById("staffSvg");
+    const svg =
+        document.getElementById(
+            "staffSvg"
+        );
 
-svg.innerHTML="";
 
+    svg.innerHTML = "";
 
-/* Staff position */
 
-const top=70;
-const spacing=18;
+    const top = 70;
 
-for(let i=0;i<5;i++){
+    const spacing = 18;
 
-const line=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"line"
-);
 
-line.setAttribute("x1","105");
-line.setAttribute("x2","855");
+    /* Staff lines */
 
-line.setAttribute(
-"y1",
-top+i*spacing
-);
+    for(let i=0;i<5;i++){
 
-line.setAttribute(
-"y2",
-top+i*spacing
-);
+        const line =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "line"
+            );
 
-line.setAttribute(
-"class",
-"staff-line"
-);
 
-svg.appendChild(line);
+        line.setAttribute(
+            "x1","105"
+        );
 
-}
+        line.setAttribute(
+            "x2","855"
+        );
 
+        line.setAttribute(
+            "y1",
+            top+i*spacing
+        );
 
-/* Treble clef */
+        line.setAttribute(
+            "y2",
+            top+i*spacing
+        );
 
-const clef=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"text"
-);
+        line.setAttribute(
+            "class",
+            "staff-line"
+        );
 
-clef.setAttribute("x","35");
-clef.setAttribute("y","142");
-clef.setAttribute("class","staff-clef");
 
-clef.textContent="𝄞";
+        svg.appendChild(line);
 
-svg.appendChild(clef);
+    }
 
 
-/*
-Staff positions:
+    /* Treble clef */
 
-Bottom line E4 = 0
-F4 = 1
-G4 = 2
-A4 = 3
-B4 = 4
-C5 = 5
-D5 = 6
-E5 = 7
-F5 = 8
-G5 = 9
-A5 = 10
-B5 = 11
-C6 = 12
-...
-*/
+    const clef =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text"
+        );
 
-const staffBase={
-"C":5,
-"D":6,
-"E":0,
-"F":1,
-"G":2,
-"A":3,
-"B":4
-};
 
+    clef.setAttribute(
+        "x","35"
+    );
 
-/*
-Use octave-aware pitches for the displayed
-chord. We choose the nearest practical octave
-for each chord tone and stack them upward.
-*/
+    clef.setAttribute(
+        "y","142"
+    );
 
-const notes=
-chordNotes(
-selectedRoot,
-selectedType
-);
+    clef.setAttribute(
+        "class",
+        "staff-clef"
+    );
 
-let musicalNotes=[];
+    clef.textContent="𝄞";
 
 
-/* Start around middle C */
+    svg.appendChild(clef);
 
-let previous=-100;
 
-notes.forEach(note=>{
+    const notes =
+        chordNotes(
+            selectedRoot,
+            selectedType
+        );
 
-let base=
-staffBase[noteLetter(note)];
 
-let octave=4;
+    let musicalNotes=[];
 
-let position=
-base+
-(octave-4)*7;
+    let previous=-100;
 
 
-/*
-Find a position above previous note.
-This gives the staff a stacked chord appearance.
-*/
+    notes.forEach(note=>{
 
-while(position<=previous){
-octave++;
-position=
-base+
-(octave-4)*7;
-}
+        const letter =
+            note.replace("#","");
 
-previous=position;
 
-musicalNotes.push({
-note:note,
-position:position
-});
+        let position =
+            STAFF_BASE[letter];
 
-});
 
+        let octave = 4;
 
-/*
-Sort from low to high.
-*/
 
-musicalNotes.sort(
-(a,b)=>a.position-b.position
-);
+        position =
+            position +
+            (octave-4)*7;
 
 
-/* Place notes */
+        while(
+            position <= previous
+        ){
 
-const startX=175;
-const availableWidth=630;
+            octave++;
 
-const stepX=
-musicalNotes.length>1
-?
-availableWidth/(musicalNotes.length-1)
-:
-0;
+            position =
+                STAFF_BASE[letter] +
+                (octave-4)*7;
 
-musicalNotes.forEach((item,index)=>{
+        }
 
-const x=
-musicalNotes.length===1
-?
-490
-:
-startX+stepX*index;
 
-const position=item.position;
+        previous =
+            position;
 
-const y=
-top+4*spacing-position*(spacing/2);
 
+        musicalNotes.push({
 
-/*
-Ledger lines below
-*/
+            note:note,
 
-if(position<0){
+            position:position
 
-for(
-let p=-2;
-p>=position;
-p-=2
-){
+        });
 
-const ledger=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"line"
-);
+    });
 
-ledger.setAttribute(
-"x1",
-x-18
-);
 
-ledger.setAttribute(
-"x2",
-x+18
-);
+    musicalNotes.sort(
+        (a,b)=>
+            a.position-b.position
+    );
 
-ledger.setAttribute(
-"y1",
-top+4*spacing-p*(spacing/2)
-);
 
-ledger.setAttribute(
-"y2",
-top+4*spacing-p*(spacing/2)
-);
+    const startX=175;
 
-ledger.setAttribute(
-"class",
-"staff-ledger"
-);
+    const availableWidth=630;
 
-svg.appendChild(ledger);
+    const stepX =
+        musicalNotes.length>1
+        ?
+        availableWidth /
+        (musicalNotes.length-1)
+        :
+        0;
 
-}
 
-}
+    musicalNotes.forEach(
+        (item,index)=>{
 
+            const x =
+                musicalNotes.length===1
+                ?
+                490
+                :
+                startX +
+                stepX*index;
 
-/*
-Ledger lines above
-*/
 
-if(position>8){
+            const y =
+                top +
+                4*spacing -
+                item.position*
+                (spacing/2);
 
-for(
-let p=10;
-p<=position;
-p+=2
-){
 
-const ledger=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"line"
-);
+            /* Ledger lines */
 
-ledger.setAttribute(
-"x1",
-x-18
-);
+            if(item.position > 8){
 
-ledger.setAttribute(
-"x2",
-x+18
-);
+                for(
+                    let p=10;
+                    p<=item.position;
+                    p+=2
+                ){
 
-ledger.setAttribute(
-"y1",
-top+4*spacing-p*(spacing/2)
-);
+                    const ledger =
+                        document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "line"
+                        );
 
-ledger.setAttribute(
-"y2",
-top+4*spacing-p*(spacing/2)
-);
 
-ledger.setAttribute(
-"class",
-"staff-ledger"
-);
+                    ledger.setAttribute(
+                        "x1",
+                        x-18
+                    );
 
-svg.appendChild(ledger);
+                    ledger.setAttribute(
+                        "x2",
+                        x+18
+                    );
 
-}
+                    ledger.setAttribute(
+                        "y1",
+                        top+
+                        4*spacing-
+                        p*(spacing/2)
+                    );
 
-}
+                    ledger.setAttribute(
+                        "y2",
+                        top+
+                        4*spacing-
+                        p*(spacing/2)
+                    );
 
+                    ledger.setAttribute(
+                        "class",
+                        "staff-ledger"
+                    );
 
-/*
-Accidental
-*/
 
-if(item.note.includes("#")){
+                    svg.appendChild(
+                        ledger
+                    );
 
-const accidental=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"text"
-);
+                }
 
-accidental.setAttribute(
-"x",
-x-26
-);
+            }
 
-accidental.setAttribute(
-"y",
-y+7
-);
 
-accidental.setAttribute(
-"class",
-"staff-accidental"
-);
+            /* Sharp */
 
-accidental.textContent="♯";
+            if(item.note.includes("#")){
 
-svg.appendChild(accidental);
+                const accidental =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "text"
+                    );
 
-}
 
+                accidental.setAttribute(
+                    "x",
+                    x-27
+                );
 
-/*
-Note head
-*/
+                accidental.setAttribute(
+                    "y",
+                    y+7
+                );
 
-const note=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"ellipse"
-);
+                accidental.setAttribute(
+                    "class",
+                    "staff-accidental"
+                );
 
-note.setAttribute("cx",x);
-note.setAttribute("cy",y);
-note.setAttribute("rx","10");
-note.setAttribute("ry","7");
+                accidental.textContent="♯";
 
-note.setAttribute(
-"class",
-"staff-note"
-);
 
-note.setAttribute(
-"transform",
-`rotate(-20 ${x} ${y})`
-);
+                svg.appendChild(
+                    accidental
+                );
 
-svg.appendChild(note);
+            }
 
 
-/*
-Stem
-*/
+            /* Note */
 
-const stem=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"line"
-);
+            const note =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "ellipse"
+                );
 
-stem.setAttribute("x1",x+8);
-stem.setAttribute("x2",x+8);
 
-stem.setAttribute("y1",y);
-stem.setAttribute("y2",y-48);
+            note.setAttribute(
+                "cx",x
+            );
 
-stem.setAttribute(
-"stroke",
-"#fff"
-);
+            note.setAttribute(
+                "cy",y
+            );
 
-stem.setAttribute(
-"stroke-width",
-"2"
-);
+            note.setAttribute(
+                "rx","10"
+            );
 
-svg.appendChild(stem);
+            note.setAttribute(
+                "ry","7"
+            );
 
+            note.setAttribute(
+                "class",
+                "staff-note"
+            );
 
-/*
-Note label above
-*/
+            note.setAttribute(
+                "transform",
+                `rotate(-20 ${x} ${y})`
+            );
 
-const label=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"text"
-);
 
-label.setAttribute(
-"x",
-x
-);
+            svg.appendChild(note);
 
-label.setAttribute(
-"y",
-y+36
-);
 
-label.setAttribute(
-"class",
-"staff-note-label"
-);
+            /* Stem */
 
-label.textContent=
-prettyNote(item.note);
+            const stem =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "line"
+                );
 
-svg.appendChild(label);
 
-});
+            stem.setAttribute(
+                "x1",
+                x+8
+            );
 
+            stem.setAttribute(
+                "x2",
+                x+8
+            );
 
-/*
-No notes fallback
-*/
+            stem.setAttribute(
+                "y1",
+                y
+            );
 
-if(!notes.length){
+            stem.setAttribute(
+                "y2",
+                y-48
+            );
 
-const text=
-document.createElementNS(
-"http://www.w3.org/2000/svg",
-"text"
-);
+            stem.setAttribute(
+                "stroke",
+                "#fff"
+            );
 
-text.setAttribute("x","450");
-text.setAttribute("y","120");
-text.setAttribute(
-"text-anchor",
-"middle"
-);
+            stem.setAttribute(
+                "stroke-width",
+                "2"
+            );
 
-text.setAttribute(
-"fill",
-"#94a3b8"
-);
 
-text.textContent="No notes";
+            svg.appendChild(
+                stem
+            );
 
-svg.appendChild(text);
 
-}
+            /* Name */
+
+            const label =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "text"
+                );
+
+
+            label.setAttribute(
+                "x",
+                x
+            );
+
+            label.setAttribute(
+                "y",
+                y+36
+            );
+
+            label.setAttribute(
+                "class",
+                "staff-note-label"
+            );
+
+            label.textContent =
+                prettyNote(item.note);
+
+
+            svg.appendChild(
+                label
+            );
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-   TUNINGS
+   STANDARD TUNINGS
 ===================================================== */
 
-const TUNINGS={
+const TUNINGS = {
 
-guitar:[
-"E","A","D","G","B","E"
-],
+    guitar:[
+        "E",
+        "A",
+        "D",
+        "G",
+        "B",
+        "E"
+    ],
 
-ukulele:[
-"G","C","E","A"
-],
+    ukulele:[
+        "G",
+        "C",
+        "E",
+        "A"
+    ],
 
-mandolin:[
-"G","D","A","E"
-]
+    mandolin:[
+        "G",
+        "D",
+        "A",
+        "E"
+    ]
 
 };
 
 
 /* =====================================================
-   FRETTED CHORD ENGINE
+   VERIFIED COMMON GUITAR SHAPES
+===================================================== */
+
+/*
+   Strings are displayed low E -> high E.
+
+   0 = open
+   X = muted
+   Number = fret
+*/
+
+const GUITAR_COMMON = {
+
+    "C":       [null,3,2,0,1,0],
+    "Cm":      [null,3,5,5,4,3],
+    "D":       [null,null,0,2,3,2],
+    "Dm":      [null,null,0,2,3,1],
+    "E":       [0,2,2,1,0,0],
+    "Em":      [0,2,2,0,0,0],
+    "F":       [1,3,3,2,1,1],
+    "Fm":      [1,3,3,1,1,1],
+    "G":       [3,2,0,0,0,3],
+    "Gm":      [3,5,5,3,3,3],
+    "A":       [null,0,2,2,2,0],
+    "Am":      [null,0,2,2,1,0],
+    "B":       [null,2,4,4,4,2],
+    "Bm":      [null,2,4,4,3,2]
+
+};
+
+
+/* =====================================================
+   VERIFIED COMMON UKULELE SHAPES
+===================================================== */
+
+/*
+   Standard ukulele tuning:
+   G C E A
+
+   String order shown:
+   G -> C -> E -> A
+
+   These are standard low-position
+   ukulele chord shapes.
+*/
+
+const UKULELE_COMMON = {
+
+    "C":[0,0,0,3],
+
+    "Cm":[0,3,3,3],
+
+    "D":[2,2,2,0],
+
+    "Dm":[2,2,1,0],
+
+    "E":[1,4,0,2],
+
+    "Em":[0,4,3,2],
+
+    "F":[2,0,1,0],
+
+    "Fm":[1,0,1,3],
+
+    "G":[0,2,3,2],
+
+    "Gm":[0,2,3,1],
+
+    "A":[2,1,0,0],
+
+    "Am":[2,0,0,0],
+
+    "B":[4,3,2,2],
+
+    "Bm":[4,2,2,2]
+
+};
+
+
+/* =====================================================
+   CONVERT COMMON SHAPE
+===================================================== */
+
+function commonShape(
+    instrument
+){
+
+    const name =
+        selectedRoot +
+        (
+            selectedType === "m"
+            ? "m"
+            : ""
+        );
+
+
+    let raw=null;
+
+
+    if(
+        instrument === "guitar"
+    ){
+
+        raw =
+            GUITAR_COMMON[name];
+
+    }
+
+
+    if(
+        instrument === "ukulele"
+    ){
+
+        raw =
+            UKULELE_COMMON[name];
+
+    }
+
+
+    if(!raw){
+
+        return null;
+
+    }
+
+
+    return raw.map(
+        fret => {
+
+            if(fret === null){
+
+                return null;
+
+            }
+
+
+            const index =
+                raw.indexOf(fret);
+
+
+            return {
+                fret:fret,
+                note:null,
+                finger:0
+            };
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ACCURATE FRETTED VOICING ENGINE
 ===================================================== */
 
 function getFrettedVoicing(
-instrument
+    instrument
 ){
 
-const tuning=
-TUNINGS[instrument];
-
-const target=
-chordNotes(
-selectedRoot,
-selectedType
-);
-
-let best=null;
+    const tuning =
+        TUNINGS[instrument];
 
 
-/*
-Search possible fret combinations.
-We deliberately favour:
-- chord tones
-- root
-- open strings
-- smaller fret spans
-*/
-
-function search(
-stringIndex,
-shape
-){
-
-if(stringIndex===tuning.length){
-
-const played=
-shape.filter(x=>x!==null);
-
-if(!played.length)return;
-
-const playedNotes=
-played.map(x=>x.note);
-
-if(!playedNotes.includes(selectedRoot))
-return;
-
-const unique=
-new Set(playedNotes);
-
-let score=
-unique.size*50;
-
-if(
-playedNotes[0]===selectedRoot
-){
-score+=30;
-}
-
-shape.forEach(x=>{
-
-if(x){
-
-score-=x.fret*2;
-
-}
-
-});
-
-const frets=
-shape
-.filter(Boolean)
-.map(x=>x.fret);
-
-if(frets.length){
-
-score-=
-(
-Math.max(...frets)-
-Math.min(...frets)
-)*8;
-
-}
-
-if(
-!best ||
-score>best.score
-){
-
-best={
-score:score,
-shape:shape
-};
-
-}
-
-return;
-}
+    const chord =
+        chordNotes(
+            selectedRoot,
+            selectedType
+        );
 
 
-/*
-Open string
-*/
-
-const openNote=
-tuning[stringIndex];
-
-if(target.includes(openNote)){
-
-search(
-stringIndex+1,
-[
-...shape,
-{
-fret:0,
-note:openNote
-}
-]
-);
-
-}
+    const root =
+        selectedRoot;
 
 
-/*
-Frets 1-7
-*/
+    /*
+       First use known common shapes for
+       standard major/minor chords.
+    */
 
-for(
-let fret=1;
-fret<=7;
-fret++
-){
-
-const note=
-NOTES[
-normalizePitch(
-pitch(openNote)+fret
-)
-];
-
-if(target.includes(note)){
-
-search(
-stringIndex+1,
-[
-...shape,
-{
-fret:fret,
-note:note
-}
-]
-);
-
-}
-
-}
+    const common =
+        commonShape(
+            instrument
+        );
 
 
-/*
-Mute
-*/
+    if(common){
 
-search(
-stringIndex+1,
-[
-...shape,
-null
-]
-);
+        const result =
+            common.map(
+                (item,index)=>{
 
-}
-
-search(0,[]);
+                    if(item === null)
+                        return null;
 
 
-if(!best){
+                    const fret =
+                        item.fret;
 
-return{
-shape:tuning.map(()=>null)
-};
 
-}
+                    if(fret === 0){
 
-return best;
+                        return {
+                            fret:0,
+
+                            note:
+                                tuning[index],
+
+                            finger:0
+                        };
+
+                    }
+
+
+                    const note =
+                        NOTES[
+                            normalizePitch(
+                                pitch(
+                                    tuning[index]
+                                ) + fret
+                            )
+                        ];
+
+
+                    /*
+                       Proper finger assignments
+                       for the known common shapes.
+                    */
+
+                    return {
+
+                        fret:fret,
+
+                        note:note,
+
+                        finger:0
+
+                    };
+
+                }
+            );
+
+
+        assignFingerNumbers(
+            result
+        );
+
+
+        return {
+            shape:result
+        };
+
+    }
+
+
+    /*
+       Extended chord fallback.
+
+       Search all chord tones.
+    */
+
+    let possibilities =
+        tuning.map(
+            openNote=>{
+
+                const choices=[];
+
+
+                for(
+                    let fret=0;
+                    fret<=12;
+                    fret++
+                ){
+
+                    const note =
+                        NOTES[
+                            normalizePitch(
+                                pitch(openNote)+fret
+                            )
+                        ];
+
+
+                    if(
+                        chord.includes(note)
+                    ){
+
+                        choices.push({
+
+                            fret:fret,
+
+                            note:note
+
+                        });
+
+                    }
+
+                }
+
+
+                choices.push(null);
+
+
+                return choices;
+
+            }
+        );
+
+
+    let best=null;
+
+
+    function evaluate(shape){
+
+        const played =
+            shape.filter(Boolean);
+
+
+        if(!played.length)
+            return -999999;
+
+
+        const notes =
+            played.map(x=>x.note);
+
+
+        if(
+            !notes.includes(
+                selectedRoot
+            )
+        ){
+
+            return -999999;
+
+        }
+
+
+        let score=0;
+
+
+        /*
+           Prefer root.
+        */
+
+        score +=
+            notes.filter(
+                n =>
+                    n === selectedRoot
+            ).length * 50;
+
+
+        /*
+           Prefer 3rd.
+        */
+
+        const intervals =
+            played.map(
+                x =>
+                    normalizePitch(
+                        pitch(x.note) -
+                        pitch(root)
+                    )
+            );
+
+
+        if(
+            intervals.includes(3) ||
+            intervals.includes(4)
+        ){
+
+            score += 35;
+
+        }
+
+
+        /*
+           Prefer seventh.
+        */
+
+        if(
+            intervals.includes(10) ||
+            intervals.includes(11)
+        ){
+
+            score += 25;
+
+        }
+
+
+        /*
+           Prefer open strings.
+        */
+
+        played.forEach(
+            x=>{
+
+                if(x.fret===0)
+                    score+=18;
+
+                else
+                    score-=x.fret*1.5;
+
+            }
+        );
+
+
+        /*
+           Compact hand position.
+        */
+
+        const frets =
+            played
+            .filter(x=>x.fret>0)
+            .map(x=>x.fret);
+
+
+        if(frets.length){
+
+            const spread =
+                Math.max(...frets) -
+                Math.min(...frets);
+
+
+            score -=
+                spread*15;
+
+        }
+
+
+        /*
+           Ukulele strongly prefers
+           low-position shapes.
+        */
+
+        if(
+            instrument === "ukulele"
+        ){
+
+            played.forEach(
+                x=>{
+
+                    if(x.fret<=5)
+                        score+=10;
+
+                    if(x.fret>7)
+                        score-=30;
+
+                }
+            );
+
+        }
+
+
+        return score;
+
+    }
+
+
+    function search(
+        stringIndex,
+        shape
+    ){
+
+        if(
+            stringIndex ===
+            tuning.length
+        ){
+
+            const score =
+                evaluate(shape);
+
+
+            if(
+                score>-999999 &&
+                (
+                    !best ||
+                    score>best.score
+                )
+            ){
+
+                best={
+                    score:score,
+
+                    shape:[
+                        ...shape
+                    ]
+                };
+
+            }
+
+
+            return;
+
+        }
+
+
+        possibilities[
+            stringIndex
+        ].forEach(option=>{
+
+            search(
+
+                stringIndex+1,
+
+                [
+                    ...shape,
+                    option
+                ]
+
+            );
+
+        });
+
+    }
+
+
+    search(0,[]);
+
+
+    if(!best){
+
+        return {
+            shape:
+                tuning.map(
+                    ()=>null
+                )
+        };
+
+    }
+
+
+    assignFingerNumbers(
+        best.shape
+    );
+
+
+    return best;
 
 }
 
 
 /* =====================================================
-   MANDOLIN
+   ASSIGN REAL FINGER NUMBERS
 ===================================================== */
 
-/*
-The mandolin is tuned G-D-A-E.
+function assignFingerNumbers(
+    shape
+){
 
-Rather than pretending every extended chord has
-one universal fingering, the engine searches the
-four courses for a playable voicing of the actual
-selected chord.
-*/
+    const fretted =
+        shape
+        .filter(
+            x =>
+                x &&
+                x.fret>0
+        );
 
-function getMandolinVoicing(){
 
-return getFrettedVoicing("mandolin");
+    const uniqueFrets =
+        [
+            ...new Set(
+                fretted.map(
+                    x=>x.fret
+                )
+            )
+        ]
+        .sort(
+            (a,b)=>a-b
+        );
+
+
+    /*
+       Map fret positions to actual fingers.
+
+       The fret itself is NOT the finger number.
+    */
+
+    const fingerMap={};
+
+
+    if(
+        uniqueFrets.length
+    ){
+
+        const base =
+            uniqueFrets[0];
+
+
+        uniqueFrets.forEach(
+            fret=>{
+
+                const distance =
+                    fret-base;
+
+
+                let finger;
+
+
+                if(distance<=0){
+
+                    finger=1;
+
+                }
+
+                else if(distance===1){
+
+                    finger=2;
+
+                }
+
+                else if(distance===2){
+
+                    finger=3;
+
+                }
+
+                else{
+
+                    finger=4;
+
+                }
+
+
+                fingerMap[fret]=
+                    finger;
+
+            }
+        );
+
+    }
+
+
+    shape.forEach(
+        item=>{
+
+            if(!item)
+                return;
+
+
+            if(item.fret===0){
+
+                item.finger=0;
+
+            }
+
+            else{
+
+                item.finger =
+                    fingerMap[
+                        item.fret
+                    ] || 1;
+
+            }
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-   DRAW FRETTED DIAGRAM
+   FRETTED DIAGRAM
 ===================================================== */
 
 function drawFretted(
-instrument,
-result
+    instrument,
+    result
 ){
 
-const tuning=
-TUNINGS[instrument];
-
-const count=tuning.length;
-
-const shape=
-result.shape;
-
-let html=
-`<div class="fret-diagram">
-<div class="fretboard"></div>`;
+    const tuning =
+        TUNINGS[instrument];
 
 
-/*
-Strings
-*/
-
-tuning.forEach((string,i)=>{
-
-const x=
-50+
-(218/(count-1))*i;
-
-html+=
-`<div
-class="fret-string"
-style="left:${x}px">
-</div>`;
-
-html+=
-`<div
-class="string-label"
-style="left:${x}px">
-${string}
-</div>`;
-
-});
+    const count =
+        tuning.length;
 
 
-/*
-Fret numbers
-*/
-
-for(let fret=1;fret<=5;fret++){
-
-const y=
-65+(fret-1)*43;
-
-html+=
-`<div
-class="fret-number"
-style="top:${y}px">
-${fret}
-</div>`;
-
-}
+    const shape =
+        result.shape;
 
 
-/*
-Dots
-*/
+    let html = `
 
-shape.forEach((item,i)=>{
+        <div class="fret-diagram">
 
-const x=
-50+
-(218/(count-1))*i;
+            <div class="fretboard"></div>
 
-if(item===null){
-
-html+=
-`<div
-class="mute-mark"
-style="left:${x}px">
-×
-</div>`;
-
-return;
-
-}
-
-if(item.fret===0){
-
-html+=
-`<div
-class="open-mark"
-style="left:${x}px">
-O
-</div>`;
-
-return;
-
-}
-
-const y=
-47+
-(item.fret-0.5)*43;
-
-html+=
-`<div
-class="finger-dot"
-style="left:${x}px;top:${y}px">
-${Math.min(4,item.fret)}
-</div>`;
-
-});
+    `;
 
 
-html+=`</div>`;
+    /*
+       Strings
+    */
 
-return html;
+    tuning.forEach(
+        (string,i)=>{
+
+            const x =
+                50 +
+                (218/(count-1))*i;
+
+
+            html += `
+
+                <div
+                    class="fret-string"
+                    style="left:${x}px">
+                </div>
+
+                <div
+                    class="string-label"
+                    style="left:${x}px">
+                    ${string}
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    /*
+       Fret numbers
+    */
+
+    for(
+        let fret=1;
+        fret<=5;
+        fret++
+    ){
+
+        const y =
+            65 +
+            (fret-1)*43;
+
+
+        html += `
+
+            <div
+                class="fret-number"
+                style="top:${y}px">
+
+                ${fret}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+       Chord notes
+    */
+
+    shape.forEach(
+        (item,i)=>{
+
+            const x =
+                50 +
+                (218/(count-1))*i;
+
+
+            /*
+               Muted
+            */
+
+            if(item === null){
+
+                html += `
+
+                    <div
+                        class="mute-mark"
+                        style="left:${x}px">
+
+                        ×
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /*
+               Open
+            */
+
+            if(item.fret===0){
+
+                html += `
+
+                    <div
+                        class="open-mark"
+                        style="left:${x}px">
+
+                        O
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /*
+               Fretted note.
+            */
+
+            const y =
+                47 +
+                (item.fret-.5)*43;
+
+
+            html += `
+
+                <div
+                    class="finger-dot"
+                    style="
+                        left:${x}px;
+                        top:${y}px;
+                    "
+
+                    title="
+                        Finger ${item.finger}
+                        • Fret ${item.fret}
+                        • ${item.note || ""}
+                    "
+                >
+
+                    ${item.finger}
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    /*
+       Finger legend
+    */
+
+    html += `
+
+        <div
+            class="finger-key"
+            style="
+                position:absolute;
+                bottom:-4px;
+                left:50%;
+                transform:translateX(-50%);
+                width:100%;
+                text-align:center;
+                font-size:10px;
+                color:#94a3b8;
+                white-space:nowrap;
+            "
+        >
+
+            1 Index&nbsp;&nbsp;
+            2 Middle&nbsp;&nbsp;
+            3 Ring&nbsp;&nbsp;
+            4 Little
+
+        </div>
+
+    `;
+
+
+    html += `</div>`;
+
+
+    return html;
 
 }
 
@@ -2091,291 +2929,445 @@ return html;
 
 function drawPiano(){
 
-const chord=
-chordNotes(
-selectedRoot,
-selectedType
-);
-
-const white=[
-"C","D","E","F","G","A","B"
-];
-
-let html=
-`<div>
-<div class="piano">`;
+    const chord =
+        chordNotes(
+            selectedRoot,
+            selectedType
+        );
 
 
-/*
-White keys
-*/
-
-white.forEach((note,i)=>{
-
-const active=
-chord.includes(note);
-
-html+=
-`<div
-class="white-key ${active?"active":""}"
-style="left:${i*40}px">
-
-<div class="key-name">
-${note}
-</div>
-
-</div>`;
-
-});
+    const white = [
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "A",
+        "B"
+    ];
 
 
-/*
-Black keys
-*/
+    let html = `
 
-const black=[
-["C#",27],
-["D#",67],
-["F#",147],
-["G#",187],
-["A#",227]
-];
+        <div>
 
-black.forEach(([note,left])=>{
+            <div class="piano">
 
-const active=
-chord.includes(note);
-
-html+=
-`<div
-class="black-key ${active?"active":""}"
-style="left:${left}px">
-</div>`;
-
-});
+    `;
 
 
-html+=
-`</div>
-<div class="piano-notes">
-${displayNotes().join(" • ")}
-</div>
-</div>`;
+    white.forEach(
+        (note,i)=>{
 
-return html;
+            const active =
+                chord.includes(note);
+
+
+            html += `
+
+                <div
+                    class="
+                        white-key
+                        ${active ? "active" : ""}
+                    "
+                    style="left:${i*40}px"
+                >
+
+                    <div class="key-name">
+
+                        ${note}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    const black = [
+
+        ["C#",27],
+        ["D#",67],
+        ["F#",147],
+        ["G#",187],
+        ["A#",227]
+
+    ];
+
+
+    black.forEach(
+        ([note,left])=>{
+
+            const active =
+                chord.includes(note);
+
+
+            html += `
+
+                <div
+                    class="
+                        black-key
+                        ${active ? "active" : ""}
+                    "
+                    style="left:${left}px"
+                >
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </div>
+
+            <div class="piano-notes">
+
+                ${displayNotes().join(" • ")}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return html;
 
 }
 
 
 /* =====================================================
-   RENDER INSTRUMENT CARDS
+   INSTRUMENT CARDS
 ===================================================== */
 
 function renderInstruments(){
 
-const grid=
-document.getElementById("diagramGrid");
-
-grid.innerHTML="";
-
-
-/*
-Guitar
-*/
-
-if(activeInstruments.guitar){
-
-const card=
-document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=
-`<h2>🎸 Guitar</h2>
-<div class="card-sub">
-${chordName()}<br>
-Standard tuning E A D G B E
-</div>`;
-
-const diagram=
-document.createElement("div");
-
-diagram.className="diagram";
-
-diagram.innerHTML=
-drawFretted(
-"guitar",
-getFrettedVoicing("guitar")
-);
-
-card.appendChild(diagram);
-
-const badge=
-document.createElement("span");
-
-badge.className="badge";
-
-badge.textContent=
-"Suggested playable voicing";
-
-card.appendChild(badge);
-
-grid.appendChild(card);
-
-}
+    const grid =
+        document.getElementById(
+            "diagramGrid"
+        );
 
 
-/*
-Ukulele
-*/
-
-if(activeInstruments.ukulele){
-
-const card=
-document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=
-`<h2>🪕 Ukulele</h2>
-<div class="card-sub">
-${chordName()}<br>
-Standard tuning G C E A
-</div>`;
-
-const diagram=
-document.createElement("div");
-
-diagram.className="diagram";
-
-diagram.innerHTML=
-drawFretted(
-"ukulele",
-getFrettedVoicing("ukulele")
-);
-
-card.appendChild(diagram);
-
-const badge=
-document.createElement("span");
-
-badge.className="badge";
-
-badge.textContent=
-"Suggested playable voicing";
-
-card.appendChild(badge);
-
-grid.appendChild(card);
-
-}
+    grid.innerHTML="";
 
 
-/*
-Mandolin
-*/
+    /* Guitar */
 
-if(activeInstruments.mandolin){
+    if(activeInstruments.guitar){
 
-const card=
-document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=
-`<h2>🎻 Mandolin</h2>
-<div class="card-sub">
-${chordName()}<br>
-G • D • A • E tuning
-</div>`;
-
-const diagram=
-document.createElement("div");
-
-diagram.className="diagram";
-
-diagram.innerHTML=
-drawFretted(
-"mandolin",
-getMandolinVoicing()
-);
-
-card.appendChild(diagram);
-
-const badge=
-document.createElement("span");
-
-badge.className="badge";
-
-badge.textContent=
-"Mandolin voicing • G D A E";
-
-card.appendChild(badge);
-
-grid.appendChild(card);
-
-}
+        const card =
+            document.createElement(
+                "div"
+            );
 
 
-/*
-Piano
-*/
+        card.className="card";
 
-if(activeInstruments.piano){
 
-const card=
-document.createElement("div");
+        card.innerHTML = `
 
-card.className="card";
+            <h2>🎸 Guitar</h2>
 
-card.innerHTML=
-`<h2>🎹 Piano</h2>
-<div class="card-sub">
-${chordName()}<br>
-Chord tones highlighted
-</div>`;
+            <div class="card-sub">
 
-const diagram=
-document.createElement("div");
+                ${chordName()}<br>
 
-diagram.className="diagram";
+                Standard tuning
+                E A D G B E
 
-diagram.innerHTML=
-drawPiano();
+            </div>
 
-card.appendChild(diagram);
+        `;
 
-grid.appendChild(card);
 
-}
+        const diagram =
+            document.createElement(
+                "div"
+            );
+
+
+        diagram.className="diagram";
+
+
+        diagram.innerHTML =
+            drawFretted(
+                "guitar",
+                getFrettedVoicing(
+                    "guitar"
+                )
+            );
+
+
+        card.appendChild(
+            diagram
+        );
+
+
+        const badge =
+            document.createElement(
+                "span"
+            );
+
+
+        badge.className="badge";
+
+
+        badge.textContent =
+            "1 Index • 2 Middle • 3 Ring • 4 Little";
+
+
+        card.appendChild(
+            badge
+        );
+
+
+        grid.appendChild(
+            card
+        );
+
+    }
+
+
+    /* Ukulele */
+
+    if(activeInstruments.ukulele){
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className="card";
+
+
+        card.innerHTML = `
+
+            <h2>🪕 Ukulele</h2>
+
+            <div class="card-sub">
+
+                ${chordName()}<br>
+
+                Standard tuning
+                G C E A
+
+            </div>
+
+        `;
+
+
+        const diagram =
+            document.createElement(
+                "div"
+            );
+
+
+        diagram.className="diagram";
+
+
+        diagram.innerHTML =
+            drawFretted(
+                "ukulele",
+                getFrettedVoicing(
+                    "ukulele"
+                )
+            );
+
+
+        card.appendChild(
+            diagram
+        );
+
+
+        const badge =
+            document.createElement(
+                "span"
+            );
+
+
+        badge.className="badge";
+
+
+        badge.textContent =
+            "1 Index • 2 Middle • 3 Ring • 4 Little";
+
+
+        card.appendChild(
+            badge
+        );
+
+
+        grid.appendChild(
+            card
+        );
+
+    }
+
+
+    /* Mandolin */
+
+    if(activeInstruments.mandolin){
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className="card";
+
+
+        card.innerHTML = `
+
+            <h2>🎻 Mandolin</h2>
+
+            <div class="card-sub">
+
+                ${chordName()}<br>
+
+                G • D • A • E
+
+            </div>
+
+        `;
+
+
+        const diagram =
+            document.createElement(
+                "div"
+            );
+
+
+        diagram.className="diagram";
+
+
+        diagram.innerHTML =
+            drawFretted(
+                "mandolin",
+                getFrettedVoicing(
+                    "mandolin"
+                )
+            );
+
+
+        card.appendChild(
+            diagram
+        );
+
+
+        const badge =
+            document.createElement(
+                "span"
+            );
+
+
+        badge.className="badge";
+
+
+        badge.textContent =
+            "Mandolin G D A E";
+
+
+        card.appendChild(
+            badge
+        );
+
+
+        grid.appendChild(
+            card
+        );
+
+    }
+
+
+    /* Piano */
+
+    if(activeInstruments.piano){
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className="card";
+
+
+        card.innerHTML = `
+
+            <h2>🎹 Piano</h2>
+
+            <div class="card-sub">
+
+                ${chordName()}<br>
+
+                Chord tones highlighted
+
+            </div>
+
+        `;
+
+
+        const diagram =
+            document.createElement(
+                "div"
+            );
+
+
+        diagram.className="diagram";
+
+
+        diagram.innerHTML =
+            drawPiano();
+
+
+        card.appendChild(
+            diagram
+        );
+
+
+        grid.appendChild(
+            card
+        );
+
+    }
 
 }
 
 
 /* =====================================================
-   UPDATE
+   MAIN UPDATE
 ===================================================== */
 
 function update(){
 
-document.getElementById(
-"selectedChord"
-).textContent=
-chordName();
+    document.getElementById(
+        "selectedChord"
+    ).textContent =
+        chordName();
 
-document.getElementById(
-"selectedNotes"
-).textContent=
-"Notes: "+
-displayNotes().join(" • ");
 
-highlightCircle();
+    document.getElementById(
+        "selectedNotes"
+    ).textContent =
+        "Notes: " +
+        displayNotes().join(" • ");
 
-buildChordLibrary();
 
-renderStaff();
+    highlightCircle();
 
-renderInstruments();
+    buildChordLibrary();
+
+    renderStaff();
+
+    renderInstruments();
 
 }
 
@@ -2385,29 +3377,41 @@ renderInstruments();
 ===================================================== */
 
 document
-.querySelectorAll(".instrument-button")
-.forEach(button=>{
+    .querySelectorAll(
+        ".instrument-button"
+    )
+    .forEach(button=>{
 
-button.addEventListener(
-"click",
-()=>{
+        button.addEventListener(
+            "click",
+            ()=>{
 
-const instrument=
-button.dataset.instrument;
+                const instrument =
+                    button.dataset.instrument;
 
-activeInstruments[instrument]=
-!activeInstruments[instrument];
 
-button.classList.toggle(
-"active",
-activeInstruments[instrument]
-);
+                activeInstruments[
+                    instrument
+                ] =
+                    !activeInstruments[
+                        instrument
+                    ];
 
-renderInstruments();
 
-});
+                button.classList.toggle(
+                    "active",
+                    activeInstruments[
+                        instrument
+                    ]
+                );
 
-});
+
+                renderInstruments();
+
+            }
+        );
+
+    });
 
 
 /* =====================================================
@@ -2415,18 +3419,19 @@ renderInstruments();
 ===================================================== */
 
 document
-.getElementById("search")
-.addEventListener(
-"input",
-buildChordLibrary
-);
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        buildChordLibrary
+    );
 
 
 /* =====================================================
-   START
+   START APP
 ===================================================== */
 
 buildCircle();
+
 update();
 
 </script>
