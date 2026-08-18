@@ -16,7 +16,12 @@
 body{
     margin:0;
     background:
-        radial-gradient(circle at top,#26364e 0%,#101827 45%,#060a11 100%);
+        radial-gradient(
+            circle at top,
+            #26364e 0%,
+            #101827 45%,
+            #060a11 100%
+        );
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
 }
@@ -29,6 +34,7 @@ header{
 header h1{
     margin:0;
     font-size:30px;
+    letter-spacing:.5px;
 }
 
 header p{
@@ -54,14 +60,42 @@ h2{
     margin-top:0;
 }
 
-button,
-select,
-input{
-    font-family:inherit;
+
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
+
+.screen{
+    display:block;
 }
 
-button{
+.screen.hidden{
+    display:none;
+}
+
+.top-navigation{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:12px auto 5px;
+}
+
+.nav-button{
+    padding:12px 18px;
+    border-radius:12px;
+    border:1px solid #64748b;
+    background:#111827;
+    color:#fff;
+    font-weight:bold;
     cursor:pointer;
+}
+
+.nav-button.active,
+.nav-button:hover{
+    background:#d4af37;
+    color:#111827;
+    border-color:#f8e08e;
 }
 
 
@@ -80,6 +114,7 @@ button{
     height:min(92vw,470px);
     margin:auto;
     border-radius:50%;
+
     background:
         radial-gradient(
             circle,
@@ -88,8 +123,12 @@ button{
             #172236 52% 72%,
             #0b1220 73%
         );
+
     border:3px solid #64748b;
-    box-shadow:inset 0 0 35px #000,0 10px 30px rgba(0,0,0,.4);
+
+    box-shadow:
+        inset 0 0 35px #000,
+        0 10px 30px rgba(0,0,0,.4);
 }
 
 .circle-ring{
@@ -112,31 +151,47 @@ button{
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
+
     width:112px;
     height:112px;
+
     border-radius:50%;
+
     background:#0a111d;
     border:2px solid #d4af37;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
+
     font-weight:bold;
     font-size:17px;
+
     padding:10px;
 }
 
 .circle-note{
     position:absolute;
+
     transform:translate(-50%,-50%);
+
     border:2px solid #94a3b8;
     background:#1e293b;
+
     color:#fff;
+
     font-weight:bold;
+
+    cursor:pointer;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     transition:.15s;
+
     z-index:5;
 }
 
@@ -160,7 +215,10 @@ button{
     background:#d4af37;
     color:#101827;
     border-color:#f8e08e;
-    transform:translate(-50%,-50%) scale(1.1);
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.1);
 }
 
 .circle-legend{
@@ -203,11 +261,17 @@ button{
 .search{
     width:100%;
     padding:13px;
+
     border-radius:11px;
+
     border:1px solid #475569;
+
     background:#0b1220;
+
     color:#fff;
+
     font-size:16px;
+
     margin-bottom:15px;
 }
 
@@ -231,11 +295,18 @@ button{
 
 .chord-button{
     padding:10px 13px;
+
     border-radius:10px;
+
     border:1px solid #475569;
+
     background:#1e293b;
+
     color:#fff;
+
     font-size:14px;
+
+    cursor:pointer;
 }
 
 .chord-button:hover,
@@ -259,11 +330,18 @@ button{
 
 .instrument-button{
     padding:11px 16px;
+
     border-radius:11px;
+
     border:1px solid #64748b;
+
     background:#111827;
+
     color:#fff;
+
     font-weight:bold;
+
+    cursor:pointer;
 }
 
 .instrument-button.active{
@@ -281,28 +359,29 @@ button{
     justify-content:center;
     flex-wrap:wrap;
     gap:9px;
-    margin-top:12px;
 }
 
 .tuning-button{
     padding:11px 15px;
-    border-radius:10px;
+    border-radius:11px;
     border:1px solid #64748b;
     background:#111827;
     color:#fff;
     font-weight:bold;
+    cursor:pointer;
 }
 
-.tuning-button.active{
+.tuning-button.active,
+.tuning-button:hover{
     background:#d4af37;
     color:#111827;
 }
 
-.tuning-info{
+.tuning-description{
     text-align:center;
-    margin-top:12px;
-    color:#cbd5e1;
-    font-size:14px;
+    color:#94a3b8;
+    margin-top:10px;
+    font-size:13px;
 }
 
 
@@ -319,13 +398,14 @@ button{
     font-size:20px;
     font-weight:bold;
     color:#f8e08e;
+    margin-bottom:3px;
 }
 
 .staff-subtitle{
     text-align:center;
     color:#94a3b8;
     font-size:13px;
-    margin:5px 0 8px;
+    margin-bottom:8px;
 }
 
 .staff-container{
@@ -353,15 +433,16 @@ button{
 
 .staff-note-label{
     fill:#fff;
-    font-size:14px;
+    font-size:13px;
     font-weight:bold;
     text-anchor:middle;
 }
 
 .staff-accidental{
     fill:#fff;
-    font-size:20px;
+    font-size:22px;
     font-weight:bold;
+    text-anchor:end;
 }
 
 .staff-clef{
@@ -382,7 +463,9 @@ button{
 
 .diagram-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+    grid-template-columns:
+        repeat(auto-fit,minmax(285px,1fr));
+
     gap:16px;
 }
 
@@ -409,14 +492,23 @@ button{
 
 .diagram{
     min-height:300px;
+
     display:flex;
     align-items:center;
     justify-content:center;
 }
 
+.badge{
+    display:block;
+    text-align:center;
+    font-size:11px;
+    color:#64748b;
+    margin-top:7px;
+}
+
 
 /* =====================================================
-   CORRECT FRETTED DIAGRAM
+   FRETTED DIAGRAM
 ===================================================== */
 
 .fret-diagram{
@@ -427,12 +519,16 @@ button{
 
 .fretboard{
     position:absolute;
-    left:55px;
-    top:48px;
-    width:210px;
+
+    left:50px;
+    right:16px;
+    top:47px;
+
     height:220px;
-    border-left:3px solid #eee;
+
+    border-left:4px solid #eee;
     border-top:5px solid #eee;
+
     background:
         repeating-linear-gradient(
             to bottom,
@@ -444,65 +540,63 @@ button{
 }
 
 /*
-   STRING LINES ARE VERTICAL.
-   Each string gets exactly ONE line.
+   IMPORTANT:
+
+   The fretboard now has:
+   - one vertical line per STRING
+   - horizontal lines for FRETS
+
+   The string count comes directly from
+   the instrument tuning.
 */
 
 .fret-string{
     position:absolute;
+
     top:0;
     bottom:0;
+
     width:2px;
+
     background:#d7dce3;
+
     z-index:3;
-}
-
-/*
-   Finger positions use the SAME X coordinate
-   as their corresponding string.
-*/
-
-.finger-dot{
-    position:absolute;
-    width:31px;
-    height:31px;
-    border-radius:50%;
-    background:#d4af37;
-    color:#111827;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    font-size:15px;
-    z-index:8;
-    transform:translate(-50%,-50%);
-    border:2px solid #f8e08e;
-    box-shadow:0 2px 7px rgba(0,0,0,.4);
 }
 
 .string-label{
     position:absolute;
+
     top:18px;
+
     transform:translateX(-50%);
+
     font-size:11px;
+
     color:#94a3b8;
-    white-space:nowrap;
 }
 
 .fret-number{
     position:absolute;
-    left:22px;
+
+    left:18px;
+
     font-size:10px;
+
     color:#94a3b8;
 }
 
 .open-mark,
 .mute-mark{
     position:absolute;
-    top:4px;
+
+    top:5px;
+
     transform:translateX(-50%);
+
     font-size:20px;
+
     font-weight:bold;
+
     z-index:8;
 }
 
@@ -514,24 +608,43 @@ button{
     color:#f87171;
 }
 
-.fret-range{
+.finger-dot{
     position:absolute;
-    left:55px;
-    top:275px;
-    width:210px;
-    text-align:center;
-    color:#94a3b8;
-    font-size:11px;
+
+    width:31px;
+    height:31px;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    color:#111827;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+    z-index:8;
+
+    transform:translate(-50%,-50%);
+
+    border:2px solid #f8e08e;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.4);
 }
 
-.finger-key{
+.finger-note{
     position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    text-align:center;
-    font-size:10px;
-    color:#94a3b8;
+    transform:translateX(-50%);
+    font-size:9px;
+    color:#cbd5e1;
+    white-space:nowrap;
 }
 
 
@@ -541,17 +654,23 @@ button{
 
 .piano{
     position:relative;
+
     width:280px;
-    height:190px;
+    height:205px;
 }
 
 .white-key{
     position:absolute;
+
     top:0;
+
     height:175px;
     width:40px;
+
     background:#fff;
+
     border:1px solid #111827;
+
     z-index:1;
 }
 
@@ -561,230 +680,189 @@ button{
 
 .black-key{
     position:absolute;
+
     top:0;
+
     width:25px;
     height:108px;
+
     background:#050505;
-    border-radius:0 0 5px 5px;
+
+    border-radius:
+        0 0 5px 5px;
+
     z-index:3;
+
+    color:#fff;
 }
 
 .black-key.active{
     background:#d4af37;
+    color:#111827;
 }
 
 .key-name{
     position:absolute;
+
     bottom:8px;
+
     width:100%;
+
     text-align:center;
+
     color:#111827;
+
     font-size:10px;
+
     font-weight:bold;
+}
+
+.black-key .key-name{
+    bottom:7px;
+    color:#fff;
+    font-size:8px;
+}
+
+.black-key.active .key-name{
+    color:#111827;
 }
 
 .piano-notes{
     text-align:center;
+
     font-size:12px;
+
     color:#cbd5e1;
+
     margin-top:10px;
 }
 
 
 /* =====================================================
-   CHORD SHEET BUTTON
+   CHORD SHEET CREATOR
 ===================================================== */
 
-.sheet-open-button{
-    width:100%;
-    padding:15px;
-    border-radius:13px;
-    border:1px solid #d4af37;
-    background:#d4af37;
-    color:#111827;
-    font-size:17px;
-    font-weight:bold;
-}
-
-.sheet-open-button:hover{
-    background:#f8e08e;
-}
-
-
-/* =====================================================
-   CHORD SHEET SCREEN
-===================================================== */
-
-#sheetScreen{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:5000;
-    background:#060a11;
-    overflow-y:auto;
-}
-
-.sheet-header{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:#0c1422;
-    border-bottom:1px solid #334155;
-    padding:12px;
-}
-
-.sheet-header-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    max-width:1200px;
-    margin:auto;
-}
-
-.sheet-header h2{
-    margin:0;
-    color:#f8e08e;
-}
-
-.sheet-close{
-    padding:10px 15px;
-    border-radius:10px;
-    border:1px solid #64748b;
-    background:#111827;
-    color:#fff;
-    font-weight:bold;
-}
-
-.sheet-tools{
+.sheet-toolbar{
     display:flex;
     flex-wrap:wrap;
-    justify-content:center;
     gap:9px;
-    max-width:1200px;
-    margin:12px auto 0;
+    justify-content:center;
+    margin-bottom:15px;
 }
 
-.sheet-tool{
-    padding:10px 14px;
-    border-radius:10px;
+.sheet-button{
+    padding:11px 15px;
+    border-radius:11px;
     border:1px solid #64748b;
     background:#111827;
     color:#fff;
     font-weight:bold;
+    cursor:pointer;
 }
 
-.sheet-tool:hover{
+.sheet-button:hover,
+.sheet-button.active{
     background:#d4af37;
     color:#111827;
 }
 
-.sheet-content{
-    width:min(1100px,94%);
-    margin:20px auto 50px;
+.sheet-input-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
 }
 
-
-/* =====================================================
-   CHORD SHEET BUILDER
-===================================================== */
-
-.sheet-selector{
-    background:#0c1422;
-    border:1px solid #334155;
-    border-radius:18px;
-    padding:15px;
-    margin-bottom:18px;
+.sheet-input{
+    flex:1;
+    min-width:190px;
+    padding:13px;
+    border-radius:11px;
+    border:1px solid #475569;
+    background:#0b1220;
+    color:#fff;
+    font-size:16px;
 }
 
-.sheet-selector h3{
-    text-align:center;
-    margin-top:0;
+.selected-chord-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:14px 0;
+}
+
+.selected-chord-chip{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 10px;
+    border-radius:10px;
+    background:#1e293b;
+    border:1px solid #475569;
+}
+
+.selected-chord-chip button{
+    border:0;
+    background:transparent;
+    color:#f87171;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.sheet-common{
+    margin-top:14px;
+}
+
+.sheet-common-title{
     color:#f8e08e;
+    font-weight:bold;
+    margin-bottom:8px;
 }
 
-.root-grid,
-.sheet-type-grid{
+.sheet-common-buttons{
     display:flex;
     flex-wrap:wrap;
     gap:7px;
-    justify-content:center;
 }
 
-.root-button,
-.sheet-type-button{
-    padding:9px 12px;
+.sheet-chord-button{
+    padding:9px 11px;
     border-radius:9px;
     border:1px solid #475569;
     background:#1e293b;
     color:#fff;
-    font-size:13px;
+    cursor:pointer;
 }
 
-.root-button.active,
-.sheet-type-button.active{
+.sheet-chord-button:hover{
     background:#d4af37;
     color:#111827;
 }
 
-.sheet-type-grid{
-    max-height:155px;
-    overflow:hidden;
-    transition:max-height .25s;
-}
-
-.sheet-type-grid.expanded{
-    max-height:800px;
-}
-
-.expand-types{
-    display:block;
-    margin:10px auto;
-    padding:8px 14px;
-    border-radius:9px;
-    border:1px solid #64748b;
-    background:#111827;
-    color:#fff;
-}
-
-.custom-chord-row{
-    display:flex;
-    gap:8px;
+.sheet-more{
+    display:none;
     margin-top:12px;
 }
 
-.custom-chord-row input{
-    flex:1;
-    padding:11px;
-    border-radius:10px;
-    border:1px solid #475569;
-    background:#0b1220;
-    color:#fff;
+.sheet-more.open{
+    display:block;
 }
 
-.custom-chord-row button{
-    padding:11px 15px;
-    border-radius:10px;
-    border:1px solid #d4af37;
-    background:#d4af37;
-    color:#111827;
-    font-weight:bold;
-}
-
-.sheet-instruments{
+.sheet-instrument-row{
     display:flex;
-    justify-content:center;
     flex-wrap:wrap;
-    gap:8px;
-    margin-top:14px;
+    justify-content:center;
+    gap:9px;
+    margin:15px 0;
 }
 
 .sheet-instrument-button{
-    padding:10px 14px;
-    border-radius:9px;
+    padding:10px 13px;
+    border-radius:10px;
     border:1px solid #64748b;
     background:#111827;
     color:#fff;
+    cursor:pointer;
     font-weight:bold;
 }
 
@@ -793,135 +871,164 @@ button{
     color:#111827;
 }
 
-.selected-sheet-chords{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:8px;
-    margin-top:14px;
-}
-
-.selected-sheet-chord{
-    padding:8px 12px;
-    border-radius:8px;
-    background:#1e293b;
-    border:1px solid #475569;
-    color:#fff;
-}
-
-.selected-sheet-chord button{
-    margin-left:7px;
-    border:0;
-    background:none;
-    color:#f87171;
-    font-weight:bold;
-}
-
-
-/* =====================================================
-   GENERATED SHEET
-===================================================== */
-
-.generated-sheet{
-    background:#0c1422;
-    border:1px solid #334155;
-    border-radius:18px;
-    padding:22px;
-}
-
-.generated-sheet-title{
-    text-align:center;
-    font-size:28px;
-    color:#f8e08e;
-    margin-bottom:22px;
-}
-
-.sheet-instrument-section{
-    margin:0 0 30px;
-    padding:18px;
-    border:1px solid #334155;
+.sheet-preview{
+    background:#fff;
+    color:#111827;
     border-radius:15px;
-    background:#101827;
+    padding:22px;
+    overflow-x:auto;
 }
 
-.sheet-instrument-title{
+.sheet-document{
+    max-width:1050px;
+    margin:auto;
+}
+
+.sheet-document-title{
     text-align:center;
-    color:#f8e08e;
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:16px;
-}
-
-.sheet-chord-row{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:16px;
-}
-
-.sheet-chord-card{
-    background:#0c1422;
-    border:1px solid #334155;
-    border-radius:13px;
-    padding:12px;
-}
-
-.sheet-chord-name{
-    text-align:center;
-    color:#f8e08e;
-    font-size:19px;
+    font-size:26px;
     font-weight:bold;
     margin-bottom:5px;
 }
 
-.sheet-chord-notes{
+.sheet-document-subtitle{
     text-align:center;
-    color:#94a3b8;
-    font-size:11px;
+    color:#555;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.sheet-entry{
+    page-break-inside:avoid;
+    break-inside:avoid;
+    border-bottom:1px solid #ddd;
+    padding:20px 0;
+}
+
+.sheet-entry:last-child{
+    border-bottom:0;
+}
+
+.sheet-entry-title{
+    font-size:23px;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:4px;
+}
+
+.sheet-entry-notes{
+    text-align:center;
+    font-size:14px;
+    color:#555;
     margin-bottom:8px;
 }
 
-.sheet-mini-staff{
+.sheet-entry-staff{
     width:100%;
-    height:125px;
-    display:block;
+    overflow:hidden;
+    margin-bottom:10px;
 }
 
-.no-sheet{
+.sheet-entry-staff svg{
+    width:100%;
+    min-width:620px;
+    height:175px;
+}
+
+.sheet-entry-diagrams{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+    gap:12px;
+}
+
+.sheet-instrument-card{
+    border:1px solid #ccc;
+    border-radius:12px;
+    padding:10px;
     text-align:center;
-    color:#94a3b8;
-    padding:30px;
+    page-break-inside:avoid;
+    break-inside:avoid;
 }
 
+.sheet-instrument-card h4{
+    margin:3px 0 4px;
+    font-size:16px;
+}
 
-/* =====================================================
-   COPY / SHARE
-===================================================== */
+.sheet-instrument-info{
+    font-size:11px;
+    color:#666;
+    margin-bottom:4px;
+}
 
-.sheet-status{
-    position:fixed;
-    left:50%;
-    bottom:25px;
-    transform:translateX(-50%);
+.sheet-diagram{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:270px;
+}
+
+.sheet-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin:15px 0;
+}
+
+.sheet-action-button{
+    padding:12px 17px;
+    border-radius:11px;
+    border:1px solid #64748b;
+    background:#111827;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.sheet-action-button:hover{
     background:#d4af37;
     color:#111827;
-    padding:12px 20px;
-    border-radius:12px;
-    font-weight:bold;
-    z-index:9999;
-    display:none;
-    box-shadow:0 5px 20px rgba(0,0,0,.4);
 }
 
 
 /* =====================================================
-   FOOTER
+   PRINT / COPY
 ===================================================== */
 
-footer{
-    text-align:center;
-    padding:25px;
-    color:#64748b;
-    font-size:12px;
+@media print{
+
+    body{
+        background:#fff;
+        color:#111;
+    }
+
+    body > *{
+        display:none !important;
+    }
+
+    #sheetScreen{
+        display:block !important;
+    }
+
+    #sheetScreen .panel:not(.sheet-panel){
+        display:none !important;
+    }
+
+    .sheet-toolbar,
+    .sheet-input-row,
+    .sheet-common,
+    .sheet-instrument-row,
+    .sheet-actions,
+    .top-navigation{
+        display:none !important;
+    }
+
+    .sheet-preview{
+        padding:0;
+        border:0;
+    }
 }
 
 
@@ -960,16 +1067,8 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .custom-chord-row{
-        flex-direction:column;
-    }
-
-    .sheet-chord-row{
-        grid-template-columns:1fr;
-    }
-
-    .sheet-header-row{
-        flex-direction:column;
+    .sheet-preview{
+        padding:12px;
     }
 
 }
@@ -980,7 +1079,6 @@ footer{
 
 <body>
 
-
 <header>
 
 <h1>🎵 ML6CMG Chord Finder</h1>
@@ -989,15 +1087,35 @@ footer{
 Circle of Fifths • Chords • Fingerings • Music Staff
 </p>
 
+<div class="top-navigation">
+
+<button
+    class="nav-button active"
+    id="finderNav">
+    🎵 Chord Finder
+</button>
+
+<button
+    class="nav-button"
+    id="sheetNav">
+    📄 Create Chord Sheet
+</button>
+
+</div>
+
 </header>
 
 
+<!-- =====================================================
+     MAIN CHORD FINDER
+===================================================== -->
+
+<main
+    id="finderScreen"
+    class="screen">
+
 <div class="container">
 
-
-<!-- ===================================================
-     CIRCLE OF FIFTHS
-=================================================== -->
 
 <section class="panel">
 
@@ -1008,10 +1126,13 @@ Circle of Fifths
 <div class="circle" id="circle">
 
 <div class="circle-ring outer"></div>
+
 <div class="circle-ring inner"></div>
 
-<div class="circle-center" id="circleCenter">
-C Major
+<div
+    class="circle-center"
+    id="circleCenter">
+    C Major
 </div>
 
 </div>
@@ -1031,18 +1152,18 @@ C Major
 </section>
 
 
-<!-- ===================================================
-     CHORD SELECTOR
-=================================================== -->
-
 <section class="panel">
 
-<div class="selected-chord" id="selectedChord">
-C Major
+<div
+    class="selected-chord"
+    id="selectedChord">
+    C Major
 </div>
 
-<div class="selected-notes" id="selectedNotes">
-Notes: C • E • G
+<div
+    class="selected-notes"
+    id="selectedNotes">
+    Notes: C • E • G
 </div>
 
 <input
@@ -1056,55 +1177,6 @@ Notes: C • E • G
 </section>
 
 
-<!-- ===================================================
-     ALTERED GUITAR TUNINGS
-=================================================== -->
-
-<section class="panel">
-
-<h3 style="text-align:center;margin-top:0">
-🎸 Guitar Tuning
-</h3>
-
-<div class="tuning-buttons">
-
-<button
-    class="tuning-button active"
-    data-tuning="standard">
-    Standard<br>E A D G B E
-</button>
-
-<button
-    class="tuning-button"
-    data-tuning="DADGAD">
-    DADGAD
-</button>
-
-<button
-    class="tuning-button"
-    data-tuning="DADFAD">
-    DADF#AD
-</button>
-
-<button
-    class="tuning-button"
-    data-tuning="dropD">
-    Drop D
-</button>
-
-</div>
-
-<div class="tuning-info" id="tuningInfo">
-Standard tuning • E A D G B E
-</div>
-
-</section>
-
-
-<!-- ===================================================
-     INSTRUMENT VISIBILITY
-=================================================== -->
-
 <section class="panel">
 
 <h3 style="text-align:center;margin-top:0">
@@ -1113,20 +1185,28 @@ Show instruments
 
 <div class="instrument-buttons">
 
-<button class="instrument-button active" data-instrument="guitar">
-🎸 Guitar
+<button
+    class="instrument-button active"
+    data-instrument="guitar">
+    🎸 Guitar
 </button>
 
-<button class="instrument-button active" data-instrument="ukulele">
-🪕 Ukulele
+<button
+    class="instrument-button active"
+    data-instrument="ukulele">
+    🪕 Ukulele
 </button>
 
-<button class="instrument-button active" data-instrument="mandolin">
-🎻 Mandolin
+<button
+    class="instrument-button active"
+    data-instrument="mandolin">
+    🎻 Mandolin
 </button>
 
-<button class="instrument-button active" data-instrument="piano">
-🎹 Piano
+<button
+    class="instrument-button active"
+    data-instrument="piano">
+    🎹 Piano
 </button>
 
 </div>
@@ -1134,26 +1214,50 @@ Show instruments
 </section>
 
 
-<!-- ===================================================
-     CHORD SHEET BUTTON
-=================================================== -->
-
 <section class="panel">
 
+<h3 style="text-align:center;margin-top:0">
+🎸 Guitar Tunings
+</h3>
+
+<div class="tuning-buttons">
+
 <button
-    class="sheet-open-button"
-    onclick="openChordSheet()">
-
-    📄 Create Chord Sheet
-
+    class="tuning-button active"
+    data-tuning="standard">
+    Standard
 </button>
+
+<button
+    class="tuning-button"
+    data-tuning="dropd">
+    Drop D
+</button>
+
+<button
+    class="tuning-button"
+    data-tuning="dadgad">
+    DADGAD
+</button>
+
+<button
+    class="tuning-button"
+    data-tuning="dadfad">
+    DADF#AD
+</button>
+
+</div>
+
+<div
+    class="tuning-description"
+    id="tuningDescription">
+
+    Guitar tuning: E A D G B E
+
+</div>
 
 </section>
 
-
-<!-- ===================================================
-     MAIN STAFF
-=================================================== -->
 
 <section class="panel staff-panel">
 
@@ -1162,7 +1266,7 @@ Show instruments
 </div>
 
 <div class="staff-subtitle">
-Notes contained in the selected chord
+All notes contained in the selected chord
 </div>
 
 <div class="staff-container">
@@ -1179,10 +1283,6 @@ Notes contained in the selected chord
 </section>
 
 
-<!-- ===================================================
-     MAIN DIAGRAMS
-=================================================== -->
-
 <section
     class="diagram-grid"
     id="diagramGrid">
@@ -1191,230 +1291,334 @@ Notes contained in the selected chord
 
 </div>
 
+</main>
+
+
+<!-- =====================================================
+     CHORD SHEET SCREEN
+===================================================== -->
+
+<main
+    id="sheetScreen"
+    class="screen hidden">
+
+<div class="container">
+
+<section class="panel sheet-panel">
+
+<h2 style="text-align:center">
+📄 Chord Sheet Creator
+</h2>
+
+<p
+    style="
+        text-align:center;
+        color:#94a3b8;
+        font-size:13px;
+    "
+>
+Add as many chords as you want. Each chord will receive
+its own notation, notes and instrument diagrams.
+</p>
+
+
+<!-- COMMON CHORDS -->
+
+<div class="sheet-common">
+
+<div class="sheet-common-title">
+Common Chords
+</div>
+
+<div
+    class="sheet-common-buttons"
+    id="sheetCommonButtons">
+</div>
+
+<button
+    class="sheet-button"
+    id="expandSheetChords"
+    style="margin-top:10px">
+
+    Show more chord options
+
+</button>
+
+<div
+    class="sheet-more"
+    id="sheetMore">
+
+    <div
+        class="sheet-common-buttons"
+        id="sheetMoreButtons">
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- TYPE CHORD -->
+
+<div
+    class="sheet-input-row"
+    style="margin-top:15px">
+
+<input
+    id="sheetChordInput"
+    class="sheet-input"
+    placeholder="Type a chord e.g. C, Am, F#m7, Bbmaj7, D7"
+>
+
+<button
+    class="sheet-button"
+    id="addTypedChord">
+
+    + Add Chord
+
+</button>
+
+</div>
+
+
+<!-- SELECTED CHORDS -->
+
+<h3>
+Chords in this sheet
+</h3>
+
+<div
+    class="selected-chord-list"
+    id="selectedChordList">
+</div>
+
+
+<!-- SHEET INSTRUMENTS -->
+
+<h3>
+Instruments for the sheet
+</h3>
+
+<div class="sheet-instrument-row">
+
+<button
+    class="sheet-instrument-button active"
+    data-sheet-instrument="guitar">
+    🎸 Guitar
+</button>
+
+<button
+    class="sheet-instrument-button active"
+    data-sheet-instrument="ukulele">
+    🪕 Ukulele
+</button>
+
+<button
+    class="sheet-instrument-button active"
+    data-sheet-instrument="mandolin">
+    🎻 Mandolin
+</button>
+
+<button
+    class="sheet-instrument-button active"
+    data-sheet-instrument="piano">
+    🎹 Piano
+</button>
+
+</div>
+
+
+<!-- SHEET TUNING -->
+
+<div
+    style="
+        text-align:center;
+        margin-bottom:12px;
+    "
+>
+
+<label
+    for="sheetGuitarTuning"
+    style="
+        color:#cbd5e1;
+        font-size:13px;
+    "
+>
+Guitar tuning:
+</label>
+
+<select
+    id="sheetGuitarTuning"
+    style="
+        margin-left:8px;
+        padding:8px;
+        border-radius:8px;
+        background:#111827;
+        color:#fff;
+        border:1px solid #475569;
+    "
+>
+
+<option value="standard">
+Standard — E A D G B E
+</option>
+
+<option value="dropd">
+Drop D — D A D G B E
+</option>
+
+<option value="dadgad">
+DADGAD — D A D G A D
+</option>
+
+<option value="dadfad">
+DADF#AD — D A D F# A D
+</option>
+
+</select>
+
+</div>
+
+
+<div class="sheet-actions">
+
+<button
+    class="sheet-action-button"
+    id="copySheet">
+
+    📋 Copy Chord Sheet
+
+</button>
+
+<button
+    class="sheet-action-button"
+    id="shareSheet">
+
+    📤 Share Chord Sheet
+
+</button>
+
+<button
+    class="sheet-action-button"
+    id="printSheet">
+
+    🖨️ Print / Save PDF
+
+</button>
+
+<button
+    class="sheet-action-button"
+    id="clearSheet">
+
+    🗑️ Clear Sheet
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ACTUAL DOCUMENT
+===================================================== -->
+
+<section class="sheet-preview">
+
+<div
+    class="sheet-document"
+    id="sheetDocument">
+
+<div class="sheet-document-title">
+ML6CMG Chord Sheet
+</div>
+
+<div class="sheet-document-subtitle">
+Chord notation • Instrument diagrams • Fingerings
+</div>
+
+<div
+    id="sheetEntries">
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
 
 <footer>
 ML6 Community Music Group • ML6CMG Chord Finder
 </footer>
 
 
-<!-- =====================================================
-     CHORD SHEET FULL SCREEN
-===================================================== -->
-
-<div id="sheetScreen">
-
-<div class="sheet-header">
-
-<div class="sheet-header-row">
-
-<h2>📄 Chord Sheet Creator</h2>
-
-<button
-    class="sheet-close"
-    onclick="closeChordSheet()">
-    ✕ Close
-</button>
-
-</div>
-
-
-<div class="sheet-tools">
-
-<button
-    class="sheet-tool"
-    onclick="copyChordSheet()">
-    📋 Copy
-</button>
-
-<button
-    class="sheet-tool"
-    onclick="shareChordSheet()">
-    📤 Share
-</button>
-
-<button
-    class="sheet-tool"
-    onclick="emailChordSheet()">
-    ✉️ Email
-</button>
-
-</div>
-
-</div>
-
-
-<div class="sheet-content">
-
-
-<!-- CHORD PICKER -->
-
-<div class="sheet-selector">
-
-<h3>
-Choose chords to add
-</h3>
-
-
-<div
-    class="root-grid"
-    id="sheetRootGrid">
-</div>
-
-
-<br>
-
-
-<h4 style="text-align:center;color:#94a3b8">
-Common Chords
-</h4>
-
-<div
-    class="sheet-type-grid"
-    id="sheetTypeGrid">
-</div>
-
-<button
-    class="expand-types"
-    id="expandTypes"
-    onclick="toggleSheetTypes()">
-    Expand More Chords
-</button>
-
-
-<div class="custom-chord-row">
-
-<input
-    id="customChordInput"
-    placeholder="Type chord e.g. Dm7, F#maj7, Bb..."
->
-
-<button onclick="addCustomChord()">
-Add
-</button>
-
-</div>
-
-
-<div class="sheet-instruments">
-
-<button
-    class="sheet-instrument-button active"
-    data-sheet-instrument="guitar">
-🎸 Guitar
-</button>
-
-<button
-    class="sheet-instrument-button active"
-    data-sheet-instrument="ukulele">
-🪕 Ukulele
-</button>
-
-<button
-    class="sheet-instrument-button active"
-    data-sheet-instrument="mandolin">
-🎻 Mandolin
-</button>
-
-<button
-    class="sheet-instrument-button active"
-    data-sheet-instrument="piano">
-🎹 Piano
-</button>
-
-</div>
-
-
-<div
-    class="selected-sheet-chords"
-    id="selectedSheetChords">
-</div>
-
-</div>
-
-
-<!-- GENERATED DOCUMENT -->
-
-<div
-    class="generated-sheet"
-    id="chordSheet">
-
-    <div class="no-sheet">
-        Select chords above to create your chord sheet.
-    </div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<div
-    id="sheetStatus"
-    class="sheet-status">
-</div>
-
-
 <script>
-
 
 /* =====================================================
    NOTE DATA
 ===================================================== */
 
-const NOTES=[
-    "C","C#","D","D#","E","F",
-    "F#","G","G#","A","A#","B"
+const NOTES = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B"
 ];
 
 
-const NOTE_INDEX={
+const NOTE_INDEX = {
+
     C:0,
     "C#":1,
     Db:1,
+
     D:2,
     "D#":3,
     Eb:3,
+
     E:4,
+
     F:5,
     "F#":6,
     Gb:6,
+
     G:7,
     "G#":8,
     Ab:8,
+
     A:9,
     "A#":10,
     Bb:10,
+
     B:11
+
 };
 
 
-const ROOT_CANONICAL={
-    C:"C",
-    "C#":"C#",
-    Db:"Db",
-    D:"D",
-    "D#":"D#",
-    Eb:"Eb",
-    E:"E",
-    F:"F",
-    "F#":"F#",
-    Gb:"Gb",
-    G:"G",
-    "G#":"G#",
-    Ab:"Ab",
-    A:"A",
-    "A#":"A#",
-    Bb:"Bb",
-    B:"B"
-};
-
+/* =====================================================
+   PROPER MUSICAL SPELLING
+===================================================== */
 
 const LETTERS=[
-    "C","D","E","F","G","A","B"
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "A",
+    "B"
 ];
-
 
 const LETTER_INDEX={
     C:0,
@@ -1426,28 +1630,64 @@ const LETTER_INDEX={
     B:6
 };
 
+const ROOT_CANONICAL={
 
-function pitch(note){
-    return NOTE_INDEX[note];
+    C:"C",
+    "C#":"C#",
+    Db:"Db",
+
+    D:"D",
+    "D#":"D#",
+    Eb:"Eb",
+
+    E:"E",
+
+    F:"F",
+    "F#":"F#",
+    Gb:"Gb",
+
+    G:"G",
+    "G#":"G#",
+    Ab:"Ab",
+
+    A:"A",
+    "A#":"A#",
+    Bb:"Bb",
+
+    B:"B"
+
+};
+
+
+function normalizePitch(number){
+
+    return ((number%12)+12)%12;
+
 }
 
 
-function normalizePitch(n){
-    return ((n%12)+12)%12;
+function pitch(note){
+
+    return NOTE_INDEX[note];
+
 }
 
 
 function noteLetter(root){
+
     return ROOT_CANONICAL[root]
         .replace("#","")
         .replace("b","");
+
 }
 
 
 function degreeForInterval(interval){
 
     const map={
+
         0:0,
+        1:0,
         2:1,
         3:2,
         4:2,
@@ -1458,87 +1698,107 @@ function degreeForInterval(interval){
         9:5,
         10:6,
         11:6
+
     };
 
-    return map[normalizePitch(interval)];
+    return map[interval];
+
+}
+
+
+function spellChordNote(root,interval){
+
+    const canonical=
+        ROOT_CANONICAL[root] || root;
+
+    const rootLetter=
+        noteLetter(canonical);
+
+    const rootLetterIndex=
+        LETTER_INDEX[rootLetter];
+
+    const degree=
+        degreeForInterval(interval);
+
+    const targetLetter=
+        LETTERS[
+            (rootLetterIndex+degree)%7
+        ];
+
+    const targetPitch=
+        normalizePitch(
+            pitch(canonical)+interval
+        );
+
+    const naturalPitch=
+        NOTE_INDEX[targetLetter];
+
+    let difference=
+        targetPitch-naturalPitch;
+
+    while(difference>6)
+        difference-=12;
+
+    while(difference<-6)
+        difference+=12;
+
+    let accidental="";
+
+    if(difference===1)
+        accidental="#";
+
+    else if(difference===-1)
+        accidental="b";
+
+    else if(difference===2)
+        accidental="##";
+
+    else if(difference===-2)
+        accidental="bb";
+
+    return targetLetter+accidental;
+
 }
 
 
 /* =====================================================
-   CHORD FORMULAS
+   CIRCLE
 ===================================================== */
 
-const FORMULAS={
+const MAJOR_CIRCLE=[
+    "C",
+    "G",
+    "D",
+    "A",
+    "E",
+    "B",
+    "F#",
+    "Db",
+    "Ab",
+    "Eb",
+    "Bb",
+    "F"
+];
 
-    "":[0,4,7],
-    m:[0,3,7],
-
-    sus2:[0,2,7],
-    sus4:[0,5,7],
-
-    "6":[0,4,7,9],
-    m6:[0,3,7,9],
-
-    "7":[0,4,7,10],
-    maj7:[0,4,7,11],
-    m7:[0,3,7,10],
-    m7b5:[0,3,6,10],
-    dim7:[0,3,6,9],
-
-    dim:[0,3,6],
-    aug:[0,4,8],
-
-    add9:[0,4,7,2],
-    "9":[0,4,7,10,2],
-    maj9:[0,4,7,11,2],
-    m9:[0,3,7,10,2],
-
-    "11":[0,4,7,10,2,5],
-    maj11:[0,4,7,11,2,5],
-    m11:[0,3,7,10,2,5],
-
-    "13":[0,4,7,10,2,5,9],
-    maj13:[0,4,7,11,2,5,9],
-    m13:[0,3,7,10,2,5,9]
-
-};
+const MINOR_CIRCLE=[
+    "Am",
+    "Em",
+    "Bm",
+    "F#m",
+    "C#m",
+    "G#m",
+    "D#m",
+    "Bbm",
+    "Fm",
+    "Cm",
+    "Gm",
+    "Dm"
+];
 
 
-const TYPE_NAMES={
-
-    "":"Major",
-    m:"Minor",
-
-    sus2:"Sus2",
-    sus4:"Sus4",
-
-    "6":"6",
-    m6:"Minor 6",
-
-    "7":"7",
-    maj7:"Major 7",
-    m7:"Minor 7",
-    m7b5:"Minor 7♭5",
-    dim7:"Diminished 7",
-
-    dim:"Diminished",
-    aug:"Augmented",
-
-    add9:"Add9",
-    "9":"9",
-    maj9:"Major 9",
-    m9:"Minor 9",
-
-    "11":"11",
-    maj11:"Major 11",
-    m11:"Minor 11",
-
-    "13":"13",
-    maj13:"Major 13",
-    m13:"Minor 13"
-
-};
-
+/* =====================================================
+   CHORD GROUPS
+===================================================== */
 
 const CHORD_GROUPS=[
 
@@ -1617,60 +1877,130 @@ const CHORD_GROUPS=[
 
 
 /* =====================================================
-   SPELLING
+   FORMULAS
 ===================================================== */
 
-function spellChordNote(root,interval){
+const FORMULAS={
 
-    const canonical=
-        ROOT_CANONICAL[root]||root;
+    "":[0,4,7],
 
-    const rootLetter=
-        noteLetter(canonical);
+    m:[0,3,7],
 
-    const rootLetterIndex=
-        LETTER_INDEX[rootLetter];
+    sus2:[0,2,7],
 
-    const degree=
-        degreeForInterval(interval);
+    sus4:[0,5,7],
 
-    const targetLetter=
-        LETTERS[
-            (rootLetterIndex+degree)%7
-        ];
+    "6":[0,4,7,9],
 
-    const targetPitch=
-        normalizePitch(
-            pitch(canonical)+interval
-        );
+    m6:[0,3,7,9],
 
-    const naturalPitch=
-        NOTE_INDEX[targetLetter];
+    "7":[0,4,7,10],
 
-    let difference=
-        targetPitch-naturalPitch;
+    maj7:[0,4,7,11],
 
-    while(difference>6)
-        difference-=12;
+    m7:[0,3,7,10],
 
-    while(difference<-6)
-        difference+=12;
+    m7b5:[0,3,6,10],
 
-    if(difference===1)
-        return targetLetter+"#";
+    dim:[0,3,6],
 
-    if(difference===-1)
-        return targetLetter+"b";
+    dim7:[0,3,6,9],
 
-    if(difference===2)
-        return targetLetter+"##";
+    aug:[0,4,8],
 
-    if(difference===-2)
-        return targetLetter+"bb";
+    add9:[0,4,7,2],
 
-    return targetLetter;
-}
+    "9":[0,4,7,10,2],
 
+    maj9:[0,4,7,11,2],
+
+    m9:[0,3,7,10,2],
+
+    "11":[0,4,7,10,2,5],
+
+    maj11:[0,4,7,11,2,5],
+
+    m11:[0,3,7,10,2,5],
+
+    "13":[0,4,7,10,2,5,9],
+
+    maj13:[0,4,7,11,2,5,9],
+
+    m13:[0,3,7,10,2,5,9]
+
+};
+
+
+const TYPE_NAMES={
+
+    "":"Major",
+    m:"Minor",
+
+    sus2:"Sus2",
+    sus4:"Sus4",
+
+    "6":"6",
+    m6:"Minor 6",
+
+    "7":"7",
+    maj7:"Major 7",
+    m7:"Minor 7",
+    m7b5:"Minor 7♭5",
+    dim7:"Diminished 7",
+
+    dim:"Diminished",
+    aug:"Augmented",
+
+    add9:"Add9",
+    "9":"9",
+    maj9:"Major 9",
+    m9:"Minor 9",
+
+    "11":"11",
+    maj11:"Major 11",
+    m11:"Minor 11",
+
+    "13":"13",
+    maj13:"Major 13",
+    m13:"Minor 13"
+
+};
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let selectedRoot="C";
+
+let selectedType="";
+
+let activeInstruments={
+
+    guitar:true,
+    ukulele:true,
+    mandolin:true,
+    piano:true
+
+};
+
+let guitarTuningName="standard";
+
+let sheetChords=[];
+
+let sheetInstruments={
+
+    guitar:true,
+    ukulele:true,
+    mandolin:true,
+    piano:true
+
+};
+
+
+/* =====================================================
+   CHORD HELPERS
+===================================================== */
 
 function chordSpelledNotes(root,type){
 
@@ -1697,7 +2027,19 @@ function chordNotes(root,type){
 }
 
 
-function chordName(root=selectedRoot,type=selectedType){
+function chordDisplayName(root,type){
+
+    return root+
+        (
+            type===""
+            ? ""
+            : type
+        );
+
+}
+
+
+function chordLongName(root,type){
 
     return root+
         (
@@ -1710,34 +2052,169 @@ function chordName(root=selectedRoot,type=selectedType){
 
 
 /* =====================================================
-   MAIN STATE
+   PARSE CHORD TEXT
 ===================================================== */
 
-let selectedRoot="C";
-let selectedType="";
+function parseChordName(text){
 
-let activeInstruments={
-    guitar:true,
-    ukulele:true,
-    mandolin:true,
-    piano:true
-};
+    let value=
+        text
+        .trim()
+        .replace(/\s+/g,"");
+
+    if(!value)
+        return null;
+
+    /*
+       Accept ♯ and ♭ as well as # and b.
+    */
+
+    value=
+        value
+        .replace(/♯/g,"#")
+        .replace(/♭/g,"b");
+
+    const match=
+        value.match(
+            /^([A-Ga-g](?:#|b)?)(.*)$/
+        );
+
+    if(!match)
+        return null;
+
+    let root=
+        match[1];
+
+    let suffix=
+        match[2];
+
+    root=
+        root.charAt(0).toUpperCase()+
+        root.slice(1);
+
+    /*
+       Normalise common names.
+    */
+
+    const aliases={
+
+        major:"",
+        maj:"",
+        minor:"m",
+        min:"m",
+
+        minor7:"m7",
+        min7:"m7",
+
+        major7:"maj7",
+        maj7:"maj7",
+
+        dominant7:"7",
+
+        diminished:"dim",
+        diminished7:"dim7",
+
+        augmented:"aug",
+
+        suspended2:"sus2",
+        suspended4:"sus4",
+
+        add9:"add9",
+
+        minor9:"m9",
+        min9:"m9",
+
+        major9:"maj9",
+
+        minor11:"m11",
+        min11:"m11",
+
+        major11:"maj11",
+
+        minor13:"m13",
+        min13:"m13",
+
+        major13:"maj13"
+
+    };
+
+    const lower=
+        suffix.toLowerCase();
+
+    if(
+        Object.prototype.hasOwnProperty.call(
+            aliases,
+            lower
+        )
+    ){
+
+        suffix=aliases[lower];
+
+    }
+
+    /*
+       Some users type "M7".
+    */
+
+    if(suffix==="M7")
+        suffix="maj7";
+
+    if(suffix==="M9")
+        suffix="maj9";
+
+    if(suffix==="M11")
+        suffix="maj11";
+
+    if(suffix==="M13")
+        suffix="maj13";
+
+    if(
+        !Object.prototype.hasOwnProperty.call(
+            FORMULAS,
+            suffix
+        )
+    ){
+
+        return null;
+
+    }
+
+    if(
+        !Object.prototype.hasOwnProperty.call(
+            NOTE_INDEX,
+            root
+        )
+    ){
+
+        return null;
+
+    }
+
+    return {
+        root:root,
+        type:suffix
+    };
+
+}
+
+
+/* =====================================================
+   MAIN CHORD NAME
+===================================================== */
+
+function chordName(){
+
+    return chordLongName(
+        selectedRoot,
+        selectedType
+    );
+
+}
 
 
 /* =====================================================
    CIRCLE
 ===================================================== */
-
-const MAJOR_CIRCLE=[
-    "C","G","D","A","E","B",
-    "F#","Db","Ab","Eb","Bb","F"
-];
-
-const MINOR_CIRCLE=[
-    "Am","Em","Bm","F#m","C#m","G#m",
-    "D#m","Bbm","Fm","Cm","Gm","Dm"
-];
-
 
 function buildCircle(){
 
@@ -1746,22 +2223,26 @@ function buildCircle(){
 
     circle
         .querySelectorAll(".circle-note")
-        .forEach(x=>x.remove());
-
+        .forEach(
+            x=>x.remove()
+        );
 
     MAJOR_CIRCLE.forEach(
         (note,index)=>{
 
             const angle=
-                (index*30-90)*Math.PI/180;
+                (index*30-90)
+                *Math.PI/180;
 
             const radius=40;
 
             const x=
-                50+radius*Math.cos(angle);
+                50+
+                radius*Math.cos(angle);
 
             const y=
-                50+radius*Math.sin(angle);
+                50+
+                radius*Math.sin(angle);
 
             const button=
                 document.createElement("button");
@@ -1773,6 +2254,9 @@ function buildCircle(){
             button.style.top=y+"%";
 
             button.textContent=note;
+
+            button.title=
+                note+" Major";
 
             button.onclick=()=>{
 
@@ -1796,15 +2280,18 @@ function buildCircle(){
                 minor.slice(0,-1);
 
             const angle=
-                (index*30-90)*Math.PI/180;
+                (index*30-90)
+                *Math.PI/180;
 
             const radius=27;
 
             const x=
-                50+radius*Math.cos(angle);
+                50+
+                radius*Math.cos(angle);
 
             const y=
-                50+radius*Math.sin(angle);
+                50+
+                radius*Math.sin(angle);
 
             const button=
                 document.createElement("button");
@@ -1816,6 +2303,9 @@ function buildCircle(){
             button.style.top=y+"%";
 
             button.textContent=minor;
+
+            button.title=
+                minor+" Relative Minor";
 
             button.onclick=()=>{
 
@@ -1864,11 +2354,9 @@ function highlightCircle(){
 
         });
 
-
-    document.getElementById(
-        "circleCenter"
-    ).textContent=
-        chordName();
+    document
+        .getElementById("circleCenter")
+        .textContent=chordName();
 
 }
 
@@ -1885,13 +2373,14 @@ function buildChordLibrary(){
         );
 
     const search=
-        document.getElementById("search")
-            .value
-            .toLowerCase()
-            .trim();
+        document.getElementById(
+            "search"
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
     library.innerHTML="";
-
 
     CHORD_GROUPS.forEach(group=>{
 
@@ -1900,20 +2389,19 @@ function buildChordLibrary(){
 
         category.className="category";
 
-
         const heading=
             document.createElement("h3");
 
-        heading.textContent=group.name;
+        heading.textContent=
+            group.name;
 
         category.appendChild(heading);
-
 
         const buttons=
             document.createElement("div");
 
-        buttons.className="chord-buttons";
-
+        buttons.className=
+            "chord-buttons";
 
         group.items.forEach(item=>{
 
@@ -1923,25 +2411,32 @@ function buildChordLibrary(){
             const fullName=
                 selectedRoot+type;
 
-
             if(
                 search &&
-                !label.toLowerCase().includes(search) &&
-                !fullName.toLowerCase().includes(search)
-            )
+                !label
+                    .toLowerCase()
+                    .includes(search) &&
+                !fullName
+                    .toLowerCase()
+                    .includes(search)
+            ){
+
                 return;
 
+            }
 
             const button=
                 document.createElement("button");
 
-            button.className="chord-button";
+            button.className=
+                "chord-button";
 
             if(type===selectedType)
                 button.classList.add("active");
 
             button.textContent=
-                selectedRoot+type;
+                selectedRoot+
+                type;
 
             button.title=label;
 
@@ -1957,10 +2452,10 @@ function buildChordLibrary(){
 
         });
 
-
         if(buttons.children.length){
 
             category.appendChild(buttons);
+
             library.appendChild(category);
 
         }
@@ -1971,86 +2466,598 @@ function buildChordLibrary(){
 
 
 /* =====================================================
-   TUNINGS
+   TREBLE STAFF
 ===================================================== */
 
-const GUITAR_TUNINGS={
+/*
+   Treble staff positions:
 
-    standard:{
-        name:"Standard tuning",
-        strings:["E","A","D","G","B","E"]
-    },
+   E4 = 0  bottom line
+   F4 = 1
+   G4 = 2
+   A4 = 3
+   B4 = 4  top line
+   C5 = 5
+   D5 = 6
+   E5 = 7
 
-    DADGAD:{
-        name:"DADGAD",
-        strings:["D","A","D","G","A","D"]
-    },
+   Every chord note is rendered.
 
-    DADFAD:{
-        name:"DADF#AD",
-        strings:["D","A","D","F#","A","D"]
-    },
+   Notes are positioned by their actual
+   letter/octave relationship rather than
+   simply putting notes beside each other.
+*/
 
-    dropD:{
-        name:"Drop D",
-        strings:["D","A","D","G","B","E"]
-    }
-
+const LETTER_STAFF_INDEX={
+    C:0,
+    D:1,
+    E:2,
+    F:3,
+    G:4,
+    A:5,
+    B:6
 };
 
 
-let selectedGuitarTuning="standard";
+function getStaffPosition(note){
 
+    const letter=
+        note.charAt(0);
 
-function getTuning(instrument){
+    const accidental=
+        note.includes("#") ||
+        note.includes("b");
 
-    if(instrument==="guitar")
-        return GUITAR_TUNINGS[
-            selectedGuitarTuning
-        ].strings;
+    /*
+       Work out octave from pitch and spelling.
+       Chord notes are represented in their
+       conventional ascending spelling.
+    */
 
-    if(instrument==="ukulele")
-        return ["G","C","E","A"];
+    let octave=4;
 
-    if(instrument==="mandolin")
-        return ["G","D","A","E"];
+    const rootIndex=
+        LETTER_STAFF_INDEX[
+            note.charAt(0)
+        ];
 
-    return [];
+    /*
+       For staff rendering we place the chord
+       tones in a practical treble-clef range.
+       The letter itself determines the staff
+       position; octave is adjusted from pitch.
+    */
+
+    const notePitch=
+        pitch(note);
+
+    if(
+        notePitch<
+        NOTE_INDEX["C"]
+    ){
+
+        octave=4;
+
+    }
+
+    /*
+       Determine a suitable octave based on
+       the root pitch and the note's interval.
+    */
+
+    return {
+        letter:letter,
+        accidental:accidental,
+        octave:octave
+    };
 
 }
 
 
-function updateTuningButtons(){
+function letterStepFromE4(letter,octave){
 
-    document
-        .querySelectorAll(".tuning-button")
-        .forEach(button=>{
+    return (
+        (octave-4)*7+
+        LETTER_STAFF_INDEX[letter]-
+        LETTER_STAFF_INDEX["E"]
+    );
 
-            button.classList.toggle(
-                "active",
-                button.dataset.tuning===
-                    selectedGuitarTuning
+}
+
+
+/*
+   Convert chord notes to unique ascending
+   musical spellings for staff display.
+*/
+
+function getStaffNotes(root,type){
+
+    const notes=
+        chordSpelledNotes(
+            root,
+            type
+        );
+
+    const rootPitch=
+        pitch(root);
+
+    const result=[];
+
+    let previousPitch=
+        rootPitch-1;
+
+    let octave=4;
+
+    notes.forEach(note=>{
+
+        let p=
+            pitch(note);
+
+        /*
+           Keep chord notes ascending from root.
+        */
+
+        while(p<=previousPitch){
+
+            p+=12;
+
+        }
+
+        let realPitch=
+            p;
+
+        let pitchOctave=
+            4+
+            Math.floor(
+                realPitch/12
             );
+
+        /*
+           NOTES uses C=0 so pitch 0-11
+           represents octave 4 here.
+        */
+
+        const letter=
+            note.charAt(0);
+
+        result.push({
+
+            note:note,
+            letter:letter,
+            octave:pitchOctave,
+            pitch:realPitch
 
         });
 
+        previousPitch=p;
 
-    document.getElementById(
-        "tuningInfo"
-    ).textContent=
-        GUITAR_TUNINGS[
-            selectedGuitarTuning
-        ].name+
-        " • "+
-        GUITAR_TUNINGS[
-            selectedGuitarTuning
-        ].strings.join(" ");
+    });
+
+    return result;
+
+}
+
+
+function renderStaffForChord(
+    root,
+    type,
+    compact=false
+){
+
+    const width=900;
+
+    const height=
+        compact
+        ? 175
+        : 240;
+
+    const top=
+        compact
+        ? 55
+        : 70;
+
+    const spacing=
+        compact
+        ? 14
+        : 18;
+
+    const staffBottom=
+        top+
+        4*spacing;
+
+    let html=`
+
+        <svg
+            class="staff-svg"
+            viewBox="0 0 ${width} ${height}"
+            preserveAspectRatio="xMidYMid meet">
+
+    `;
+
+    /*
+       Staff lines.
+    */
+
+    for(let i=0;i<5;i++){
+
+        const y=
+            top+
+            i*spacing;
+
+        html+=`
+
+            <line
+                x1="105"
+                x2="855"
+                y1="${y}"
+                y2="${y}"
+                class="staff-line"
+            >
+
+        `;
+
+        html+=`</line>`;
+
+    }
+
+    /*
+       Treble clef.
+    */
+
+    html+=`
+
+        <text
+            x="35"
+            y="${top+72}"
+            class="staff-clef">
+
+            𝄞
+
+        </text>
+
+    `;
+
+
+    const notes=
+        getStaffNotes(
+            root,
+            type
+        );
+
+
+    /*
+       Spread all notes across the staff
+       while keeping them simultaneous
+       musically.
+    */
+
+    const count=notes.length;
+
+    const startX=185;
+
+    const endX=
+        count>1
+        ? 800
+        : 490;
+
+    const step=
+        count>1
+        ? (endX-startX)/(count-1)
+        : 0;
+
+
+    notes.forEach(
+        (item,index)=>{
+
+            const x=
+                count===1
+                ? 490
+                : startX+
+                    step*index;
+
+            const staffStep=
+                letterStepFromE4(
+                    item.letter,
+                    item.octave
+                );
+
+            const y=
+                staffBottom-
+                staffStep*
+                (spacing/2);
+
+
+            /*
+               Ledger lines above.
+            */
+
+            if(staffStep>8){
+
+                for(
+                    let p=10;
+                    p<=staffStep;
+                    p+=2
+                ){
+
+                    const ly=
+                        staffBottom-
+                        p*(spacing/2);
+
+                    html+=`
+
+                        <line
+                            x1="${x-18}"
+                            x2="${x+18}"
+                            y1="${ly}"
+                            y2="${ly}"
+                            class="staff-ledger"
+                        >
+
+                        </line>
+
+                    `;
+
+                }
+
+            }
+
+
+            /*
+               Ledger lines below.
+            */
+
+            if(staffStep<0){
+
+                for(
+                    let p=-2;
+                    p>=staffStep;
+                    p-=2
+                ){
+
+                    const ly=
+                        staffBottom-
+                        p*(spacing/2);
+
+                    html+=`
+
+                        <line
+                            x1="${x-18}"
+                            x2="${x+18}"
+                            y1="${ly}"
+                            y2="${ly}"
+                            class="staff-ledger"
+                        >
+
+                        </line>
+
+                    `;
+
+                }
+
+            }
+
+
+            /*
+               Accidental.
+            */
+
+            if(item.note.includes("#")){
+
+                html+=`
+
+                    <text
+                        x="${x-15}"
+                        y="${y+7}"
+                        class="staff-accidental">
+
+                        ♯
+
+                    </text>
+
+                `;
+
+            }
+
+            else if(item.note.includes("b")){
+
+                html+=`
+
+                    <text
+                        x="${x-15}"
+                        y="${y+7}"
+                        class="staff-accidental">
+
+                        ♭
+
+                    </text>
+
+                `;
+
+            }
+
+
+            /*
+               Note head.
+            */
+
+            html+=`
+
+                <ellipse
+                    cx="${x}"
+                    cy="${y}"
+                    rx="10"
+                    ry="7"
+                    class="staff-note"
+                    transform="
+                        rotate(
+                            -20
+                            ${x}
+                            ${y}
+                        )
+                    "
+                >
+
+                </ellipse>
+
+            `;
+
+
+            /*
+               Stem.
+            */
+
+            html+=`
+
+                <line
+                    x1="${x+8}"
+                    x2="${x+8}"
+                    y1="${y}"
+                    y2="${y-42}"
+                    stroke="#111827"
+                    stroke-width="2"
+                >
+
+                </line>
+
+            `;
+
+
+            /*
+               Actual note name.
+            */
+
+            html+=`
+
+                <text
+                    x="${x}"
+                    y="${Math.min(height-8,y+35)}"
+                    class="staff-note-label">
+
+                    ${item.note}
+
+                </text>
+
+            `;
+
+        }
+    );
+
+
+    html+=`</svg>`;
+
+    return html;
+
+}
+
+
+function renderMainStaff(){
+
+    const svg=
+        document.getElementById(
+            "staffSvg"
+        );
+
+    const markup=
+        renderStaffForChord(
+            selectedRoot,
+            selectedType,
+            false
+        );
+
+    svg.outerHTML=
+        markup.replace(
+            "<svg",
+            '<svg id="staffSvg"'
+        );
 
 }
 
 
 /* =====================================================
-   COMMON STANDARD SHAPES
+   GUITAR TUNINGS
+===================================================== */
+
+const GUITAR_TUNINGS={
+
+    standard:[
+        "E",
+        "A",
+        "D",
+        "G",
+        "B",
+        "E"
+    ],
+
+    dropd:[
+        "D",
+        "A",
+        "D",
+        "G",
+        "B",
+        "E"
+    ],
+
+    dadgad:[
+        "D",
+        "A",
+        "D",
+        "G",
+        "A",
+        "D"
+    ],
+
+    dadfad:[
+        "D",
+        "A",
+        "D",
+        "F#",
+        "A",
+        "D"
+    ]
+
+};
+
+
+const TUNING_NAMES={
+
+    standard:"E A D G B E",
+
+    dropd:"D A D G B E",
+
+    dadgad:"D A D G A D",
+
+    dadfad:"D A D F# A D"
+
+};
+
+
+/* =====================================================
+   STANDARD TUNINGS
+===================================================== */
+
+const TUNINGS={
+
+    guitar:GUITAR_TUNINGS.standard,
+
+    ukulele:[
+        "G",
+        "C",
+        "E",
+        "A"
+    ],
+
+    mandolin:[
+        "G",
+        "D",
+        "A",
+        "E"
+    ]
+
+};
+
+
+/* =====================================================
+   COMMON SHAPES
 ===================================================== */
 
 const GUITAR_COMMON={
@@ -2105,7 +3112,7 @@ const UKULELE_COMMON={
 };
 
 
-const MANDOLIN_COMMON={
+const MANDOLIN_PREFERRED={
 
     "G|":[0,0,2,3],
     "C|":[0,2,3,0],
@@ -2130,10 +3137,22 @@ const MANDOLIN_COMMON={
 
 
 /* =====================================================
-   SHAPE HELPERS
+   SHAPE CREATION
 ===================================================== */
 
-function getCommonShape(instrument){
+function currentTuning(instrument){
+
+    if(instrument==="guitar")
+        return GUITAR_TUNINGS[
+            guitarTuningName
+        ];
+
+    return TUNINGS[instrument];
+
+}
+
+
+function commonShape(instrument){
 
     const name=
         selectedRoot+
@@ -2143,43 +3162,46 @@ function getCommonShape(instrument){
             : ""
         );
 
+    let raw=null;
 
     if(instrument==="guitar"){
 
-        if(selectedGuitarTuning!=="standard")
-            return null;
+        /*
+           Only use the old common shape
+           on STANDARD tuning.
 
-        return GUITAR_COMMON[name]||null;
+           This prevents a standard shape
+           being incorrectly displayed when
+           DADGAD / Drop D / DADF#AD is selected.
+        */
+
+        if(guitarTuningName==="standard")
+            raw=GUITAR_COMMON[name];
 
     }
 
-
     if(instrument==="ukulele")
-        return UKULELE_COMMON[name]||null;
-
+        raw=UKULELE_COMMON[name];
 
     if(instrument==="mandolin"){
 
-        return MANDOLIN_COMMON[
-            selectedRoot+
-            "|" +
-            (
-                selectedType==="m"
-                ? "m"
-                : ""
-            )
-        ]||null;
+        raw=
+            MANDOLIN_PREFERRED[
+                selectedRoot+
+                "|" +
+                (
+                    selectedType==="m"
+                    ? "m"
+                    : ""
+                )
+            ];
 
     }
 
-    return null;
+    if(!raw)
+        return null;
 
-}
-
-
-function shapeFromArray(array){
-
-    return array.map(fret=>{
+    return raw.map(fret=>{
 
         if(fret===null)
             return null;
@@ -2195,10 +3217,166 @@ function shapeFromArray(array){
 }
 
 
-function shapeNotes(instrument,shape){
+/* =====================================================
+   SHAPE VALIDATION
+===================================================== */
+
+function shapeIsValid(
+    instrument,
+    shape
+){
 
     const tuning=
-        getTuning(instrument);
+        currentTuning(instrument);
+
+    const tones=
+        new Set(
+            chordNotes(
+                selectedRoot,
+                selectedType
+            )
+        );
+
+    const played=[];
+
+    shape.forEach(
+        (item,index)=>{
+
+            if(item===null)
+                return;
+
+            const note=
+                normalizePitch(
+                    pitch(tuning[index])+
+                    item.fret
+                );
+
+            played.push(note);
+
+        }
+    );
+
+    if(!played.length)
+        return false;
+
+    if(
+        played.some(
+            note=>!tones.has(note)
+        )
+    ){
+
+        return false;
+
+    }
+
+    return played.includes(
+        pitch(selectedRoot)
+    );
+
+}
+
+
+/* =====================================================
+   FINGER ASSIGNMENT
+===================================================== */
+
+/*
+   This is intentionally kept separate from
+   fret numbers.
+
+   1 = Index
+   2 = Middle
+   3 = Ring
+   4 = Little
+
+   Open string = 0
+   Muted string = null
+*/
+
+function assignFingerNumbers(shape){
+
+    const fretted=
+        shape.filter(
+            item=>
+                item &&
+                item.fret>0
+        );
+
+    if(!fretted.length)
+        return;
+
+    const uniqueFrets=
+        [
+            ...new Set(
+                fretted.map(
+                    item=>item.fret
+                )
+            )
+        ]
+        .sort(
+            (a,b)=>a-b
+        );
+
+    const base=
+        uniqueFrets[0];
+
+    const fingerMap={};
+
+    uniqueFrets.forEach(
+        fret=>{
+
+            const distance=
+                fret-base;
+
+            let finger;
+
+            if(distance===0)
+                finger=1;
+
+            else if(distance===1)
+                finger=2;
+
+            else if(distance===2)
+                finger=3;
+
+            else
+                finger=4;
+
+            fingerMap[fret]=finger;
+
+        }
+    );
+
+    shape.forEach(
+        item=>{
+
+            if(!item)
+                return;
+
+            if(item.fret===0)
+                item.finger=0;
+
+            else
+                item.finger=
+                    fingerMap[item.fret] || 4;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FILL NOTES
+===================================================== */
+
+function fillShapeNotes(
+    instrument,
+    shape
+){
+
+    const tuning=
+        currentTuning(instrument);
 
     shape.forEach(
         (item,index)=>{
@@ -2209,7 +3387,9 @@ function shapeNotes(instrument,shape){
             item.note=
                 NOTES[
                     normalizePitch(
-                        pitch(tuning[index])+
+                        pitch(
+                            tuning[index]
+                        )+
                         item.fret
                     )
                 ];
@@ -2220,259 +3400,72 @@ function shapeNotes(instrument,shape){
 }
 
 
-function assignFingerNumbers(shape){
-
-    const fretted=
-        shape.filter(
-            x=>x && x.fret>0
-        );
-
-    if(!fretted.length)
-        return;
-
-
-    /*
-       Finger numbering follows physical fret
-       positions.
-
-       1 = index
-       2 = middle
-       3 = ring
-       4 = little
-    */
-
-    const unique=
-        [...new Set(
-            fretted.map(x=>x.fret)
-        )].sort((a,b)=>a-b);
-
-
-    const base=unique[0];
-
-
-    shape.forEach(item=>{
-
-        if(!item)
-            return;
-
-        if(item.fret===0){
-
-            item.finger=0;
-            return;
-
-        }
-
-        const distance=
-            item.fret-base;
-
-        item.finger=
-            distance===0 ? 1 :
-            distance===1 ? 2 :
-            distance===2 ? 3 : 4;
-
-    });
-
-}
-
-
 /* =====================================================
-   SHAPE EVALUATION
+   GENERIC FRETTED VOICING
 ===================================================== */
 
-function evaluateShape(
+function getFrettedVoicing(
     instrument,
-    shape
+    root=selectedRoot,
+    type=selectedType
 ){
 
-    const tuning=
-        getTuning(instrument);
-
-    const tones=
-        new Set(
-            chordNotes(
-                selectedRoot,
-                selectedType
-            )
-        );
-
-    const root=
-        pitch(selectedRoot);
-
-    const played=[];
-
-
-    shape.forEach(
-        (item,index)=>{
-
-            if(!item)
-                return;
-
-            const note=
-                normalizePitch(
-                    pitch(tuning[index])+
-                    item.fret
-                );
-
-            if(tones.has(note))
-                played.push({
-                    note:note,
-                    fret:item.fret
-                });
-
-        }
-    );
-
-
-    if(!played.length)
-        return -Infinity;
-
-
-    const pitches=
-        played.map(x=>x.note);
-
-
-    if(!pitches.includes(root))
-        return -Infinity;
-
-
-    const unique=
-        new Set(pitches);
-
-    let score=
-        unique.size*45;
-
-
-    score+=
-        pitches.filter(
-            x=>x===root
-        ).length*35;
-
-
-    const intervals=
-        pitches.map(
-            x=>normalizePitch(x-root)
-        );
-
-
-    if(
-        intervals.includes(3) ||
-        intervals.includes(4)
-    )
-        score+=35;
-
-
-    if(intervals.includes(7))
-        score+=20;
-
-
-    if(
-        intervals.includes(10) ||
-        intervals.includes(11)
-    )
-        score+=18;
-
-
-    played.forEach(item=>{
-
-        if(item.fret===0)
-            score+=22;
-        else
-            score-=item.fret*1.4;
-
-    });
-
-
-    const frets=
-        played
-        .filter(x=>x.fret>0)
-        .map(x=>x.fret);
-
-
-    if(frets.length){
-
-        const span=
-            Math.max(...frets)-
-            Math.min(...frets);
-
-        score-=span*18;
-
-        if(span>4)
-            score-=100;
-
-    }
-
-
-    score+=
-        played.length*8;
-
-
-    return score;
-
-}
-
-
-/* =====================================================
-   VOICING SEARCH
-===================================================== */
-
-function searchVoicing(instrument){
-
-    const tuning=
-        getTuning(instrument);
-
-    const common=
-        getCommonShape(instrument);
-
-
-    if(common){
-
-        const shape=
-            shapeFromArray(common);
-
-        assignFingerNumbers(shape);
-        shapeNotes(instrument,shape);
-
-        return {
-            shape:shape,
-            position:1
-        };
-
-    }
-
-
-    const tones=
-        new Set(
-            chordNotes(
-                selectedRoot,
-                selectedType
-            )
-        );
-
-
     /*
-       Search several fretboard windows.
-
-       This is important:
-       diagrams are NOT restricted to frets 1-5.
-
-       A chord can therefore appear at fret 6,
-       7, 8, 9, 10, 11 or 12 when required.
+       Temporarily use requested chord for
+       sheet generation.
     */
 
-    let best=null;
+    const tuning=
+        currentTuning(instrument);
 
+    const chord=
+        chordNotes(
+            root,
+            type
+        );
 
-    for(
-        let base=0;
-        base<=8;
-        base++
+    /*
+       Common shapes only belong to the
+       current main chord.
+    */
+
+    if(
+        root===selectedRoot &&
+        type===selectedType
     ){
 
-        const possibilities=
-            tuning.map(openNote=>{
+        const common=
+            commonShape(instrument);
+
+        if(
+            common &&
+            shapeIsValid(
+                instrument,
+                common
+            )
+        ){
+
+            assignFingerNumbers(common);
+
+            fillShapeNotes(
+                instrument,
+                common
+            );
+
+            return {
+                shape:common
+            };
+
+        }
+
+    }
+
+
+    const possibilities=
+        tuning.map(
+            openNote=>{
 
                 const choices=[];
-
 
                 for(
                     let fret=0;
@@ -2480,118 +3473,235 @@ function searchVoicing(instrument){
                     fret++
                 ){
 
-                    if(
-                        base===0
-                    ){
-
-                        if(fret>4)
-                            continue;
-
-                    }
-                    else{
-
-                        if(
-                            fret<base ||
-                            fret>base+4
-                        )
-                            continue;
-
-                    }
-
-
                     const note=
                         normalizePitch(
-                            pitch(openNote)+fret
+                            pitch(openNote)+
+                            fret
                         );
 
-
-                    if(tones.has(note)){
+                    if(
+                        chord.includes(note)
+                    ){
 
                         choices.push({
+
                             fret:fret,
                             note:null,
                             finger:0
+
                         });
 
                     }
 
                 }
 
-
                 /*
-                   Muting is always possible.
+                   Muted string.
                 */
 
                 choices.push(null);
 
                 return choices;
 
-            });
+            }
+        );
 
 
-        function search(
-            index,
-            shape
-        ){
-
-            if(index===tuning.length){
-
-                const score=
-                    evaluateShape(
-                        instrument,
-                        shape
-                    );
+    let best=null;
 
 
-                if(
-                    score!==-Infinity &&
-                    (
-                        !best ||
-                        score>best.score
-                    )
-                ){
+    function evaluate(shape){
 
-                    best={
-                        score:score,
-                        shape:shape.map(x=>
-                            x
-                            ? {...x}
-                            : null
-                        ),
-                        position:base
-                    };
+        const played=
+            shape.filter(Boolean);
+
+        if(!played.length)
+            return -999999;
+
+        const pitches=
+            played.map(
+                (item,index)=>{
+
+                    /*
+                       Find the actual string
+                       index by matching the
+                       item in the original shape.
+                    */
+
+                    return null;
 
                 }
+            );
 
-                return;
+
+        const actualPitches=[];
+
+        shape.forEach(
+            (item,index)=>{
+
+                if(!item)
+                    return;
+
+                actualPitches.push(
+                    normalizePitch(
+                        pitch(tuning[index])+
+                        item.fret
+                    )
+                );
 
             }
+        );
 
 
-            possibilities[index]
-                .forEach(option=>{
+        if(
+            !actualPitches.includes(
+                pitch(root)
+            )
+        )
+            return -999999;
 
-                    search(
-                        index+1,
-                        [...shape,option]
-                    );
 
-                });
+        let score=0;
+
+        score+=
+            actualPitches.filter(
+                x=>x===pitch(root)
+            ).length*55;
+
+
+        const intervals=
+            actualPitches.map(
+                x=>
+                    normalizePitch(
+                        x-pitch(root)
+                    )
+            );
+
+
+        if(
+            intervals.includes(3) ||
+            intervals.includes(4)
+        )
+            score+=35;
+
+
+        if(intervals.includes(7))
+            score+=20;
+
+
+        if(
+            intervals.includes(10) ||
+            intervals.includes(11)
+        )
+            score+=20;
+
+
+        shape.forEach(item=>{
+
+            if(!item)
+                return;
+
+            if(item.fret===0)
+                score+=18;
+
+            else
+                score-=item.fret*1.5;
+
+        });
+
+
+        const frets=
+            shape
+            .filter(
+                x=>
+                    x &&
+                    x.fret>0
+            )
+            .map(
+                x=>x.fret
+            );
+
+
+        if(frets.length){
+
+            score-=
+                (
+                    Math.max(...frets)-
+                    Math.min(...frets)
+                )*10;
 
         }
 
 
-        search(0,[]);
+        score+=
+            played.length*8;
+
+        return score;
 
     }
+
+
+    function search(
+        stringIndex,
+        shape
+    ){
+
+        if(
+            stringIndex===
+            tuning.length
+        ){
+
+            const score=
+                evaluate(shape);
+
+            if(
+                score>-999999 &&
+                (
+                    !best ||
+                    score>best.score
+                )
+            ){
+
+                best={
+                    score:score,
+                    shape:[...shape]
+                };
+
+            }
+
+            return;
+
+        }
+
+
+        possibilities[stringIndex]
+            .forEach(option=>{
+
+                search(
+                    stringIndex+1,
+                    [
+                        ...shape,
+                        option
+                    ]
+                );
+
+            });
+
+    }
+
+
+    search(0,[]);
 
 
     if(!best){
 
         return {
+
             shape:
-                tuning.map(()=>null),
-            position:1
+                tuning.map(
+                    ()=>null
+                )
+
         };
 
     }
@@ -2601,11 +3711,311 @@ function searchVoicing(instrument){
         best.shape
     );
 
-    shapeNotes(
+    fillShapeNotes(
         instrument,
         best.shape
     );
 
+    return best;
+
+}
+
+
+/* =====================================================
+   MANDOLIN VOICING
+===================================================== */
+
+function getMandolinVoicing(
+    root=selectedRoot,
+    type=selectedType
+){
+
+    const tuning=
+        TUNINGS.mandolin;
+
+    const tones=
+        new Set(
+            chordNotes(
+                root,
+                type
+            )
+        );
+
+
+    /*
+       Preferred shapes only for current
+       main chord.
+    */
+
+    if(
+        root===selectedRoot &&
+        type===selectedType
+    ){
+
+        const preferred=
+            commonShape("mandolin");
+
+        if(
+            preferred &&
+            shapeIsValid(
+                "mandolin",
+                preferred
+            )
+        ){
+
+            assignFingerNumbers(
+                preferred
+            );
+
+            fillShapeNotes(
+                "mandolin",
+                preferred
+            );
+
+            return {
+                shape:preferred,
+                preferred:true
+            };
+
+        }
+
+    }
+
+
+    const possibilities=
+        tuning.map(
+            openNote=>{
+
+                const choices=[];
+
+                for(
+                    let fret=0;
+                    fret<=7;
+                    fret++
+                ){
+
+                    const note=
+                        normalizePitch(
+                            pitch(openNote)+
+                            fret
+                        );
+
+                    if(
+                        tones.has(note)
+                    ){
+
+                        choices.push({
+
+                            fret:fret,
+                            note:null,
+                            finger:0
+
+                        });
+
+                    }
+
+                }
+
+                choices.push(null);
+
+                return choices;
+
+            }
+        );
+
+
+    let best=null;
+
+
+    function evaluate(shape){
+
+        const played=
+            shape.filter(Boolean);
+
+        if(!played.length)
+            return -999999;
+
+        const pitches=[];
+
+        shape.forEach(
+            (item,index)=>{
+
+                if(!item)
+                    return;
+
+                pitches.push(
+                    normalizePitch(
+                        pitch(tuning[index])+
+                        item.fret
+                    )
+                );
+
+            }
+        );
+
+
+        if(
+            !pitches.includes(
+                pitch(root)
+            )
+        )
+            return -999999;
+
+
+        let score=0;
+
+
+        score+=
+            new Set(pitches).size*45;
+
+
+        score+=
+            pitches.filter(
+                x=>x===pitch(root)
+            ).length*35;
+
+
+        const intervals=
+            pitches.map(
+                x=>
+                    normalizePitch(
+                        x-pitch(root)
+                    )
+            );
+
+
+        if(
+            intervals.includes(3) ||
+            intervals.includes(4)
+        )
+            score+=35;
+
+
+        if(intervals.includes(7))
+            score+=20;
+
+
+        if(
+            intervals.includes(10) ||
+            intervals.includes(11)
+        )
+            score+=18;
+
+
+        played.forEach(item=>{
+
+            if(item.fret===0)
+                score+=18;
+
+            else
+                score-=item.fret*2;
+
+        });
+
+
+        const frets=
+            played
+            .filter(
+                item=>item.fret>0
+            )
+            .map(
+                item=>item.fret
+            );
+
+
+        if(frets.length){
+
+            score-=
+                (
+                    Math.max(...frets)-
+                    Math.min(...frets)
+                )*12;
+
+        }
+
+
+        score+=
+            played.length*8;
+
+        return score;
+
+    }
+
+
+    function search(
+        stringIndex,
+        shape
+    ){
+
+        if(
+            stringIndex===
+            tuning.length
+        ){
+
+            const score=
+                evaluate(shape);
+
+            if(
+                score>-999999 &&
+                (
+                    !best ||
+                    score>best.score
+                )
+            ){
+
+                best={
+                    score:score,
+                    shape:[...shape]
+                };
+
+            }
+
+            return;
+
+        }
+
+
+        possibilities[stringIndex]
+            .forEach(option=>{
+
+                search(
+                    stringIndex+1,
+                    [
+                        ...shape,
+                        option
+                    ]
+                );
+
+            });
+
+    }
+
+
+    search(0,[]);
+
+
+    if(!best){
+
+        return {
+
+            shape:
+                tuning.map(
+                    ()=>null
+                )
+
+        };
+
+    }
+
+
+    assignFingerNumbers(
+        best.shape
+    );
+
+    fillShapeNotes(
+        "mandolin",
+        best.shape
+    );
 
     return best;
 
@@ -2618,203 +4028,127 @@ function searchVoicing(instrument){
 
 function drawFretted(
     instrument,
-    result
+    result,
+    sheetMode=false
 ){
 
     const tuning=
-        getTuning(instrument);
-
-    const shape=
-        result.shape;
+        currentTuning(instrument);
 
     const count=
         tuning.length;
 
-    const left=55;
-    const width=210;
-
-    const stringSpacing=
-        width/(count-1);
-
+    const shape=
+        result.shape;
 
     /*
-       Determine the displayed fret range.
+       Exact string count.
 
-       Open-position chords show 1-5.
+       Guitar = 6
+       Ukulele = 4
+       Mandolin = 4
 
-       Higher-position chords automatically
-       move the diagram to the required fret
-       range.
+       There are never extra decorative
+       strings.
     */
-
-    const fretted=
-        shape
-        .filter(x=>x && x.fret>0)
-        .map(x=>x.fret);
-
-
-    let startFret=1;
-
-
-    if(fretted.length){
-
-        const minFret=
-            Math.min(...fretted);
-
-        const maxFret=
-            Math.max(...fretted);
-
-
-        if(maxFret>5){
-
-            startFret=
-                Math.max(
-                    1,
-                    minFret
-                );
-
-        }
-
-    }
-
-
-    let endFret=
-        startFret+4;
-
 
     let html=`
 
-<div class="fret-diagram">
+        <div
+            class="fret-diagram"
+            style="
+                transform:
+                    scale(${sheetMode?.82:1});
+                transform-origin:
+                    center top;
+            "
+        >
 
-<div
-    class="fretboard"
-    style="
-        background:
-        repeating-linear-gradient(
-            to bottom,
-            transparent 0,
-            transparent 43px,
-            #94a3b8 43px,
-            #94a3b8 45px
-        );
-    "
-></div>
+            <div class="fretboard"></div>
 
-`;
+    `;
 
-
-    /*
-       Exactly one string line per string.
-    */
 
     tuning.forEach(
-        (string,index)=>{
+        (string,i)=>{
 
             const x=
-                left+
-                stringSpacing*index;
-
+                50+
+                (218/(count-1))*i;
 
             html+=`
 
-<div
-    class="fret-string"
-    style="left:${x}px">
-</div>
+                <div
+                    class="fret-string"
+                    style="
+                        left:${x}px
+                    ">
+                </div>
 
-<div
-    class="string-label"
-    style="left:${x}px">
-    ${string}
-</div>
+                <div
+                    class="string-label"
+                    style="
+                        left:${x}px
+                    ">
+                    ${string}
+                </div>
 
-`;
+            `;
 
         }
     );
 
 
-    /*
-       Fret numbers.
-    */
-
     for(
-        let fret=startFret;
-        fret<=endFret;
+        let fret=1;
+        fret<=5;
         fret++
     ){
 
-        const row=
-            fret-startFret;
-
-        const top=
-            66+
-            row*43;
-
+        const y=
+            65+
+            (fret-1)*43;
 
         html+=`
 
-<div
-    class="fret-number"
-    style="top:${top}px">
+            <div
+                class="fret-number"
+                style="
+                    top:${y}px
+                ">
 
-    ${fret}
+                ${fret}
 
-</div>
+            </div>
 
-`;
-
-    }
-
-
-    /*
-       Nut marker for first-position diagrams.
-    */
-
-    if(startFret===1){
-
-        html+=`
-
-<div
-    style="
-        position:absolute;
-        left:55px;
-        top:42px;
-        width:210px;
-        height:6px;
-        background:#fff;
-        z-index:6;
-    ">
-</div>
-
-`;
+        `;
 
     }
 
-
-    /*
-       Open and muted strings.
-    */
 
     shape.forEach(
-        (item,index)=>{
+        (item,i)=>{
 
             const x=
-                left+
-                stringSpacing*index;
+                50+
+                (218/(count-1))*i;
 
 
             if(item===null){
 
                 html+=`
 
-<div
-    class="mute-mark"
-    style="left:${x}px">
-    ×
-</div>
+                    <div
+                        class="mute-mark"
+                        style="
+                            left:${x}px
+                        ">
 
-`;
+                        ×
+
+                    </div>
+
+                `;
 
                 return;
 
@@ -2825,13 +4159,17 @@ function drawFretted(
 
                 html+=`
 
-<div
-    class="open-mark"
-    style="left:${x}px">
-    O
-</div>
+                    <div
+                        class="open-mark"
+                        style="
+                            left:${x}px
+                        ">
 
-`;
+                        O
+
+                    </div>
+
+                `;
 
                 return;
 
@@ -2840,41 +4178,39 @@ function drawFretted(
 
             /*
                IMPORTANT:
+               x = STRING position.
+               y = FRET position.
 
-               Finger dot is placed on the SAME
-               vertical string line.
-
-               It is never positioned according
-               to the finger number.
+               Therefore the finger cannot
+               accidentally move to another string.
             */
 
-            const row=
-                item.fret-startFret;
-
             const y=
-                69+
-                row*43+
-                21.5;
+                47+
+                (item.fret-.5)*43;
 
 
             html+=`
 
-<div
-    class="finger-dot"
-    style="
-        left:${x}px;
-        top:${y}px;
-    "
-    title="
-        ${item.note}
-        • Finger ${item.finger}
-        • Fret ${item.fret}
-    "
->
-    ${item.finger}
-</div>
+                <div
+                    class="finger-dot"
+                    style="
+                        left:${x}px;
+                        top:${y}px;
+                    "
+                    title="
+                        Finger ${item.finger}
+                        • Fret ${item.fret}
+                        • String ${i+1}
+                        • ${item.note || ""}
+                    "
+                >
 
-`;
+                    ${item.finger}
+
+                </div>
+
+            `;
 
         }
     );
@@ -2882,25 +4218,31 @@ function drawFretted(
 
     html+=`
 
-<div class="fret-range">
+        <div
+            style="
+                position:absolute;
+                bottom:-4px;
+                left:50%;
+                transform:translateX(-50%);
+                width:100%;
+                text-align:center;
+                font-size:10px;
+                color:#94a3b8;
+                white-space:nowrap;
+            "
+        >
 
-    Frets ${startFret}–${endFret}
+            1 Index&nbsp;&nbsp;
+            2 Middle&nbsp;&nbsp;
+            3 Ring&nbsp;&nbsp;
+            4 Little
 
-</div>
+        </div>
 
-<div class="finger-key">
+    `;
 
-    1 Index&nbsp;&nbsp;
-    2 Middle&nbsp;&nbsp;
-    3 Ring&nbsp;&nbsp;
-    4 Little
 
-</div>
-
-</div>
-
-`;
-
+    html+=`</div>`;
 
     return html;
 
@@ -2917,59 +4259,78 @@ function drawPiano(
 ){
 
     const chord=
-        chordNotes(root,type);
+        chordNotes(
+            root,
+            type
+        );
+
+    const spelled=
+        chordSpelledNotes(
+            root,
+            type
+        );
 
 
     const white=[
-        "C","D","E","F","G","A","B"
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "A",
+        "B"
     ];
 
 
     let html=`
 
-<div>
+        <div>
 
-<div class="piano">
+            <div class="piano">
 
-`;
+    `;
 
 
     white.forEach(
-        (note,index)=>{
+        (note,i)=>{
 
             const active=
                 chord.includes(
                     pitch(note)
                 );
 
-
             html+=`
 
-<div
-    class="
-        white-key
-        ${active?"active":""}
-    "
-    style="left:${index*40}px">
+                <div
+                    class="
+                        white-key
+                        ${active?"active":""}
+                    "
+                    style="
+                        left:${i*40}px
+                    "
+                >
 
-<div class="key-name">
-    ${note}
-</div>
+                    <div class="key-name">
+                        ${note}
+                    </div>
 
-</div>
+                </div>
 
-`;
+            `;
 
         }
     );
 
 
     const black=[
+
         ["C#",27],
         ["D#",67],
         ["F#",147],
         ["G#",187],
         ["A#",227]
+
     ];
 
 
@@ -2981,18 +4342,25 @@ function drawPiano(
                     pitch(note)
                 );
 
-
             html+=`
 
-<div
-    class="
-        black-key
-        ${active?"active":""}
-    "
-    style="left:${left}px">
-</div>
+                <div
+                    class="
+                        black-key
+                        ${active?"active":""}
+                    "
+                    style="
+                        left:${left}px
+                    "
+                >
 
-`;
+                    <div class="key-name">
+                        ${note}
+                    </div>
+
+                </div>
+
+            `;
 
         }
     );
@@ -3000,17 +4368,17 @@ function drawPiano(
 
     html+=`
 
-</div>
+            </div>
 
-<div class="piano-notes">
+            <div class="piano-notes">
 
-${chordSpelledNotes(root,type).join(" • ")}
+                ${spelled.join(" • ")}
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-`;
+    `;
 
     return html;
 
@@ -3018,337 +4386,25 @@ ${chordSpelledNotes(root,type).join(" • ")}
 
 
 /* =====================================================
-   STAFF
+   INSTRUMENT NAME
 ===================================================== */
 
-const STAFF_BASE={
-    C:5,
-    D:6,
-    E:0,
-    F:1,
-    G:2,
-    A:3,
-    B:4
-};
+function instrumentName(instrument){
 
+    return {
 
-function renderStaffInto(
-    svg,
-    root,
-    type,
-    small=false
-){
+        guitar:"🎸 Guitar",
+        ukulele:"🪕 Ukulele",
+        mandolin:"🎻 Mandolin",
+        piano:"🎹 Piano"
 
-    svg.innerHTML="";
-
-
-    const top=
-        small ? 35 : 70;
-
-    const spacing=
-        small ? 10 : 18;
-
-
-    const width=
-        small ? 300 : 750;
-
-    const startX=
-        small ? 55 : 175;
-
-
-    for(let i=0;i<5;i++){
-
-        const line=
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line"
-            );
-
-        line.setAttribute(
-            "x1",
-            small ? 35 : 105
-        );
-
-        line.setAttribute(
-            "x2",
-            small ? 295 : 855
-        );
-
-        line.setAttribute(
-            "y1",
-            top+i*spacing
-        );
-
-        line.setAttribute(
-            "y2",
-            top+i*spacing
-        );
-
-        line.setAttribute(
-            "class",
-            "staff-line"
-        );
-
-        svg.appendChild(line);
-
-    }
-
-
-    const clef=
-        document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "text"
-        );
-
-    clef.setAttribute(
-        "x",
-        small ? 5 : 35
-    );
-
-    clef.setAttribute(
-        "y",
-        small ? 75 : 142
-    );
-
-    clef.setAttribute(
-        "class",
-        "staff-clef"
-    );
-
-    clef.setAttribute(
-        "font-size",
-        small ? "45" : "82"
-    );
-
-    clef.textContent="𝄞";
-
-    svg.appendChild(clef);
-
-
-    const notes=
-        chordSpelledNotes(
-            root,
-            type
-        );
-
-
-    const positions=[];
-
-
-    notes.forEach(note=>{
-
-        const letter=
-            note.charAt(0);
-
-        let position=
-            STAFF_BASE[letter];
-
-        let octave=4;
-
-        while(
-            positions.length &&
-            position<=
-                positions[
-                    positions.length-1
-                ].position
-        ){
-
-            octave++;
-
-            position=
-                STAFF_BASE[letter]+
-                (octave-4)*7;
-
-        }
-
-
-        positions.push({
-            note:note,
-            position:position
-        });
-
-    });
-
-
-    positions.sort(
-        (a,b)=>
-            a.position-b.position
-    );
-
-
-    const step=
-        positions.length>1
-        ?
-        width/(positions.length-1)
-        :
-        0;
-
-
-    positions.forEach(
-        (item,index)=>{
-
-            const x=
-                positions.length===1
-                ?
-                (small ? 165 : 490)
-                :
-                startX+
-                step*index;
-
-
-            const y=
-                top+
-                4*spacing-
-                item.position*
-                (spacing/2);
-
-
-            if(
-                item.position>8
-            ){
-
-                for(
-                    let p=10;
-                    p<=item.position;
-                    p+=2
-                ){
-
-                    const ledger=
-                        document.createElementNS(
-                            "http://www.w3.org/2000/svg",
-                            "line"
-                        );
-
-                    ledger.setAttribute(
-                        "x1",
-                        x-12
-                    );
-
-                    ledger.setAttribute(
-                        "x2",
-                        x+12
-                    );
-
-                    ledger.setAttribute(
-                        "y1",
-                        top+
-                        4*spacing-
-                        p*(spacing/2)
-                    );
-
-                    ledger.setAttribute(
-                        "y2",
-                        top+
-                        4*spacing-
-                        p*(spacing/2)
-                    );
-
-                    ledger.setAttribute(
-                        "class",
-                        "staff-ledger"
-                    );
-
-                    svg.appendChild(ledger);
-
-                }
-
-            }
-
-
-            if(
-                item.note.includes("#") ||
-                item.note.includes("b")
-            ){
-
-                const accidental=
-                    document.createElementNS(
-                        "http://www.w3.org/2000/svg",
-                        "text"
-                    );
-
-                accidental.setAttribute(
-                    "x",
-                    x-18
-                );
-
-                accidental.setAttribute(
-                    "y",
-                    y+5
-                );
-
-                accidental.setAttribute(
-                    "class",
-                    "staff-accidental"
-                );
-
-                accidental.setAttribute(
-                    "font-size",
-                    small ? "12" : "20"
-                );
-
-                accidental.textContent=
-                    item.note.includes("#")
-                    ? "♯"
-                    : "♭";
-
-                svg.appendChild(accidental);
-
-            }
-
-
-            const note=
-                document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "ellipse"
-                );
-
-            note.setAttribute(
-                "cx",
-                x
-            );
-
-            note.setAttribute(
-                "cy",
-                y
-            );
-
-            note.setAttribute(
-                "rx",
-                small ? "6" : "10"
-            );
-
-            note.setAttribute(
-                "ry",
-                small ? "4" : "7"
-            );
-
-            note.setAttribute(
-                "class",
-                "staff-note"
-            );
-
-            svg.appendChild(note);
-
-        }
-    );
-
-}
-
-
-function renderMainStaff(){
-
-    renderStaffInto(
-        document.getElementById("staffSvg"),
-        selectedRoot,
-        selectedType,
-        false
-    );
+    }[instrument];
 
 }
 
 
 /* =====================================================
-   MAIN INSTRUMENT CARDS
+   RENDER MAIN INSTRUMENTS
 ===================================================== */
 
 function renderInstruments(){
@@ -3363,1229 +4419,189 @@ function renderInstruments(){
 
     if(activeInstruments.guitar){
 
-        const result=
-            searchVoicing("guitar");
+        const card=
+            document.createElement("div");
 
+        card.className="card";
 
-        grid.appendChild(
-            createInstrumentCard(
-                "🎸 Guitar",
+        card.innerHTML=`
+
+            <h2>🎸 Guitar</h2>
+
+            <div class="card-sub">
+
+                ${chordName()}<br>
+
+                ${TUNING_NAMES[guitarTuningName]}
+
+            </div>
+
+        `;
+
+        const diagram=
+            document.createElement("div");
+
+        diagram.className="diagram";
+
+        diagram.innerHTML=
+            drawFretted(
                 "guitar",
-                result
-            )
-        );
+                getFrettedVoicing(
+                    "guitar"
+                )
+            );
+
+        card.appendChild(diagram);
+
+        const badge=
+            document.createElement("span");
+
+        badge.className="badge";
+
+        badge.textContent=
+            "1 Index • 2 Middle • 3 Ring • 4 Little";
+
+        card.appendChild(badge);
+
+        grid.appendChild(card);
 
     }
 
 
     if(activeInstruments.ukulele){
 
-        const result=
-            searchVoicing("ukulele");
+        const card=
+            document.createElement("div");
 
+        card.className="card";
 
-        grid.appendChild(
-            createInstrumentCard(
-                "🪕 Ukulele",
+        card.innerHTML=`
+
+            <h2>🪕 Ukulele</h2>
+
+            <div class="card-sub">
+
+                ${chordName()}<br>
+
+                Standard tuning G C E A
+
+            </div>
+
+        `;
+
+        const diagram=
+            document.createElement("div");
+
+        diagram.className="diagram";
+
+        diagram.innerHTML=
+            drawFretted(
                 "ukulele",
-                result
-            )
-        );
+                getFrettedVoicing(
+                    "ukulele"
+                )
+            );
+
+        card.appendChild(diagram);
+
+        const badge=
+            document.createElement("span");
+
+        badge.className="badge";
+
+        badge.textContent=
+            "1 Index • 2 Middle • 3 Ring • 4 Little";
+
+        card.appendChild(badge);
+
+        grid.appendChild(card);
 
     }
 
 
     if(activeInstruments.mandolin){
 
-        const result=
-            searchVoicing("mandolin");
+        const card=
+            document.createElement("div");
 
+        card.className="card";
 
-        grid.appendChild(
-            createInstrumentCard(
-                "🎻 Mandolin",
+        card.innerHTML=`
+
+            <h2>🎻 Mandolin</h2>
+
+            <div class="card-sub">
+
+                ${chordName()}<br>
+
+                Standard G • D • A • E
+
+            </div>
+
+        `;
+
+        const diagram=
+            document.createElement("div");
+
+        diagram.className="diagram";
+
+        diagram.innerHTML=
+            drawFretted(
                 "mandolin",
-                result
-            )
-        );
+                getMandolinVoicing()
+            );
+
+        card.appendChild(diagram);
+
+        const badge=
+            document.createElement("span");
+
+        badge.className="badge";
+
+        badge.textContent=
+            "1 Index • 2 Middle • 3 Ring • 4 Little";
+
+        card.appendChild(badge);
+
+        grid.appendChild(card);
 
     }
 
 
     if(activeInstruments.piano){
 
-        grid.appendChild(
-            createInstrumentCard(
-                "🎹 Piano",
-                "piano",
-                null
-            )
-        );
+        const card=
+            document.createElement("div");
 
-    }
+        card.className="card";
 
-}
+        card.innerHTML=`
 
+            <h2>🎹 Piano</h2>
 
-function createInstrumentCard(
-    title,
-    instrument,
-    result
-){
+            <div class="card-sub">
 
-    const card=
-        document.createElement("div");
+                ${chordName()}<br>
 
-    card.className="card";
+                Chord tones highlighted
 
+            </div>
 
-    let tuningText="";
+        `;
 
+        const diagram=
+            document.createElement("div");
 
-    if(instrument==="guitar"){
-
-        tuningText=
-            GUITAR_TUNINGS[
-                selectedGuitarTuning
-            ].strings.join(" ");
-
-    }
-
-    else if(instrument==="ukulele"){
-
-        tuningText=
-            "G C E A";
-
-    }
-
-    else if(instrument==="mandolin"){
-
-        tuningText=
-            "G D A E";
-
-    }
-
-
-    card.innerHTML=`
-
-<h2>${title}</h2>
-
-<div class="card-sub">
-
-${chordName()}<br>
-
-${
-    instrument==="piano"
-    ?
-    "Chord tones highlighted"
-    :
-    "Tuning • "+tuningText
-}
-
-</div>
-
-`;
-
-
-    const diagram=
-        document.createElement("div");
-
-    diagram.className="diagram";
-
-
-    if(instrument==="piano"){
+        diagram.className="diagram";
 
         diagram.innerHTML=
             drawPiano();
 
-    }
-    else{
+        card.appendChild(diagram);
 
-        diagram.innerHTML=
-            drawFretted(
-                instrument,
-                result
-            );
+        grid.appendChild(card);
 
     }
-
-
-    card.appendChild(diagram);
-
-
-    return card;
-
-}
-
-
-/* =====================================================
-   CHORD SHEET STATE
-===================================================== */
-
-let sheetChords=[];
-
-let sheetInstruments={
-    guitar:true,
-    ukulele:true,
-    mandolin:true,
-    piano:true
-};
-
-
-let sheetTypesExpanded=false;
-
-
-/* =====================================================
-   SHEET ROOTS
-===================================================== */
-
-function buildSheetRoots(){
-
-    const grid=
-        document.getElementById(
-            "sheetRootGrid"
-        );
-
-    grid.innerHTML="";
-
-
-    const roots=[
-        "C","C#","Db",
-        "D","D#","Eb",
-        "E","F","F#","Gb",
-        "G","G#","Ab",
-        "A","A#","Bb","B"
-    ];
-
-
-    roots.forEach(root=>{
-
-        const button=
-            document.createElement("button");
-
-        button.className=
-            "root-button";
-
-        button.textContent=root;
-
-        if(
-            root===selectedRoot
-        )
-            button.classList.add("active");
-
-
-        button.onclick=()=>{
-
-            selectedRoot=root;
-
-            buildSheetRoots();
-            buildSheetTypes();
-
-        };
-
-
-        grid.appendChild(button);
-
-    });
-
-}
-
-
-/* =====================================================
-   SHEET CHORD TYPES
-===================================================== */
-
-function buildSheetTypes(){
-
-    const grid=
-        document.getElementById(
-            "sheetTypeGrid"
-        );
-
-    grid.innerHTML="";
-
-
-    const common=[
-        "",
-        "m",
-        "7",
-        "maj7",
-        "m7",
-        "sus2",
-        "sus4",
-        "6",
-        "m6",
-        "add9"
-    ];
-
-
-    const all=[
-        ...common,
-        "9",
-        "maj9",
-        "m9",
-        "11",
-        "maj11",
-        "m11",
-        "13",
-        "maj13",
-        "m13",
-        "m7b5",
-        "dim",
-        "dim7",
-        "aug"
-    ];
-
-
-    const types=
-        sheetTypesExpanded
-        ? all
-        : common;
-
-
-    types.forEach(type=>{
-
-        const button=
-            document.createElement("button");
-
-        button.className=
-            "sheet-type-button";
-
-        button.textContent=
-            selectedRoot+
-            (
-                type===""
-                ? ""
-                : type
-            );
-
-
-        button.title=
-            TYPE_NAMES[type];
-
-
-        button.onclick=()=>{
-
-            addSheetChord(
-                selectedRoot,
-                type
-            );
-
-        };
-
-
-        grid.appendChild(button);
-
-    });
-
-}
-
-
-function toggleSheetTypes(){
-
-    sheetTypesExpanded=
-        !sheetTypesExpanded;
-
-
-    const grid=
-        document.getElementById(
-            "sheetTypeGrid"
-        );
-
-
-    grid.classList.toggle(
-        "expanded",
-        sheetTypesExpanded
-    );
-
-
-    document.getElementById(
-        "expandTypes"
-    ).textContent=
-        sheetTypesExpanded
-        ? "Show Common Chords"
-        : "Expand More Chords";
-
-
-    buildSheetTypes();
-
-}
-
-
-/* =====================================================
-   ADD CHORD TO SHEET
-===================================================== */
-
-function addSheetChord(
-    root,
-    type
-){
-
-    const key=
-        root+"|"+type;
-
-
-    if(
-        sheetChords.some(
-            chord=>
-                chord.root===root &&
-                chord.type===type
-        )
-    ){
-
-        showSheetStatus(
-            "That chord is already on the sheet."
-        );
-
-        return;
-
-    }
-
-
-    sheetChords.push({
-        root:root,
-        type:type,
-        key:key
-    });
-
-
-    renderSelectedSheetChords();
-    renderChordSheet();
-
-}
-
-
-function removeSheetChord(index){
-
-    sheetChords.splice(
-        index,
-        1
-    );
-
-
-    renderSelectedSheetChords();
-    renderChordSheet();
-
-}
-
-
-function renderSelectedSheetChords(){
-
-    const box=
-        document.getElementById(
-            "selectedSheetChords"
-        );
-
-    box.innerHTML="";
-
-
-    sheetChords.forEach(
-        (chord,index)=>{
-
-            const item=
-                document.createElement("div");
-
-            item.className=
-                "selected-sheet-chord";
-
-
-            item.innerHTML=`
-
-${chord.root}${chord.type}
-
-<button
-    onclick="removeSheetChord(${index})">
-    ×
-</button>
-
-`;
-
-            box.appendChild(item);
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   CUSTOM CHORD
-===================================================== */
-
-function addCustomChord(){
-
-    const input=
-        document.getElementById(
-            "customChordInput"
-        );
-
-    const value=
-        input.value
-            .trim()
-            .replace(/\s+/g,"");
-
-
-    if(!value)
-        return;
-
-
-    const parsed=
-        parseChordName(value);
-
-
-    if(!parsed){
-
-        showSheetStatus(
-            "Chord not recognised."
-        );
-
-        return;
-
-    }
-
-
-    addSheetChord(
-        parsed.root,
-        parsed.type
-    );
-
-
-    input.value="";
-
-}
-
-
-function parseChordName(value){
-
-    const match=
-        value.match(
-            /^(C#|Db|D#|Eb|F#|Gb|G#|Ab|A#|Bb|[A-Ga-g])(.*)$/
-        );
-
-
-    if(!match)
-        return null;
-
-
-    let root=
-        match[1];
-
-
-    root=
-        root.charAt(0).toUpperCase()+
-        root.slice(1);
-
-
-    let suffix=
-        match[2]||"";
-
-
-    /*
-       Common written chord names.
-    */
-
-    suffix=
-        suffix
-            .replace(/major/gi,"")
-            .replace(/minor/gi,"m")
-            .replace(/maj/gi,"maj")
-            .replace(/min/gi,"m")
-            .replace(/flat5/gi,"b5")
-            .replace(/♭5/g,"b5")
-            .replace(/sharp/g,"#");
-
-
-    if(
-        suffix==="M"
-    )
-        suffix="";
-
-
-    if(
-        suffix==="min"
-    )
-        suffix="m";
-
-
-    if(
-        !Object.prototype.hasOwnProperty.call(
-            FORMULAS,
-            suffix
-        )
-    ){
-
-        return null;
-
-    }
-
-
-    return {
-        root:root,
-        type:suffix
-    };
-
-}
-
-
-/* =====================================================
-   SHEET INSTRUMENT BUTTONS
-===================================================== */
-
-document
-    .querySelectorAll(
-        ".sheet-instrument-button"
-    )
-    .forEach(button=>{
-
-        button.addEventListener(
-            "click",
-            ()=>{
-
-                const instrument=
-                    button.dataset.sheetInstrument;
-
-
-                sheetInstruments[
-                    instrument
-                ]=
-                    !sheetInstruments[
-                        instrument
-                    ];
-
-
-                button.classList.toggle(
-                    "active",
-                    sheetInstruments[
-                        instrument
-                    ]
-                );
-
-
-                renderChordSheet();
-
-            }
-        );
-
-    });
-
-
-/* =====================================================
-   OPEN / CLOSE SHEET
-===================================================== */
-
-function openChordSheet(){
-
-    document.getElementById(
-        "sheetScreen"
-    ).style.display="block";
-
-
-    document.body.style.overflow="hidden";
-
-
-    buildSheetRoots();
-    buildSheetTypes();
-    renderSelectedSheetChords();
-    renderChordSheet();
-
-}
-
-
-function closeChordSheet(){
-
-    document.getElementById(
-        "sheetScreen"
-    ).style.display="none";
-
-
-    document.body.style.overflow="";
-
-}
-
-
-/* =====================================================
-   RENDER CHORD SHEET
-===================================================== */
-
-function renderChordSheet(){
-
-    const sheet=
-        document.getElementById(
-            "chordSheet"
-        );
-
-
-    if(!sheet)
-        return;
-
-
-    if(!sheetChords.length){
-
-        sheet.innerHTML=`
-
-<div class="no-sheet">
-
-    Select chords above to create your chord sheet.
-
-</div>
-
-`;
-
-        return;
-
-    }
-
-
-    let html=`
-
-<div class="generated-sheet-title">
-
-ML6CMG Chord Sheet
-
-</div>
-
-`;
-
-
-    const instruments=[
-        ["guitar","🎸 Guitar"],
-        ["ukulele","🪕 Ukulele"],
-        ["mandolin","🎻 Mandolin"],
-        ["piano","🎹 Piano"]
-    ];
-
-
-    instruments.forEach(
-        ([instrument,title])=>{
-
-            if(
-                !sheetInstruments[
-                    instrument
-                ]
-            )
-                return;
-
-
-            let tuning="";
-
-
-            if(instrument==="guitar"){
-
-                tuning=
-                    GUITAR_TUNINGS[
-                        selectedGuitarTuning
-                    ].strings.join(" ");
-
-            }
-
-            else if(instrument==="ukulele"){
-
-                tuning=
-                    "G C E A";
-
-            }
-
-            else if(instrument==="mandolin"){
-
-                tuning=
-                    "G D A E";
-
-            }
-
-
-            html+=`
-
-<div class="sheet-instrument-section">
-
-<div class="sheet-instrument-title">
-
-${title}
-
-${tuning
-    ? `<div style="
-        font-size:11px;
-        color:#94a3b8;
-        font-weight:normal;
-        margin-top:4px;
-      ">
-        ${tuning}
-      </div>`
-    : ""}
-
-</div>
-
-<div class="sheet-chord-row">
-
-`;
-
-
-            sheetChords.forEach(
-                chord=>{
-
-                    const name=
-                        chordName(
-                            chord.root,
-                            chord.type
-                        );
-
-
-                    html+=`
-
-<div class="sheet-chord-card">
-
-<div class="sheet-chord-name">
-
-${chord.root}${chord.type}
-
-</div>
-
-<div class="sheet-chord-notes">
-
-${chordSpelledNotes(
-    chord.root,
-    chord.type
-).join(" • ")}
-
-</div>
-
-`;
-
-
-                    if(
-                        instrument==="piano"
-                    ){
-
-                        html+=
-                            drawPiano(
-                                chord.root,
-                                chord.type
-                            );
-
-                    }
-                    else{
-
-                        /*
-                           Temporarily use the global
-                           root/type state for the
-                           voicing engine, then restore it.
-                        */
-
-                        const oldRoot=
-                            selectedRoot;
-
-                        const oldType=
-                            selectedType;
-
-
-                        selectedRoot=
-                            chord.root;
-
-                        selectedType=
-                            chord.type;
-
-
-                        const result=
-                            searchVoicing(
-                                instrument
-                            );
-
-
-                        html+=
-                            drawFretted(
-                                instrument,
-                                result
-                            );
-
-
-                        selectedRoot=
-                            oldRoot;
-
-                        selectedType=
-                            oldType;
-
-                    }
-
-
-                    /*
-                       Small staff under EVERY diagram.
-                    */
-
-                    html+=`
-
-<svg
-    class="sheet-mini-staff"
-    viewBox="0 0 330 125"
-    preserveAspectRatio="xMidYMid meet">
-
-</svg>
-
-`;
-
-
-                    html+=`
-
-</div>
-
-`;
-
-                }
-            );
-
-
-            html+=`
-
-</div>
-
-</div>
-
-`;
-
-        }
-    );
-
-
-    sheet.innerHTML=html;
-
-
-    /*
-       Populate the small staff SVGs after
-       the HTML has been inserted.
-    */
-
-    const staffSvgs=
-        sheet.querySelectorAll(
-            ".sheet-mini-staff"
-        );
-
-
-    let counter=0;
-
-
-    sheetChords.forEach(chord=>{
-
-        instruments.forEach(
-            ([instrument])=>{
-
-                if(
-                    !sheetInstruments[
-                        instrument
-                    ]
-                )
-                    return;
-
-
-                const svg=
-                    staffSvgs[counter];
-
-
-                if(svg){
-
-                    renderStaffInto(
-                        svg,
-                        chord.root,
-                        chord.type,
-                        true
-                    );
-
-                }
-
-
-                counter++;
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =====================================================
-   COPY FORMATTED CHORD SHEET
-===================================================== */
-
-async function copyChordSheet(){
-
-    const sheet=
-        document.getElementById(
-            "chordSheet"
-        );
-
-
-    if(!sheet){
-
-        showSheetStatus(
-            "Chord sheet not found."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Clone the entire document.
-
-       This keeps the diagrams and their
-       formatting inside the copied HTML.
-    */
-
-    const clone=
-        sheet.cloneNode(true);
-
-
-    const html=
-        clone.outerHTML;
-
-
-    const plainText=
-        clone.innerText;
-
-
-    try{
-
-        if(
-            navigator.clipboard &&
-            window.ClipboardItem
-        ){
-
-            const htmlBlob=
-                new Blob(
-                    [html],
-                    {
-                        type:"text/html"
-                    }
-                );
-
-
-            const textBlob=
-                new Blob(
-                    [plainText],
-                    {
-                        type:"text/plain"
-                    }
-                );
-
-
-            const item=
-                new ClipboardItem({
-
-                    "text/html":
-                        htmlBlob,
-
-                    "text/plain":
-                        textBlob
-
-                });
-
-
-            await navigator.clipboard.write([
-                item
-            ]);
-
-
-            showSheetStatus(
-                "Chord sheet copied with formatting."
-            );
-
-            return;
-
-        }
-
-    }
-    catch(error){
-
-        console.log(
-            "Rich copy failed",
-            error
-        );
-
-    }
-
-
-    /*
-       Fallback.
-    */
-
-    const range=
-        document.createRange();
-
-    range.selectNodeContents(
-        sheet
-    );
-
-
-    const selection=
-        window.getSelection();
-
-    selection.removeAllRanges();
-
-    selection.addRange(range);
-
-
-    try{
-
-        document.execCommand(
-            "copy"
-        );
-
-        selection.removeAllRanges();
-
-        showSheetStatus(
-            "Chord sheet copied."
-        );
-
-    }
-    catch(error){
-
-        selection.removeAllRanges();
-
-        showSheetStatus(
-            "Copy is not available on this browser."
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   NATIVE DEVICE SHARE
-===================================================== */
-
-async function shareChordSheet(){
-
-    const sheet=
-        document.getElementById(
-            "chordSheet"
-        );
-
-
-    if(!sheet)
-        return;
-
-
-    const text=
-        sheet.innerText;
-
-
-    /*
-       iPad / iPhone native share menu.
-
-       This allows the user to select
-       WhatsApp, Mail, Messages etc.
-       when those apps are available.
-    */
-
-    if(
-        navigator.share
-    ){
-
-        try{
-
-            await navigator.share({
-
-                title:
-                    "ML6CMG Chord Sheet",
-
-                text:text
-
-            });
-
-            return;
-
-        }
-        catch(error){
-
-            if(
-                error.name===
-                "AbortError"
-            )
-                return;
-
-        }
-
-    }
-
-
-    /*
-       Fallback.
-    */
-
-    emailChordSheet();
-
-}
-
-
-/* =====================================================
-   EMAIL
-===================================================== */
-
-function emailChordSheet(){
-
-    const sheet=
-        document.getElementById(
-            "chordSheet"
-        );
-
-
-    if(!sheet)
-        return;
-
-
-    const subject=
-        encodeURIComponent(
-            "ML6CMG Chord Sheet"
-        );
-
-
-    const body=
-        encodeURIComponent(
-            sheet.innerText
-        );
-
-
-    window.location.href=
-        "mailto:?subject="+
-        subject+
-        "&body="+
-        body;
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function showSheetStatus(message){
-
-    const box=
-        document.getElementById(
-            "sheetStatus"
-        );
-
-
-    box.textContent=
-        message;
-
-    box.style.display=
-        "block";
-
-
-    clearTimeout(
-        window.sheetStatusTimer
-    );
-
-
-    window.sheetStatusTimer=
-        setTimeout(
-            ()=>{
-                box.style.display=
-                    "none";
-            },
-            2500
-        );
 
 }
 
@@ -4624,6 +4640,53 @@ function update(){
 
 
 /* =====================================================
+   GUITAR TUNING BUTTONS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".tuning-button"
+    )
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                guitarTuningName=
+                    button.dataset.tuning;
+
+                document
+                    .querySelectorAll(
+                        ".tuning-button"
+                    )
+                    .forEach(
+                        b=>
+                            b.classList.toggle(
+                                "active",
+                                b===button
+                            )
+                    );
+
+
+                document.getElementById(
+                    "tuningDescription"
+                ).textContent=
+                    "Guitar tuning: "+
+                    TUNING_NAMES[
+                        guitarTuningName
+                    ];
+
+
+                update();
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
    MAIN INSTRUMENT BUTTONS
 ===================================================== */
 
@@ -4640,14 +4703,12 @@ document
                 const instrument=
                     button.dataset.instrument;
 
-
                 activeInstruments[
                     instrument
                 ]=
                     !activeInstruments[
                         instrument
                     ];
-
 
                 button.classList.toggle(
                     "active",
@@ -4656,36 +4717,7 @@ document
                     ]
                 );
 
-
                 renderInstruments();
-
-            }
-        );
-
-    });
-
-
-/* =====================================================
-   TUNING BUTTONS
-===================================================== */
-
-document
-    .querySelectorAll(
-        ".tuning-button"
-    )
-    .forEach(button=>{
-
-        button.addEventListener(
-            "click",
-            ()=>{
-
-                selectedGuitarTuning=
-                    button.dataset.tuning;
-
-
-                updateTuningButtons();
-
-                update();
 
             }
         );
@@ -4706,12 +4738,816 @@ document
 
 
 /* =====================================================
-   ENTER KEY FOR CUSTOM CHORD
+   SCREEN NAVIGATION
+===================================================== */
+
+const finderScreen=
+    document.getElementById(
+        "finderScreen"
+    );
+
+const sheetScreen=
+    document.getElementById(
+        "sheetScreen"
+    );
+
+const finderNav=
+    document.getElementById(
+        "finderNav"
+    );
+
+const sheetNav=
+    document.getElementById(
+        "sheetNav"
+    );
+
+
+finderNav.onclick=()=>{
+
+    finderScreen.classList.remove(
+        "hidden"
+    );
+
+    sheetScreen.classList.add(
+        "hidden"
+    );
+
+    finderNav.classList.add(
+        "active"
+    );
+
+    sheetNav.classList.remove(
+        "active"
+    );
+
+};
+
+
+sheetNav.onclick=()=>{
+
+    finderScreen.classList.add(
+        "hidden"
+    );
+
+    sheetScreen.classList.remove(
+        "hidden"
+    );
+
+    finderNav.classList.remove(
+        "active"
+    );
+
+    sheetNav.classList.add(
+        "active"
+    );
+
+    renderSheet();
+
+};
+
+
+/* =====================================================
+   SHEET COMMON CHORDS
+===================================================== */
+
+const COMMON_SHEET_CHORDS=[
+
+    "C",
+    "G",
+    "D",
+    "A",
+    "E",
+    "F",
+
+    "Am",
+    "Em",
+    "Dm",
+    "Bm",
+    "Cm",
+    "Fm"
+
+];
+
+
+function buildSheetChordButtons(){
+
+    const common=
+        document.getElementById(
+            "sheetCommonButtons"
+        );
+
+    const more=
+        document.getElementById(
+            "sheetMoreButtons"
+        );
+
+    common.innerHTML="";
+    more.innerHTML="";
+
+
+    COMMON_SHEET_CHORDS.forEach(
+        chord=>{
+
+            const button=
+                document.createElement("button");
+
+            button.className=
+                "sheet-chord-button";
+
+            button.textContent=chord;
+
+            button.onclick=()=>{
+
+                addSheetChord(chord);
+
+            };
+
+            common.appendChild(button);
+
+        }
+    );
+
+
+    CHORD_GROUPS.forEach(
+        group=>{
+
+            group.items.forEach(
+                item=>{
+
+                    const type=
+                        item[1];
+
+                    /*
+                       Include several useful
+                       root variations in expanded
+                       mode so the user isn't locked
+                       to the current key.
+                    */
+
+                    [
+                        "C",
+                        "G",
+                        "D",
+                        "A",
+                        "E",
+                        "F",
+                        "Bb",
+                        "Am",
+                        "Em",
+                        "Dm"
+                    ].forEach(
+                        base=>{
+
+                            let root=base;
+
+                            let rootType=type;
+
+                            if(
+                                base.endsWith("m")
+                            ){
+
+                                root=
+                                    base.slice(0,-1);
+
+                                if(
+                                    type===""
+                                ){
+
+                                    rootType="m";
+
+                                }
+
+                            }
+
+                            const chord=
+                                root+
+                                rootType;
+
+                            if(
+                                !FORMULAS[
+                                    rootType
+                                ]
+                            )
+                                return;
+
+                            const button=
+                                document.createElement(
+                                    "button"
+                                );
+
+                            button.className=
+                                "sheet-chord-button";
+
+                            button.textContent=
+                                chord;
+
+                            button.onclick=()=>{
+
+                                addSheetChord(
+                                    chord
+                                );
+
+                            };
+
+                            more.appendChild(
+                                button
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ADD SHEET CHORD
+===================================================== */
+
+function addSheetChord(text){
+
+    const parsed=
+        parseChordName(text);
+
+    if(!parsed){
+
+        alert(
+            "I couldn't recognise that chord.\n\n"+
+            "Examples:\n"+
+            "C\n"+
+            "Am\n"+
+            "F#m7\n"+
+            "Bbmaj7\n"+
+            "D7"
+        );
+
+        return;
+
+    }
+
+
+    sheetChords.push({
+
+        root:parsed.root,
+        type:parsed.type
+
+    });
+
+
+    renderSheet();
+
+}
+
+
+/* =====================================================
+   REMOVE SHEET CHORD
+===================================================== */
+
+function removeSheetChord(index){
+
+    sheetChords.splice(
+        index,
+        1
+    );
+
+    renderSheet();
+
+}
+
+
+/* =====================================================
+   SHEET CHORD LIST
+===================================================== */
+
+function renderSheetChordList(){
+
+    const list=
+        document.getElementById(
+            "selectedChordList"
+        );
+
+    list.innerHTML="";
+
+
+    sheetChords.forEach(
+        (chord,index)=>{
+
+            const chip=
+                document.createElement(
+                    "div"
+                );
+
+            chip.className=
+                "selected-chord-chip";
+
+            chip.innerHTML=`
+
+                <strong>
+                    ${chordDisplayName(
+                        chord.root,
+                        chord.type
+                    )}
+                </strong>
+
+                <button
+                    title="Remove chord"
+                    onclick="
+                        removeSheetChord(
+                            ${index}
+                        )
+                    "
+                >
+                    ×
+                </button>
+
+            `;
+
+            list.appendChild(chip);
+
+        }
+    );
+
+
+    if(!sheetChords.length){
+
+        list.innerHTML=`
+
+            <span
+                style="
+                    color:#64748b;
+                    font-size:13px;
+                "
+            >
+
+                No chords added yet.
+
+            </span>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   SHEET INSTRUMENT DIAGRAM
+===================================================== */
+
+function renderSheetInstrument(
+    instrument,
+    root,
+    type
+){
+
+    let diagram="";
+
+    if(instrument==="piano"){
+
+        diagram=
+            drawPiano(
+                root,
+                type
+            );
+
+    }
+
+    else if(instrument==="mandolin"){
+
+        /*
+           Generate using the requested chord
+           without changing the main selected
+           chord.
+        */
+
+        const oldRoot=
+            selectedRoot;
+
+        const oldType=
+            selectedType;
+
+        selectedRoot=root;
+        selectedType=type;
+
+        const result=
+            getMandolinVoicing();
+
+        selectedRoot=oldRoot;
+        selectedType=oldType;
+
+        diagram=
+            drawFretted(
+                "mandolin",
+                result,
+                true
+            );
+
+    }
+
+    else if(instrument==="guitar"){
+
+        const oldRoot=
+            selectedRoot;
+
+        const oldType=
+            selectedType;
+
+        selectedRoot=root;
+        selectedType=type;
+
+        const result=
+            getFrettedVoicing(
+                "guitar"
+            );
+
+        selectedRoot=oldRoot;
+        selectedType=oldType;
+
+        diagram=
+            drawFretted(
+                "guitar",
+                result,
+                true
+            );
+
+    }
+
+    else if(instrument==="ukulele"){
+
+        const oldRoot=
+            selectedRoot;
+
+        const oldType=
+            selectedType;
+
+        selectedRoot=root;
+        selectedType=type;
+
+        const result=
+            getFrettedVoicing(
+                "ukulele"
+            );
+
+        selectedRoot=oldRoot;
+        selectedType=oldType;
+
+        diagram=
+            drawFretted(
+                "ukulele",
+                result,
+                true
+            );
+
+    }
+
+    return diagram;
+
+}
+
+
+/* =====================================================
+   SHEET RENDER
+===================================================== */
+
+function renderSheet(){
+
+    renderSheetChordList();
+
+    const entries=
+        document.getElementById(
+            "sheetEntries"
+        );
+
+    entries.innerHTML="";
+
+
+    if(!sheetChords.length){
+
+        entries.innerHTML=`
+
+            <div
+                style="
+                    text-align:center;
+                    padding:40px;
+                    color:#777;
+                "
+            >
+
+                Add chords above to create
+                your chord sheet.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    sheetChords.forEach(
+        (chord,index)=>{
+
+            const entry=
+                document.createElement(
+                    "article"
+                );
+
+            entry.className=
+                "sheet-entry";
+
+
+            const title=
+                chordDisplayName(
+                    chord.root,
+                    chord.type
+                );
+
+
+            const notes=
+                chordSpelledNotes(
+                    chord.root,
+                    chord.type
+                );
+
+
+            let diagrams="";
+
+
+            Object.keys(
+                sheetInstruments
+            )
+            .forEach(
+                instrument=>{
+
+                    if(
+                        !sheetInstruments[
+                            instrument
+                        ]
+                    )
+                        return;
+
+
+                    let tuningText="";
+
+
+                    if(
+                        instrument==="guitar"
+                    ){
+
+                        const selected=
+                            document.getElementById(
+                                "sheetGuitarTuning"
+                            ).value;
+
+                        tuningText=
+                            TUNING_NAMES[
+                                selected
+                            ];
+
+                    }
+
+                    else if(
+                        instrument==="ukulele"
+                    ){
+
+                        tuningText=
+                            "G C E A";
+
+                    }
+
+                    else if(
+                        instrument==="mandolin"
+                    ){
+
+                        tuningText=
+                            "G D A E";
+
+                    }
+
+                    else{
+
+                        tuningText=
+                            "Chord tones";
+
+                    }
+
+
+                    diagrams+=`
+
+                        <div
+                            class="
+                                sheet-instrument-card
+                            "
+                        >
+
+                            <h4>
+                                ${instrumentName(
+                                    instrument
+                                )}
+                            </h4>
+
+                            <div
+                                class="
+                                    sheet-instrument-info
+                                "
+                            >
+
+                                ${
+                                    tuningText
+                                }
+
+                            </div>
+
+                            <div
+                                class="sheet-diagram"
+                            >
+
+                                ${
+                                    renderSheetInstrument(
+                                        instrument,
+                                        chord.root,
+                                        chord.type
+                                    )
+                                }
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            entry.innerHTML=`
+
+                <div class="sheet-entry-title">
+
+                    ${index+1}.
+                    ${title}
+
+                </div>
+
+                <div class="sheet-entry-notes">
+
+                    Notes:
+                    ${notes.join(" • ")}
+
+                </div>
+
+                <div class="sheet-entry-staff">
+
+                    ${
+                        renderStaffForChord(
+                            chord.root,
+                            chord.type,
+                            true
+                        )
+                    }
+
+                </div>
+
+                <div class="sheet-entry-diagrams">
+
+                    ${diagrams}
+
+                </div>
+
+            `;
+
+
+            entries.appendChild(entry);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SHEET INSTRUMENT BUTTONS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".sheet-instrument-button"
+    )
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                const instrument=
+                    button.dataset.sheetInstrument;
+
+                sheetInstruments[
+                    instrument
+                ]=
+                    !sheetInstruments[
+                        instrument
+                    ];
+
+                button.classList.toggle(
+                    "active",
+                    sheetInstruments[
+                        instrument
+                    ]
+                );
+
+                renderSheet();
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   SHEET GUITAR TUNING
 ===================================================== */
 
 document
     .getElementById(
-        "customChordInput"
+        "sheetGuitarTuning"
+    )
+    .addEventListener(
+        "change",
+        renderSheet
+    );
+
+
+/* =====================================================
+   MORE CHORDS
+===================================================== */
+
+document
+    .getElementById(
+        "expandSheetChords"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            const more=
+                document.getElementById(
+                    "sheetMore"
+                );
+
+            const open=
+                more.classList.toggle(
+                    "open"
+                );
+
+            this.textContent=
+                open
+                ? "Hide extra chord options"
+                : "Show more chord options";
+
+        }
+    );
+
+
+/* =====================================================
+   ADD TYPED CHORD
+===================================================== */
+
+document
+    .getElementById(
+        "addTypedChord"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+
+            const input=
+                document.getElementById(
+                    "sheetChordInput"
+                );
+
+            if(!input.value.trim())
+                return;
+
+            addSheetChord(
+                input.value
+            );
+
+            input.value="";
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "sheetChordInput"
     )
     .addEventListener(
         "keydown",
@@ -4721,7 +5557,247 @@ document
 
                 event.preventDefault();
 
-                addCustomChord();
+                document
+                    .getElementById(
+                        "addTypedChord"
+                    )
+                    .click();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   COPY CHORD SHEET
+===================================================== */
+
+async function copyChordSheet(){
+
+    const documentElement=
+        document.getElementById(
+            "sheetDocument"
+        );
+
+    /*
+       Copy both HTML and plain text.
+
+       This means applications that support
+       rich clipboard data can preserve the
+       formatting.
+    */
+
+    const html=
+        documentElement.outerHTML;
+
+    const text=
+        documentElement.innerText;
+
+
+    try{
+
+        if(
+            navigator.clipboard &&
+            window.ClipboardItem
+        ){
+
+            const item=
+                new ClipboardItem({
+
+                    "text/html":
+                        new Blob(
+                            [html],
+                            {
+                                type:
+                                    "text/html"
+                            }
+                        ),
+
+                    "text/plain":
+                        new Blob(
+                            [text],
+                            {
+                                type:
+                                    "text/plain"
+                            }
+                        )
+
+                });
+
+
+            await navigator.clipboard.write([
+                item
+            ]);
+
+        }
+
+        else{
+
+            await navigator.clipboard.writeText(
+                text
+            );
+
+        }
+
+        alert(
+            "Chord sheet copied."
+        );
+
+    }
+
+    catch(error){
+
+        /*
+           Fallback for browsers that
+           block clipboard HTML.
+        */
+
+        const area=
+            document.createElement(
+                "textarea"
+            );
+
+        area.value=text;
+
+        document.body.appendChild(
+            area
+        );
+
+        area.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        area.remove();
+
+        alert(
+            "Chord sheet copied."
+        );
+
+    }
+
+}
+
+
+document
+    .getElementById(
+        "copySheet"
+    )
+    .addEventListener(
+        "click",
+        copyChordSheet
+    );
+
+
+/* =====================================================
+   SHARE CHORD SHEET
+===================================================== */
+
+async function shareChordSheet(){
+
+    const documentElement=
+        document.getElementById(
+            "sheetDocument"
+        );
+
+    const text=
+        documentElement.innerText;
+
+
+    if(
+        navigator.share
+    ){
+
+        try{
+
+            await navigator.share({
+
+                title:
+                    "ML6CMG Chord Sheet",
+
+                text:text
+
+            });
+
+        }
+
+        catch(error){
+
+            /*
+               User cancelled share.
+               Nothing else needed.
+            */
+
+        }
+
+        return;
+
+    }
+
+
+    /*
+       Desktop/browser fallback.
+    */
+
+    await copyChordSheet();
+
+}
+
+
+document
+    .getElementById(
+        "shareSheet"
+    )
+    .addEventListener(
+        "click",
+        shareChordSheet
+    );
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+document
+    .getElementById(
+        "printSheet"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+
+            window.print();
+
+        }
+    );
+
+
+/* =====================================================
+   CLEAR SHEET
+===================================================== */
+
+document
+    .getElementById(
+        "clearSheet"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+
+            if(!sheetChords.length)
+                return;
+
+            if(
+                confirm(
+                    "Clear all chords from this sheet?"
+                )
+            ){
+
+                sheetChords=[];
+
+                renderSheet();
 
             }
 
@@ -4735,9 +5811,11 @@ document
 
 buildCircle();
 
-updateTuningButtons();
+buildSheetChordButtons();
 
 update();
+
+renderSheet();
 
 </script>
 
